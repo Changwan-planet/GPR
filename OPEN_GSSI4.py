@@ -25,6 +25,7 @@ input_path1=common_path+item_number1
 input_path2=common_path+item_number2
 input_path3=common_path+item_number3
 input_path4=common_path+item_number4
+input_path5=common_path+item_number5
 
 
 #LABEL
