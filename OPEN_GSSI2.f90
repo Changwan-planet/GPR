@@ -1,0 +1,139 @@
+Program OPEN_GSSI
+Implicit none
+
+!USE GSSI_PROGRAM
+
+!========PATH======================
+CHARACTER (LEN=55) :: COMMON_PATH1
+CHARACTER (LEN=55) :: COMMON_PATH2
+
+CHARACTER (LEN=50) :: ITEM_NUMBER
+
+CHARACTER (LEN=120) :: INPUT_PATH
+
+CHARACTER (LEN=120) :: OUTPUT_PATH1
+CHARACTER (LEN=120) :: OUTPUT_PATH2
+CHARACTER (LEN=120) :: OUTPUT_PATH3
+CHARACTER (LEN=120) :: OUTPUT_PATH4
+
+CHARACTER (LEN=50) :: OUTPUT_NAME1
+CHARACTER (LEN=50) :: OUTPUT_NAME2
+CHARACTER (LEN=50) :: OUTPUT_NAME3
+CHARACTER (LEN=50) :: OUTPUT_NAME4
+!=================================
+
+
+!==================================
+INTEGER, DIMENSION(32768) :: HEADER
+!REAL, DIMENSION(32768) :: HEADER2    !32768
+INTEGER, PARAMETER :: ROWS=4096
+INTEGER, PARAMETER :: DISTANCE=560
+INTEGER            :: DIS 
+!==================================
+
+
+!================================================
+INTEGER, DIMENSION(ROWS,DISTANCE) :: B_SCAN_IMAGE
+REAL, DIMENSION(ROWS,DISTANCE) :: B_SCAN_IMAGE2
+REAL, DIMENSION(ROWS,1) :: INTENSITY
+!=================================================      
+
+
+INTEGER             :: I,J
+
+!=============================PATH===================================
+!COMMON_PATH1="/home/changwan/GPR/2020_11(three tombs)/201109.PRJ/"
+COMMON_PATH1="/home/changwan/GPR/201223/"
+COMMON_PATH2="/home/changwan/GPR/"
+
+
+!ITEM_NUMBER="201109__002.DZT"
+ITEM_NUMBER="201223__001.DZT"
+
+OUTPUT_NAME1="A_scope_GPR.txt"
+OUTPUT_NAME2="B_SCAN_IMAGE_GPR.txt"
+OUTPUT_NAME3="INTENSITY_PROFILE_GPR.txt"
+OUTPUT_NAME4="INTENSITY_PROFILE2_GPR.txt"
+
+
+INPUT_PATH = TRIM(COMMON_PATH1)//ITEM_NUMBER
+OUTPUT_PATH1 = TRIM(COMMON_PATH2)//OUTPUT_NAME1
+OUTPUT_PATH2 = TRIM(COMMON_PATH2)//OUTPUT_NAME2
+OUTPUT_PATH3 = TRIM(COMMON_PATH2)//OUTPUT_NAME3
+OUTPUT_PATH4 = TRIM(COMMON_PATH2)//OUTPUT_NAME4
+!=====================================================================
+
+
+OPEN(UNIT=10,FILE=INPUT_PATH,FORM='UNFORMATTED',STATUS='OLD',ACTION='READ')
+OPEN(UNIT=20,FILE=OUTPUT_PATH1,STATUS='REPLACE',ACTION='WRITE')
+OPEN(UNIT=21,FILE=OUTPUT_PATH2,STATUS='REPLACE',ACTION='WRITE')
+OPEN(UNIT=22,FILE=OUTPUT_PATH3,STATUS='REPLACE',ACTION='WRITE')
+OPEN(UNIT=23,FILE=OUTPUT_PATH4,STATUS='REPLACE',ACTION='WRITE')
+
+
+
+!======INITIALIZATION=======
+DIS = 0
+B_SCAN_IMAGE = 0
+B_SCAN_IMAGE2 = 0.0
+INTENSITY = 0.0
+!===========================
+
+
+PRINT *, "PLEASE TYPTE THE  DISTANCE"
+READ *, DIS
+!PRINT *, DIS
+
+      READ(10) HEADER,B_SCAN_IMAGE
+
+!=======A-SCOPE===============================
+    B_SCAN_IMAGE2=B_SCAN_IMAGE
+    J=1
+    WRITE(20,*) (B_SCAN_IMAGE2(I,J), I=1,ROWS)
+!    PRINT *, (B_SCAN_IMAGE2(I,J), I=1,ROWS)
+
+!============================================= 
+
+
+!======B_SCAN=================================
+     DO J=1,ROWS
+
+     WRITE(21,*)(B_SCAN_IMAGE2(J,I), I=1,DIS)
+   
+     END DO
+!=============================================
+
+
+!=====INTENSITY_PROFILE=======================
+
+      DO I=1,DIS
+       DO J=1,ROWS
+    !  DO I=1,DIS
+
+   
+!     IF (B_SCAN_IMAGE2(J,I)==0.0) then 
+!         B_SCAN_IMAGE2(4096,I)=1.0
+!     END IF
+
+     INTENSITY(J,1)=INTENSITY(J,1)+10*log10((B_SCAN_IMAGE2(J,I)**2))   
+     
+     IF (I==1) THEN
+     
+      INTENSITY(4096,1)=INTENSITY(4095,1)
+      WRITE(22,*) INTENSITY(J,1) 
+     
+     END IF 
+     
+    
+      END DO
+     END DO
+
+INTENSITY(4096,1)=INTENSITY(4095,1)
+
+WRITE(23,*) INTENSITY
+
+
+!=============================================
+
+
+END PROGRAM
