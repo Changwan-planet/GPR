@@ -1,7 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib import cm
 import pandas as pd
 from pandas import Series, DataFrame 
+from mpl_toolkits.mplot3d import Axes3D
+from scipy.interpolate import interp1d
+import ipyvolume as ipv
+
 
 
 def make_patch_spines_invisible(ax):
@@ -11,68 +16,114 @@ def make_patch_spines_invisible(ax):
         sp.set_visible(False)
 
 #PATH
-input_path1="/home/changwan/GPR/C_SCAN_IMAGE_GPR_flip.txt"
-#input_path2="/home/changwan/GPR/3D_IMAGE_GPR.txt"
+#input_path1="/home/changwan/GPR/C_SCAN_IMAGE_GPR_flip.txt"
+input_path2="/home/changwan/GPR/3D_IMAGE_GPR.txt"
 
 
 
 #READ DATASET
-data=np.loadtxt(input_path1)
-#data2=np.loadtxt(input_path2)
+#data=np.loadtxt(input_path1)
+data2=np.loadtxt(input_path2)
 
 
 #C_SCAN_IMAGE
-######READ HEADER#######
-ROW = np.linspace(0,(data.shape[0]-1),data.shape[0],dtype='int64')
-COL = np.linspace(0,(data.shape[1]-1),data.shape[1],dtype='int64')
-#data_2=pd.DataFrame(data,index=ROW,columns=COL)
-data_2=pd.DataFrame(data)
 
 
-data_2.info()
-print('\n')
-print("data_2.shape=",data_2.shape)
-
-print('\n')
-print(data_2.head())
-print(data_2.tail())
-#########################
-
-#C_SCAN_IMAGE.info()
-print('\n')
-print("C_SCAN_IMAGE.shape=",data_2.shape)
-
-ax1_min=0
-ax1_max=data.shape[0]*0.05
-ay1_min=0
-ay1_max=data.shape[1]*0.5
-
-print("data.shape[0]",data.shape[0])
-print("data.shape[1]",data.shape[1])
-
-print("ax1_min=",ax1_min)
-print("ax1_max=",ax1_max)
-print("ay1_min=",ay1_min)
-print("ay1_max=",ay1_max)
-
-
-fit, host=plt.subplots()
-plt.grid()
-host.imshow(data_2,extent=(ax1_min,ax1_max,ay1_min,ay1_max),aspect="auto")
-########
-
-
-#3D_CUBE
-"""
-print(data2.shape)
-
-data2_2=data2.reshape(4096,504,19)
-
+#RESAHPE THE INPUT DATA
+#print(data2.shape)
+data2_2=data2.reshape(781,560,19)
 print(data2_2.shape)
 
-plt.imshow(data2_2[1000,:,:])
-plt.show()
-"""
+
+fig,host =plt.subplots()
+
+print(data2_2.shape[1])
+print(data2_2.shape[2])
+
+ax1_min=0
+ax1_max=data2_2.shape[1]*0.05
+ay1_min=0
+ay1_max=data2_2.shape[2]*0.5
+
+#     ++++++++++++++++++++++
+#++++++Before interploation++++++
+#     ++++++++++++++++++++++
+
+#plt.imshow(data2_2[380,:,:],extent=(ax1_min,ax1_max,ay1_min,ay1_max),aspect="auto")
+#plt.imshow(data2_2[380,:,:],aspect="auto")
+#plt.imshow(data2_2[380,:,:])
+#plt.colorbar()
+
+#      +++++++++++++++
+#+++++++Interpolation++++++
+#      +++++++++++++++
+
+
+x=np.arange(0,data2_2.shape[2],1)
+xint = np.linspace(x.min(), x.max(), 1000)
+yint2d=np.zeros((1,data2_2.shape[1],xint.shape[0]))
+d_profile=np.arange(0, data2_2.shape[1],1)
+
+
+#     ++++++++++++++++++
+#++++++1D interpolation++++++
+#     ++++++++++++++++++
+
+#fq = interp1d(x,data2_2[380,100,:], kind = 'quadratic')
+#yintq=fq(xint)
+#plt.plot(xint, yintq, 'ro')
+#plt.plot(x,data2_2[380,100,:],'bo')
+
+
+#     ++++++++++++++++++++++++++++++++++++++
+#++++++2D interpolatian along one direction++++++
+#     ++++++++++++++++++++++++++++++++++++++
+
+for i in d_profile:
+
+ fq = interp1d(x,data2_2[380,i,:], kind = 'quadratic')
+
+ yint2d[0][i][:] =  fq(xint)
+
+#     ++++++++++++++++++
+#++++++Tick designation++++++
+#     ++++++++++++++++++
+ax1_min=0
+ax1_max=yint2d.shape[1]*0.05
+ay1_min=0
+
+interval=0.5 *19 / 1000
+print(interval)
+
+ay1_max=yint2d.shape[2]*interval
+
+
+#plt.imshow(yint2d[0,:,:],extent=(ax1_min,ax1_max,ay1_min,ay1_max),aspect="auto")
+#plt.imshow(yint2d[0,:,:],aspect="auto")
+#plt.colorbar()
+
+
+#plt.imshow(yint2d[0,:,:],aspect="auto")
+#plt.colorbar()
+
+
+#     ++++++++++
+#++++++1D check++++++
+#     ++++++++++
+#plt.plot(xint,yint2d[0,100,:],'ro')
+#plt.plot(x,data2_2[380,100,:],'bo')
+
+#plt.grid()
+#plt.show()
+
+print(yint2d.shape)
+
+ipv.figure()
+#ipv.quickvolshow(yint2d)
+ipv.quickvolshow(data2_2)
+
+ipv.show()
+
 """
 #B_SCAN_IMAGE
 fig, host=plt.subplots(figsize=(15,18))
@@ -153,7 +204,7 @@ plt.minorticks_on()
 plt.tick_params(which="minor",length=4,color='r')
 """
 
-plt.show()
+#plt.show()
 
 
 

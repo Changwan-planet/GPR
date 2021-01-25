@@ -35,6 +35,8 @@ plt.figure(figsize=(5,5))
 plt.plot(A_SCOPE)
 
 
+
+
 plt.figure(figsize=(10,10))
 #B_SCAN_IMAGE.info()
 print(B_SCAN_IMAGE.shape)
@@ -75,6 +77,7 @@ plt.title('INTENSITY_INTEGRATION',fontsize=20)
 plt.grid()
 
 xt=np.arange(0,4095,500)
+"""
 #TW=90/(3*10**9) #TIME_WINDOW
 DW=90                 #DISTANCE_WINDOW, DISTANCE  THAT THE LIGHT MOVES.
 SF=4096 #SAMPLING FREQUENCY
@@ -82,6 +85,9 @@ DP=16 #DIELECTRIC PERMITTIVITY
 DISTANCE_STEP=(DW/SF)/math.sqrt(DP)
 
 plt.xticks(xt,(i*round(DISTANCE_STEP,2) for i in xt),fontsize=10)
+"""
+
+plt.xticks(xt,fontsize=10)
 
 plt.ylabel("INTENSITY [dB]",fontsize=20)
 plt.xlabel("Depth [m],  $\epsilon_r$=16",fontsize=20)
@@ -107,5 +113,6 @@ plt.imshow(C_SCAN_IMAGE2)
 #plt.imshow(CUBE_IMAGE)
 """
 
-
+plt.savefig("test.png")
 plt.show()
+

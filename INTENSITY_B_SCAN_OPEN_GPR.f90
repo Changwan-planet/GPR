@@ -39,13 +39,15 @@ REAL, DIMENSION(ROWS,1) :: INTENSITY
 INTEGER :: L,I,J,K,T,ALLOCATESTATUS
 
 !=============================PATH===================================
-!COMMON_PATH1="/home/changwan/GPR/2020_11(three tombs)/201109.PRJ/"
-COMMON_PATH1="/home/changwan/GPR/201223/"
+COMMON_PATH1="/home/changwan/GPR/2020_11(three tombs)/201109.PRJ/"
+!COMMON_PATH1="/home/changwan/GPR/201223/"
 COMMON_PATH2="/home/changwan/GPR/"
 
 
-!ITEM_NUMBER="201109__002.DZT"
-ITEM_NUMBER="201223__011.DZT"
+ITEM_NUMBER="201109__002.DZT"
+!ITEM_NUMBER="201223__011.DZT"
+!ITEM_NUMBER="201223__001.DZT"
+
 
 OUTPUT_NAME1="A_SCOPE_GPR.txt"
 OUTPUT_NAME2="B_SCAN_IMAGE_GPR.txt"
@@ -105,6 +107,7 @@ IF (ALLOCATESTATUS /= 0) STOP "***NOW ENOUGH MEMORY***"
 !     END DO
 !=============================================
 
+I = 0
 
 !=====INTENSITY_PROFILE=======================
 
