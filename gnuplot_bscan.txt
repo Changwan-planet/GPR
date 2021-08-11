@@ -1,0 +1,25 @@
+sample=4096
+c=(3.0)*(10**8)
+permit=25
+d=90.0
+
+k=(d/sample)/sqrt(permit)
+
+dis_interval=0.05
+
+set link y2 via y/k inverse y*k
+set link x2 via x/dis_interval inverse x*dis_interval
+/
+
+set xlabel "DISTANCE [m]" font "arial,20"
+set ylabel "DEPTH [m]" font "arial,20"
+
+set xtics 
+set ytics 
+
+set xtics font "arial,10"
+set ytics font "arial,10"
+
+set palette negative
+set palette model HSV
+
