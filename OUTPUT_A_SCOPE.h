@@ -1,5 +1,5 @@
 !=======A-SCOPE===============================
-J=1
+J=3
     DO I=1,ROWS
     !   WRITE(20,*) (B_SCAN_IMAGE2(I,J), I=1,ROWS)
         WRITE(20,*) B_SCAN_IMAGE2(I,J) 
