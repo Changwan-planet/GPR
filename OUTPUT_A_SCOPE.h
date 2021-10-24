@@ -1,23 +1,24 @@
-!=======A-SCOPE===============================
-J=3
-    DO I=1,ROWS
-    !   WRITE(20,*) (B_SCAN_IMAGE2(I,J), I=1,ROWS)
-        WRITE(20,*) B_SCAN_IMAGE2(I,J) 
+!=======A-SCOPE============================
+!X=DIS=THE NUMBER OF STACKING
+!Y=TRA
+X=100
+Y=1
+
+!BEFORE REMOVING BACKGROUND
+    DO Z=1,ROWS
+        WRITE(20,*) B_SCAN_IMAGE3(X,Y,Z) 
     END DO
 
-
-!    DO I = 1,ROWS
-!        B_SCAN_IMAGE3(I,J) = B_SCAN_IMAGE3(I,J)**2
-!    END DO
-
-!    DO I =1,ROWS
-!        B_SCAN_IMAGE3(I,J) = 10 * log10(B_SCAN_IMAGE3(I,J))
-!    END DO
-
-    DO I=1,ROWS
-
-       WRITE(21,*) B_SCAN_IMAGE3(I,J)
-    
+!AFTER REMOVING BACKGROUND
+    DO Z=1,ROWS
+        WRITE(21,*) B_SCAN_IMAGE4(X,Y,Z) 
     END DO
 
-
+!=======STACKED_A_SCOPE===============================
+Y = 1
+! DO Y = 1, TRA    
+    DO Z=1,ROWS
+       WRITE(23,*) STACKED_A_SCOPE(1,Y,Z) 
+    END DO
+! END DO   
+!=====================================================  

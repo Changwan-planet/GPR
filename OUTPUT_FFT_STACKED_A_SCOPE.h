@@ -1,28 +1,33 @@
-DO I = 1, ROWS
+DO Y = 1, TRA
+   DO Z = 1, ROWS
 
-psd(I,1) = 10 * log10(f_real(I,1)**2 + f_imag(I,1)**2)
+      psd(1,Y,Z) = 10 * log10(f_real(1,Y,Z)**2 + f_imag(1,Y,Z)**2)
 
+   END DO
 END DO
 
+
+!======================================================================
+!TO MAKE A GRAPH OF THE PSD WITH SYMMETRY
+DO Y = 1, TRA
+   DO Z = 1, ROWS/2
+      psd2(1, Y, Z) = psd(1, Y, Z+ROWS/2)
+   END DO
+END DO
+
+DO Y = 1, TRA
+   DO Z = ROWS/2+1, ROWS
+      psd2(1, Y, Z) = psd(1, Y, Z-ROWS/2)
+   END DO
+END DO
+!======================================================================
+
 !=======FFT_STACKED_A_SCOPE===============================
-DO I = 1,ROWS
-           WRITE(24,*) f_real(I,1), f_imag(I,1), psd(I,1), ifft_real(I,1), Ifft_imag(I,1) 
+Y=10
+DO Z = 1,ROWS
+           WRITE(24,*) f_real(1,Y,Z),    f_imag(1,Y,Z), &
+                         psd2(1,Y,Z), ifft_real(1,Y,Z), Ifft_imag(1,Y,Z) 
 END DO
 !=========================================================
 
-!CONSIDER THE PROPERTY OF THE FFT GRAPHY
 
-!=======USEFUL FFT_STACKED_A_SCOPE ===============================
-
-
-!DO I = 1, INT(ROWS/2.0)
-
-!    If (f_real(I,1) > 0) then
-
-!    WRITE(*,*) "I=",I, f_real(I,1)
-!    WRITE(24,*) f_real(I,1), f_imag(I,1), ifft_real(I,1), Ifft_imag(I,1) 
-
-!END IF 
-
-!END DO
-!=====================================================
