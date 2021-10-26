@@ -28,8 +28,11 @@ DO G=1,TRA
 
 !=============================PATH===================================
 
-COMMON_PATH1="/home/changwan/GPR/20211022/"
-COMMON_PATH2="/home/changwan/GPR/20211022/"
+!COMMON_PATH1="/home/changwan/GPR/20211022/"
+!COMMON_PATH2="/home/changwan/GPR/20211022/"
+COMMON_PATH1="/mnt/l/GPR_DATA/20211022/"
+COMMON_PATH2="/mnt/l/GPR_DATA/20211022/"
+
 
 !COMMON_PATH1="/home/changwan/GPR/20211022_2/"
 !COMMON_PATH2="/home/changwan/GPR/20211022_2/"
