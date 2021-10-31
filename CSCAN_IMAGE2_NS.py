@@ -19,8 +19,8 @@ def make_patch_spines_invisible(ax):
 #input_path1="/home/changwan/GPR/C_SCAN_IMAGE_GPR_flip.txt"
 #input_path2="/home/changwan/GPR/3D_IMAGE_GPR.txt"
 #input_path2="L:/MOGOD_GPR/2021/3D_CUBE_IMAGE_GPR.txt"
-#input_path2 = "/home/changwan/GPR/211027_4/3D_CUBE_IMAGE_GPR.txt"
-input_path2 = "/home/changwan/GPR/211027_4/HILBERT_3D_CUBE_IMAGE_GPR.txt"
+input_path2 = "/home/changwan/GPR/211027_4/3D_CUBE_IMAGE_GPR.txt"
+#input_path2 = "/home/changwan/GPR/211027_4/HILBERT_3D_CUBE_IMAGE_GPR.txt"
 
 #READ DATASET
 #data=np.loadtxt(input_path1)
@@ -62,8 +62,13 @@ ay1_max=data2_2.shape[1]*0.5 #This is Easting.
 #++++++Before interploation++++++
 #     ++++++++++++++++++++++
 start =  900
-end   = 1500
+end   = 1100
 rows=list(range(start,end,1))
+
+
+dis_s = 0
+dis_e = data2_2.shape[0]
+dis=list(range(dis_s,dis_e,1))
 
 #PLEASE CHECK THE DIRECTION OF THE GRAPH.
 #Check the direction of the graph
@@ -74,10 +79,16 @@ rows=list(range(start,end,1))
 #++++++Remove the average++++++
 #     ++++++++++++++++++++
 
-#for depth in rows:
- data2_2[:,:,depth] = data2_2[:,:,depth] - np.mean(data2_2[:,:,depth])
+#remote the noise of the cable
+##for depth in rows:
+#data2_2[:,:,depth] = data2_2[:,:,depth] - np.mean(data2_2[:,:,depth])
+##for east in dis:
+## data2_2[east,:,depth] = data2_2[east,:,depth] \
+##                         - np.mean(data2_2[east,:,depth])
 
 for depth in rows:
+# data2_2[:,:,depth] = data2_2[:,:,depth] - np.mean(data2_2[:,:,depth])
+
 
 #Transpose the C_scan, and
 #Flip the C_scan when it comes to up and down
@@ -89,7 +100,7 @@ for depth in rows:
 #Almost similar in with and without the interpolation.
 #,interpolation = 'spline16')
 
-#plt.colorbar()
+ plt.colorbar()
 
  depth_title = round(((depth-start) * depth_int), 2)
  print(depth_title,"m", "sample=",depth)

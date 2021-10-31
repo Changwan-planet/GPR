@@ -51,7 +51,7 @@ imag = 0.0
 
 DO Y = 1, TRA
     CALL fft(STACKED_B_SCAN(1,Y,:), imag, ROWS, f_real(1,Y,:), f_imag(1,Y,:))
-!    CALL ifft(f_real(1,Y,:), f_imag(1,Y,:), ROWS, ifft_real(1,Y,:), ifft_imag(1,Y,:))
+!    CALL ifft(f_real(1,Y,:), f_imag(1,Y,:), ROWS, ifft_real(1,Y,:), ifft_imag(1,Y,:))l
 END DO
 
 !DO Y = 1, TRA
