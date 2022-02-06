@@ -2,9 +2,8 @@
 #include <math.h>
 #include "basic_math.h"
 
-#define SQUARE(X) ((X) * (X))
-#define z 4096 //rows
-#define x 101 //column
+//#define y 3 //rows j
+//#define x 4 //column i
 
 int main()
 {
@@ -13,36 +12,48 @@ int main()
     #include "open_read.h"
 
 //sum
-//    for(i=0; i<x; i++)
- //      sum += signal[1][k];
-         sum(signal, x, z);
-         //sum_matrix = sum(signal,x,z);
-         //printf("%10.10lf \n",sum_matrix);
 
+   sum_matrix = sum(signal, sizeof(signal)/sizeof(signal[0]));
+        
+       for(i=0; i < x; i++){
+           printf("%lf \n",sum_matrix[i]);
+                           }
+           printf("%lf \n",sum_matrix[4]);                          
+
+//square
+   sq_matrix = square(signal, sizeof(signal)/sizeof(signal[0]));
+      
+      for(j=0; j < y; j++){
+      for(i=0; i < x; i++){
+           printf("%lf \n",sq_matrix[j][i]);
+                           }
+                           }
+
+      
 
 /*
 //square
     for (i=0; i<x; i++){
-    for (k=0; k<z; k++){
-        signal_sq[k]=signal[i][k] * signal[i][k];
+    for (j=0; j<y; j++){
+        signal_sq[j]=signal[j][i] * signal[j][i];
                        }
                        }
 //max
-     for (i=0; i<x; i++){
-                          max[i] = signal_sq[0];
-     for (k=0; k<z; k++){                       
-                          if (signal_sq[i] > max[i]){
-                                                      max[i] = signal_sq[i];
-                                                      t = i;
+     for (j=0; j<y; j++){
+                          max[j] = signal_sq[0];
+     for (i=0; i<x; i++){                       
+                          if (signal_sq[j] > max[j]){
+                                                      max[j] = signal_sq[j];
+                                                      t = j;
                                                     } 
                         } 
-//       printf("max=%lf survey_point=%d max_loc=%d \n", max[i], i, t);
+//       printf("max=%lf survey_point=%d max_loc=%d \n", max[j], i, t);
                         }
 
 //dB (reference: surface reflection, a strongest value)
-     for(i=0; i<x; i++){
-     for(k=0; k<z; k++){ 
-                          dB_str[i][k] = log10(max[i]/signal[i][k]);
+     for(j=0; j<y; j++){
+     for(i=0; i<x; i++){ 
+                          dB_str[j][i] = log10(max[j]/signal[j][i]);
                        }
                        }
 

@@ -1,8 +1,12 @@
     FILE * fp_r;
     FILE * fp_w;
 
-    fp_r = fopen("/mnt/l/GPR_DATA/KOREA/DAESUCK_ri/220126.PRJ/HILBERT_BSCAN_STACKED_IMAGE.txt","r");
-    fp_w = fopen("/mnt/l/GPR_DATA/KOREA/DAESUCK_ri/220126.PRJ/output.txt","w");
+//    fp_r = fopen("/mnt/l/GPR_DATA/KOREA/DAESUCK_ri/220126.PRJ/HILBERT_BSCAN_STACKED_IMAGE.txt","r");
+//    fp_w = fopen("/mnt/l/GPR_DATA/KOREA/DAESUCK_ri/220126.PRJ/output.txt","w");
+
+    fp_r = fopen("/home/changwan/GPR_DATA/KOREA/DAESUCK_ri/220126.PRJ/HILBERT_BSCAN_STACKED_IMAGE.txt","r");
+    fp_w = fopen("/home/changwan/GPR_DATA/KOREA/DAESUCK_ri/220126.PRJ/output.txt","w");
+
 
 
     if(fp_r==NULL){
@@ -16,9 +20,9 @@
                   }
 
 
-   for(k=0;k<z;k++){
+   for(j=0;j<y;j++){
    for(i=0;i<x;i++){
-                    fscanf(fp_r, "%lf", &signal[i][k]); 
+                    fscanf(fp_r, "%lf", &signal[j][i]); 
                    }   
                    }
 
