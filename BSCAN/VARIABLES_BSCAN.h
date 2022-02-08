@@ -1,7 +1,7 @@
 
 !=++===============================
 INTEGER, PARAMETER :: DIS=509       !X
-INTEGER, PARAMETER :: TRA=100       !Y
+INTEGER, PARAMETER :: TRA=101       !Y
 INTEGER, PARAMETER :: ROWS=4096     !Z 4096
 !==================================
 
