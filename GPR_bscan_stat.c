@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include <math.h>
+
 #include "basic_math.h"
 
-//#define y 3 //rows j
-//#define x 4 //column i
 
 int main()
 {
@@ -12,25 +11,21 @@ int main()
     #include "open_read.h"
 
 //sum
-
    sum_matrix = sum(signal, sizeof(signal)/sizeof(signal[0]));
         
-       for(i=0; i < x; i++){
-           printf("%lf \n",sum_matrix[i]);
-                           }
-           printf("%lf \n",sum_matrix[4]);                          
+//       for(i=0; i < x; i++){
+//           printf("%lf \n",sum_matrix[i]);
+//                           }
+//           printf("%lf \n",sum_matrix[4]);                          
 
 //square
    sq_matrix = square(signal, sizeof(signal)/sizeof(signal[0]));
-      
-      for(j=0; j < y; j++){
-      for(i=0; i < x; i++){
+     
+      for(int j=0; j < y; j++){
+      for(int i=0; i < x; i++){
            printf("%lf \n",sq_matrix[j][i]);
                            }
-                           }
-
-      
-
+                           }    
 /*
 //square
     for (i=0; i<x; i++){

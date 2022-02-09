@@ -1,9 +1,8 @@
-    int  i, j, k;
 
     int state_r, state_w;
 
-    int y=3;
-    int x=4;
+    int y=4096;
+    int x=101;
     double t;
 
     double signal[y][x];
