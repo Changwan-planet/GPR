@@ -3,14 +3,11 @@
 #include <math.h>
 
 #include "define.h"
-
-
 #include "basic_math.h"
 
 
 int main()
 {
-//    #include "struct"
     #include "variables.h"
     #include "open_read.h"
 
@@ -22,31 +19,11 @@ int main()
 //                           }
 //           printf("%lf \n",sum_matrix[4]);                          
 
+//sqaure: argument in 2D matrix   
   sq_matrix = square(signal, sizeof(signal)/sizeof(signal[0]));
 //         square(signal, sizeof(signal)/sizeof(signal[0]));/
-//              printf("%lf ", sq_matrix[1][0]);  
-
-
-
+              printf("%lf ", sq_matrix[1][0]);  
 /*
-//square: argument is a column.
-   for(int i=0; i<x; i++){
-                           sq_temp=&signal[0][i];
-   for(int j=0; j<y; j++){                       
-             
-                           sq_signal[j]=*sq_temp;
-                           sq_temp = sq_temp + x;  
-                         } 
-                                                 
-             sq_matrix=square(sq_signal, sizeof(sq_signal)/sizeof(double));   
-             
-             for(int j=0; j<y; j++) printf("%lf \n",sq_matrix[j]);             
-             
-             printf("\n");
-                         }
-*/
-
-/* 
 //max
      for (j=0; j<y; j++){
                           max[j] = signal_sq[0];

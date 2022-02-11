@@ -1,2 +1,2 @@
-#define y 4096
-#define x 101
+#define yy 3
+#define xx 4

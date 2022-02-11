@@ -1,4 +1,6 @@
-double * sum(double signal[][101], int y);
-double * square(double signal[][101], int y);
+double * sum(double signal[][xx], int y);
+//double * square(double sq_signal[yy], int y);
+double ** square(double signal[][xx], int y);
+
 
 
