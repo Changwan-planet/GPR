@@ -17,45 +17,32 @@ int main()
 //       for(i=0; i < x; i++){
 //           printf("%lf \n",sum_matrix[i]);
 //                           }
-//           printf("%lf \n",sum_matrix[4]);                          
+                          
 
 //sqaure: argument in 2D matrix   
   sq_matrix = square(signal, sizeof(signal)/sizeof(signal[0]));
 //         square(signal, sizeof(signal)/sizeof(signal[0]));/
-              printf("%lf ", sq_matrix[1][0]);  
-/*
-//max
-     for (j=0; j<y; j++){
-                          max[j] = signal_sq[0];
-     for (i=0; i<x; i++){                       
-                          if (signal_sq[j] > max[j]){
-                                                      max[j] = signal_sq[j];
-                                                      t = j;
-                                                    } 
-                        } 
-//       printf("max=%lf survey_point=%d max_loc=%d \n", max[j], i, t);
-                        }
+//              printf("%lf \n ", sq_matrix[1][0]);  
 
+
+//max: argument in 2D matrix
+  max_matrix = max(sq_matrix, sizeof(sq_matrix)/sizeof(sq_matrix[0]));
+  
+   
+
+/*
 //dB (reference: surface reflection, a strongest value)
      for(j=0; j<y; j++){
      for(i=0; i<x; i++){ 
                           dB_str[j][i] = log10(max[j]/signal[j][i]);
                        }
                        }
-
-#include "write.h"
 */
 
+
+//#include "write.h"
 #include "close.h"
    
-//free the memory              
-//   for (int j=0; j < yy; j++){
-//                              free(sq_matrix[j]);
-//                             }
-//   printf("%p \n", &sq_matrix); 
-//   free(sq_matrix);
-//   printf("%p \n", &sq_matrix[1]); 
- 
    return 0;
 }
 

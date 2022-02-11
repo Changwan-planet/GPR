@@ -1,2 +1,2 @@
-#define yy 3
-#define xx 4
+#define yy 4096
+#define xx 101

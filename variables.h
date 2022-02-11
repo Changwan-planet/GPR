@@ -6,17 +6,10 @@
     
     double t;
 
-    double signal[y][x];
-    
-    double dB_str[y][x]; //dB. reference to the strongest echo.
-    double max[x];
-
+    double signal[y][x];   
     double *sum_matrix;
+    double **sq_matrix;  
+    double *max_matrix;
 
-    double *sq_temp;
-
-    double sq_signal[y];
-
-    double **sq_matrix;
-   
-
+    double dB_str[y][x]; //dB. reference to the strongest echo.
+ 
