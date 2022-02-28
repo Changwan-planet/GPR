@@ -1,7 +1,7 @@
 
 !==================================
 INTEGER, PARAMETER :: DIS=509       !X
-INTEGER, PARAMETER :: TRA=50       !Y
+INTEGER, PARAMETER :: TRA=50        !Y
 INTEGER, PARAMETER :: ROWS=4096     !Z 4096
 !==================================
 
@@ -17,8 +17,12 @@ REAL*8, DIMENSION(DIS,TRA,ROWS) :: B_SCAN_IMAGE4
 !============================================================
 REAL*8, DIMENSION(  1,  1, ROWS) :: STACKED_A_SCOPE
 REAL*8, DIMENSION(  1,  TRA, ROWS) :: STACKED_B_SCAN
+REAL*8, DIMENSION(  1,  TRA, ROWS) :: STACKED_B_SCAN2
 !============================================================
 
+!============================================================
+REAL*8, DIMENSION(  1,  1,  ROWS) :: MEAN_A_SCOPE
+!============================================================
 
 !============================================================
 REAL*8, DIMENSION(1,1,ROWS) :: imag
