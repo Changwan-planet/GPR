@@ -11,14 +11,14 @@ int main()
     #include "open_read.h"
  
 //square: 1D array -> 1D array (a column, 1 pulse(scan)).
-   printf("++++++squrae++++++\n");
+   printf("++++++square++++++\n");
    for(int i=0; i<x; i++){
                            sq_temp=&signal[0][i];
    for(int j=0; j<y; j++){                                    
                            sq_signal[j]=*sq_temp;
                            sq_temp = sq_temp + x;  
                          }                 
-           sq_matrix = square(sq_signal, sizeof(sq_signal)/sizeof(double)); 
+          sq_matrix = square(sq_signal, sizeof(sq_signal)/sizeof(double)); 
 
    for(int j=0; j<y; j++){
                //printf("j=%d i=%d %lf \n",j, i, sq_matrix[j]);             
@@ -41,12 +41,13 @@ int main()
                            max_signal[j]=*max_temp;
                            max_temp = max_temp + x;  
                          }                 
-           max_matrix = max(max_signal, sizeof(max_signal)/sizeof(double)); 
-  
-               //printf("j=%d i=%d %lf \n",j, i, sq_matrix[j]);             
+          max_matrix = max(max_signal, sizeof(max_signal)/sizeof(double)); 
+            
                max_matrix2[i] = max_matrix;
-                         
-             //printf("\n");
+
+//               printf("i=%d %lf \n", i, max_matrix2[i]);          
+//               printf("i=%d \n", i);          
+//               printf("\n");
                          }
 //print max
 //   for(int i=0; i<x; i++){
@@ -56,9 +57,13 @@ int main()
      
 //dB (reference: surface reflection, a strongest value)
      printf("++++++dB++++++\n");     
-     for(int j=0; j<y; j++){
+     //for(int j=0; j<y; j++){
+     
      for(int i=0; i<x; i++){ 
-                 dB_str[j][i] = log10(max_matrix2[i]/sq_matrix2[j][i]);
+     for(int j=0; j<y; j++){
+      
+                // dB_str[j][i] = 10 * log10(max_matrix2[i]/sq_matrix2[j][i]);
+                dB_str[j][i] = 10 * log10(sq_matrix2[j][i]/max_matrix2[i]);
                    
 //      printf("j=%d i=%d %lf\n", j,i,dB_str[j][i]);
                            }

@@ -31,18 +31,18 @@ double max(double max_signal[yy],int y)
 
 //  printf("++++++max++++++\n");
 //  printf("%d %d \n",y4, x4);
-
-  for( j=0; j < y4; j++){
                          temp_sq_max = max_signal[0];
-  for( i=0; i < x4; i++){
+ 
+  for( j=0; j < y4; j++){
                          if ( max_signal[j] > temp_sq_max ) 
                             {  
                              temp_sq_max = max_signal[j];  
                              t = j;
-                             }
+                            }  
                          }
-      //printf("max=%lf j_max_loc=%d i_max_loc=%d \n", temp_sq_max, j, i);
-                         }
+                        
+                         printf("j_max_loc=%d max=%lf \n", t, temp_sq_max); 
+                         
    return temp_sq_max;
 }
 
