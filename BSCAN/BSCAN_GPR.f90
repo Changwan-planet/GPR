@@ -46,11 +46,9 @@ END DO
 
 !REMOVE MEAN_ASCAN 
    CALL mean_ascan(STACKED_B_SCAN(1,:,:), TRA, ROWS, MEAN_A_SCOPE) 
-!   PRINT *, MEAN_A_SCOPE
-
 DO Y = 1, TRA
    DO Z = 1, ROWS
-      STACKED_B_SCAN2(1, Y, Z) = STACKED_B_SCAN(1, Y, Z) - MEAN_A_SCOPE(1,1,Z)
+  STACKED_B_SCAN(1, Y, Z) = STACKED_B_SCAN(1, Y, Z) - MEAN_A_SCOPE(1,1,Z)
    END DO 
 END DO
 
@@ -59,7 +57,7 @@ END DO
 imag = 0.0   
 
 DO Y = 1, TRA
-    CALL fft(STACKED_B_SCAN2(1,Y,:), imag, ROWS, f_real(1,Y,:), f_imag(1,Y,:))
+    CALL fft(STACKED_B_SCAN(1,Y,:), imag, ROWS, f_real(1,Y,:), f_imag(1,Y,:))
 !    CALL ifft(f_real(1,Y,:), f_imag(1,Y,:), ROWS, ifft_real(1,Y,:), ifft_imag(1,Y,:))l
 END DO
 
@@ -78,7 +76,7 @@ END DO
 
 !STACKED SCAN WITH THE AMOUNT OF THE DIS
 DO Y = 1, TRA
-      CALL fft_hilbert(STACKED_B_SCAN2(1,Y,:), ROWS, HILBERT_STACKED_SIGNAL)
+      CALL fft_hilbert(STACKED_B_SCAN(1,Y,:), ROWS, HILBERT_STACKED_SIGNAL)
       HILBERT_STACKED_B_SCAN(1,Y,:) = HILBERT_STACKED_SIGNAL(1,1,:) 
 END DO
 
