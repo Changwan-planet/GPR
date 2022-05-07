@@ -1,7 +1,7 @@
 
 !==================================
-INTEGER, PARAMETER :: DIS=511      !X
-INTEGER, PARAMETER :: TRA=50        !Y
+INTEGER, PARAMETER :: DIS=100     !X
+INTEGER, PARAMETER :: TRA=81       !Y
 INTEGER, PARAMETER :: ROWS=4096     !Z 4096
 !==================================
 
@@ -63,8 +63,9 @@ REAL*8              :: MEAN
 !CHARACTER (LEN=4)  :: FT='.rd3'
 
 
-!CHARACTER (LEN=11) :: FH1='220303__'
-CHARACTER (LEN=13)  :: FH1='220303_4__'
+!CHARACTER (LEN=11) :: FH1='200430__'
+CHARACTER (LEN=11) :: FH1='220503__'
+!CHARACTER (LEN=13)  :: FH1='220506_3__'
 !CHARACTER (LEN=13) :: FH1='20211022__'
 
 CHARACTER (LEN=4)  :: FT='.DZT'

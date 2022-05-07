@@ -32,7 +32,7 @@ Y = 1
 !=======MEAN_A_SCOPE===============================
 Y = 1   
     DO Z=1,ROWS
-       !WRITE(20,*) MEAN_A_SCOPE(1,Y,Z) 
-       WRITE(20,*) STACKED_B_SCAN(1,Y,Z) 
+       WRITE(20,*) MEAN_A_SCOPE(1,Y,Z) 
+       !WRITE(20,*) STACKED_B_SCAN(1,Y,Z) 
     END DO  
 !=====================================================  
