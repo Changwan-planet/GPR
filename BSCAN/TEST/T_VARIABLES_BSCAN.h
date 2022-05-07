@@ -1,11 +1,12 @@
 
 !==================================
 INTEGER, PARAMETER :: DIS= 2050      !X
-INTEGER, PARAMETER :: TRA = 1        !Y
+INTEGER, PARAMETER :: TRA = 10        !Y
 INTEGER, PARAMETER :: ROWS = 4096     !Z 4096
 INTEGER, PARAMETER :: MV = 50
 REAL, PARAMETER :: MV2 = 50
-INTEGER, PARAMETER :: DIS2 = DIS/MV2
+REAL :: DIS2
+INTEGER ::  DIS3
 !==================================
 
 !===========================================================
@@ -18,14 +19,13 @@ REAL*8, DIMENSION(DIS,TRA,ROWS) :: B_SCAN_IMAGE4
 
 
 !============================================================
-REAL*8, DIMENSION(DIS2,  1, ROWS) :: MV_MEAN_BSCAN
+REAL*8, DIMENSION(:, :, :), ALLOCATABLE :: MV_MEAN_BSCAN
+REAL*8, DIMENSION(:, :, :), ALLOCATABLE :: MV_MEAN_BSCAN2
 !============================================================
 
 
 !============================================================
-REAL*8, DIMENSION(  1,  1, ROWS) :: STACKED_A_SCOPE
-REAL*8, DIMENSION(  1,  TRA, ROWS) :: STACKED_B_SCAN
-REAL*8, DIMENSION(  1,  TRA, ROWS) :: STACKED_B_SCAN2
+REAL*8, DIMENSION(:, :, :), ALLOCATABLE :: STACKED_BSCAN
 !============================================================
 
 !============================================================
