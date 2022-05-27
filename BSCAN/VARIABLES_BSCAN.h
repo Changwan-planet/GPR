@@ -1,7 +1,7 @@
 
 !==================================
-INTEGER, PARAMETER :: DIS=100     !X
-INTEGER, PARAMETER :: TRA=81       !Y
+INTEGER, PARAMETER :: DIS=20    !X
+INTEGER, PARAMETER :: TRA=77       !Y
 INTEGER, PARAMETER :: ROWS=4096     !Z 4096
 !==================================
 
@@ -13,6 +13,8 @@ REAL*8, DIMENSION(DIS,TRA,ROWS) :: B_SCAN_IMAGE3
 REAL*8, DIMENSION(DIS,TRA,ROWS) :: B_SCAN_IMAGE4
 !============================================================      
 
+!============================================================
+REAL*8, DIMENSION(  1,  1, ROWS) :: INST_A_SCOPE
 
 !============================================================
 REAL*8, DIMENSION(  1,  1, ROWS) :: STACKED_A_SCOPE
@@ -47,13 +49,24 @@ REAL*8, DIMENSION (1, 1, 1:ROWS) :: idft_imag
 REAL*8, DIMENSION (1, 1, 1:ROWS) :: a_idft_imag
 REAL*8, DIMENSION (1, 1, 1:ROWS) :: HILBERT_SIGNAL
 REAL*8, DIMENSION (1, 1, 1:ROWS) :: HILBERT_STACKED_SIGNAL
+REAL*8, DIMENSION (1, 1, 1:ROWS) :: HILBERT_STACKED_SIGNAL_imag
+
+
 REAL*8, DIMENSION (1, TRA, 1:ROWS) :: HILBERT_B_SCAN
 REAL*8, DIMENSION (1, TRA, 1:ROWS) :: HILBERT_STACKED_B_SCAN
+REAL*8, DIMENSION (1, TRA, 1:ROWS) :: HILBERT_STACKED_B_SCAN_imag
+
+REAL*8, DIMENSION (1, TRA, 1:ROWS) :: HILBERT_STACKED_power
+REAL*8, DIMENSION (1, TRA, 1:ROWS) :: HILBERT_STACKED_powerdB
+
+
 
 INTEGER             :: I,J,K,G,N,P,R, SAMPLE
 INTEGER             :: X, Y, Z
 REAL*8              :: BGR
 REAL*8              :: MEAN
+REAL*8              :: MAX_ASCAN
+
 
 !=============================================================
 !CHARACTER (LEN=11)  :: FH1='201223__0'
@@ -64,8 +77,11 @@ REAL*8              :: MEAN
 
 
 !CHARACTER (LEN=11) :: FH1='200430__'
-CHARACTER (LEN=11) :: FH1='220503__'
-!CHARACTER (LEN=13)  :: FH1='220506_3__'
+!CHARACTER (LEN=11) :: FH1='220519__'
+!CHARACTER (LEN=13)  :: FH1='220525_9__'
+CHARACTER (LEN=14)  :: FH1='220525_14__'
+
+
 !CHARACTER (LEN=13) :: FH1='20211022__'
 
 CHARACTER (LEN=4)  :: FT='.DZT'
