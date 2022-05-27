@@ -1,7 +1,7 @@
 
 !===============EW=================
-INTEGER, PARAMETER :: DIS=140       !X
-INTEGER, PARAMETER :: TRA=67        !Y
+INTEGER, PARAMETER :: DIS=496      !X
+INTEGER, PARAMETER :: TRA=1       !Y
 INTEGER, PARAMETER :: ROWS=4096     !Z 4096
 !==================================
 
@@ -36,7 +36,8 @@ REAL*8              :: MAX_SLICE, SLICE_MEAN, SLICE_MEAN2
 !CHARACTER (LEN=4)  :: FT='.rd3'
 
 !CHARACTER (LEN=13)  :: FH1='211027_4__'
-CHARACTER (LEN=11)  :: FH1='211028__'
+CHARACTER (LEN=11)  :: FH1='200430__'
+!CHARACTER (LEN=11)  :: FH1='211028__'
 CHARACTER (LEN=4)  :: FT='.DZT'
 
 CHARACTER (LEN=22) :: ITEM_NUMBER

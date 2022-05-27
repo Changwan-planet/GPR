@@ -22,11 +22,9 @@ def make_patch_spines_invisible(ax):
 
 #input_path2 = "/home/changwan/GPR/211028/3D_CUBE_IMAGE_GPR.txt"
 #input_path2 = "/home/changwan/GPR/211028/HILBERT_3D_CUBE_IMAGE_GPR.txt"
-#input_path2 = "/home/changwan/GPR/211028/HILBERT_3D_CUBE_IMAGE_GPR.txt"
-#input_path2="L:\mnt\l\GPR_DATA/211028.PRJ/HILBERT_3D_CUBE_IMAGE_GPR.txt"
+input_path2 = "/home/changwan/GPR_DATA/KOREA/211028/HILBERT_3D_CUBE_IMAGE_GPR.txt"
+#input_path2 = "/home/changwan/GPR/output.txt"
 
-input_path2="L:\GPR_DATA"+"\P211028.PRJ\HILBERT_3D_CUBE_IMAGE_GPR.txt"
-#input_path2="L:\GPR_DATA"+"\P211027_4.PRJ\HILBERT_3D_CUBE_IMAGE_GPR.txt"
 
 
 #READ DATASET
@@ -50,7 +48,12 @@ print("depth_interval=",depth_int)
 
 #RESAHPE THE INPUT DATA
 print("input_shape=",data2.shape)    
-data2_2=data2.reshape(140,67,4096)
+#data2_2=data2.reshape(140,1,4096)
+data2_2=data2.reshape(100,50,100)
+
+#data2_2=data2.reshape(2,3,4)
+
+
 print("3D_shape (x,y,z) =",data2_2.shape)
 print("+++++++++++++++++++++")
 print("\n")
@@ -68,9 +71,19 @@ ay1_max=data2_2.shape[1]*0.5 #This is Eastilng.
 #     ++++++++++++++++++++++
 #++++++Before interploation++++++
 #     ++++++++++++++++++++++
-start =  900
-end   = 1050
+#start =  0
+#end   =  4
+#rows=list(range(start,end,1))
+
+
+#start =  900
+#end   = 1050
+
+start = 1
+end   = 100
+
 rows=list(range(start,end,1))
+
 
 dis_s = 0
 dis_e = data2_2.shape[0]

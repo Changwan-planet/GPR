@@ -18,12 +18,7 @@ def make_patch_spines_invisible(ax):
 
 #PATH
 #input_path1="/home/changwan/GPR/C_SCAN_IMAGE_GPR_flip.txt"
-#input_path2="/home/changwan/GPR/3D_IMAGE_GPR.txt"
-#input_path2="L:/MOGOD_GPR/2021/3D_CUBE_IMAGE_GPR.txt"
-input_path2="L:\GPR_DATA\P211027_4.PRJ\HILBERT_3D_CUBE_IMAGE_GPR.txt"
-#input_path2="/mnt/l/GPR_DATA/211027_4.PRJ/HILBERT_3D_CUBE_IMAGE_GPR.txt"
-
-
+input_path2="/home/changwan/GPR_DATA/KOREA/MIHO_ri/CSCAN3/220526_1.PRJ/HILBERT_3DCUBE_powerdB.txt"
 
 #input_path2 = "/home/changwan/GPR/211027_4/3D_CUBE_IMAGE_GPR.txt"
 #input_path2 = "/home/changwan/GPR/211027_4/HILBERT_3D_CUBE_IMAGE_GPR.txt"
@@ -35,8 +30,8 @@ data2=np.loadtxt(input_path2)
 
 #CALCULATE THE DISTANCE INTERVAL:
 c_sl = 3*10**8   # speed of light
-depth_range = 90 # 90 m 
-permit = 25
+depth_range = 50 # 90 m 
+permit = 16
 sample = 4096
 depth_int = depth_range/ sample 
 depth_int = round(depth_int, 2)
@@ -49,7 +44,7 @@ print("depth_interval=",depth_int)
 
 #RESAHPE THE INPUT DATA
 print("input_shape=",data2.shape)    
-data2_2=data2.reshape(695,13,4096)
+data2_2=data2.reshape(1900,17,4096)
 print("3D_shape (x,y,z) =",data2_2.shape)
 print("+++++++++++++++++++++")
 print("\n")
@@ -59,9 +54,9 @@ fig,host =plt.subplots()
 print(data2_2.shape[2])
 
 ax1_min=0
-ax1_max=data2_2.shape[0]*0.05  #This is Northing.
-ay1_min=0
-ay1_max=data2_2.shape[1]*0.5 #This is Easting.
+ax1_max=data2_2.shape[0]*0.01  #This is Northing.
+ay1_max=0
+ay1_min=data2_2.shape[1]*0.5 #This is Easting.
 
 
 #cmap=colors.ListedColormap(["white","blue","red"])
@@ -71,8 +66,8 @@ ay1_max=data2_2.shape[1]*0.5 #This is Easting.
 #     ++++++++++++++++++++++
 #++++++Before interploation++++++
 #     ++++++++++++++++++++++
-start =  900
-end   = 1050
+start = 1000
+end   = 2000
 rows=list(range(start,end,1))
 
 
@@ -103,7 +98,7 @@ for depth in rows:
 #Transpose the C_scan, and
 #Flip the C_scan when it comes to up and down
 #Becasue I consider the tendency the imhosw plots.
- plt.imshow(np.flipud(data2_2[:,:,depth].T)
+ plt.imshow(data2_2[:,:,depth].T
            ,extent=(ax1_min,ax1_max,ay1_min,ay1_max)
            ,cmap='gist_rainbow')
 
@@ -117,12 +112,12 @@ for depth in rows:
  depth_title = round(((depth-start) * depth_int), 2)
  print(depth_title,"m", "sample=",depth)
 
- plt.title("Gyodong-ri_100 MHz_NS_Pol.", fontweight="bold", fontsize=30)
+ plt.title("MIHO-ri_100 MHz_NS_Pol.", fontweight="bold", fontsize=30)
 
 #Track interval 
  plt.ylabel("Northing [m] int=_0.5 m", fontweight="bold",fontsize=20)
 #Distance interval
- plt.xlabel("Easting [m]  int_0.05 m", fontweight="bold",fontsize=20)
+ plt.xlabel("Easting [m]  int_0.01 m", fontweight="bold",fontsize=20)
 
 #Ticks
  plt.xticks(fontsize=15, fontweight="bold")
