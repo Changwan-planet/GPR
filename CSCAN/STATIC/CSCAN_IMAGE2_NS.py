@@ -19,7 +19,7 @@ def make_patch_spines_invisible(ax):
 #PATH
 #input_path2 = "/home/changwan/GPR/211027_4/3D_CUBE_IMAGE_GPR.txt"
 #input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/CSCAN/CSCAN_GPR_stacking.txt"
-input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/CSCAN/HILBERT_3DCUBE_stacking_powerdB.txt"
+input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/CSCAN2/HILBERT_3DCUBE_stacking_powerdB.txt"
 
 
 #READ DATASET
@@ -43,7 +43,7 @@ print("depth_interval=",depth_int)
 
 #RESAHPE THE INPUT DATA
 print("input_shape=",data2.shape)    
-data2_2=data2.reshape(81,7,4096)
+data2_2=data2.reshape(77,14,4096)
 print("3D_shape (x,y,z) =",data2_2.shape)
 print("+++++++++++++++++++++")
 print("\n")
