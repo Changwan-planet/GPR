@@ -10,4 +10,6 @@ END DO
 !==> THIS STRUCTURE (F X Y) X Z CAN BE PRINTED.
 !==> (F X Y) IS THE C_SCAN.
 PRINT *, "COMPLETE 3D_CUBE IMAGE OUTPUT"
+PRINT *, "3D STRCUTRUE = (X ,Y ,Z)"
+PRINT *, "(",DIS,",",Y,",",Z,")"
 !==========================================
