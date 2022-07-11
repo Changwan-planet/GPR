@@ -1,48 +1,48 @@
+!==================EW==================
+!INTEGER, PARAMETER :: DIS=496       !X
+!INTEGER, PARAMETER :: TRA=1         !Y
+!INTEGER, PARAMETER :: ROWS=4096     !Z 4096
+!======================================
 
-!===============EW=================
-INTEGER, PARAMETER :: DIS=496      !X
-INTEGER, PARAMETER :: TRA=1       !Y
-INTEGER, PARAMETER :: ROWS=4096     !Z 4096
-!==================================
+
+!================MOGOD=================
+INTEGER, PARAMETER :: DIS=2300      !X
+INTEGER, PARAMETER :: TRA=100       !Y
+INTEGER, PARAMETER :: ROWS=512      !Z
+!======================================
+
+
+!============2D MOVING MEAN=================
+INTEGER, PARAMETER :: WW = 2
+INTEGER, PARAMETER :: MV_DIS = (DIS -WW) +1
+INTEGER, PARAMETER :: MV_TRA = (TRA -WW) +1
+!===========================================
 
 
 !===========================================================
-INTEGER, DIMENSION(32768) :: HEADER !32768 * 4 BYTES!
-INTEGER, DIMENSION(ROWS,DIS,TRA) :: B_SCAN_IMAGE
-REAL*8, DIMENSION(ROWS,DIS,TRA) :: B_SCAN_IMAGE2
+REAL*8, DIMENSION(ROWS,TRA,DIS) :: B_SCAN_IMAGE33
 REAL*8, DIMENSION(DIS,TRA,ROWS) :: B_SCAN_IMAGE3
-REAL*8, DIMENSION(DIS,TRA,ROWS) :: HILBERT_B_SCAN
+REAL*8, DIMENSION(DIS,TRA,ROWS) :: B_SCAN_IMAGE4
+REAL*8, DIMENSION(MV_DIS,MV_TRA,ROWS) :: B_SCAN_IMAGE5
 !============================================================      
 
 
 !============================================================
 REAL*8, DIMENSION(1,1,1:ROWS) :: HILBERT_SIGNAL
+REAL*8, DIMENSION(1,1,1:ROWS) :: HILBERT_SIGNAL_imag
+REAL*8, DIMENSION(DIS,TRA,ROWS) :: HILBERT_B_SCAN
+REAL*8, DIMENSION(DIS,TRA,ROWS) :: HILBERT_B_SCAN_imag
+REAL*8, DIMENSION(DIS,TRA,ROWS) :: HILBERT_power
+REAL*8, DIMENSION(DIS,TRA,ROWS) :: HILBERT_powerdB
+!===========================================================
 
 REAL*8, DIMENSION(1:ROWS,1) :: f_real
 REAL*8, DIMENSION(1:ROWS,1) :: f_imag
 
 
 INTEGER             :: I,J,K,G,N,P,R, SAMPLE
-INTEGER             :: X, Y, Z
+INTEGER             :: X, Y, Z, MV_X, MV_Y
 REAL*8              :: BGR
 REAL*8              :: MEAN
 REAL*8              :: MAX_SLICE, SLICE_MEAN, SLICE_MEAN2
-
 !=============================================================
-!CHARACTER (LEN=11)  :: FH1='201223__0'
-!CHARACTER (LEN=11)  :: FH1='210201__0'
-!CHARACTER (LEN=11)  :: FH1='201223__0'
-!CHARACTER (LEN=18)  :: FH1='f1-500-profile-'
-!CHARACTER (LEN=4)  :: FT='.rd3'
-
-!CHARACTER (LEN=13)  :: FH1='211027_4__'
-CHARACTER (LEN=11)  :: FH1='200430__'
-!CHARACTER (LEN=11)  :: FH1='211028__'
-CHARACTER (LEN=4)  :: FT='.DZT'
-
-CHARACTER (LEN=22) :: ITEM_NUMBER
-
-
-!PRINT *, FH1
-
-

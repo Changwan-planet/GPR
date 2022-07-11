@@ -1,16 +1,17 @@
 
 !=============================PATH===================================
 !COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/SPALAND/"
-COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/CSCAN3/220526_1.PRJ/"
+!COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/CSCAN3/220526_1.PRJ/"
+COMMON_PATH1="/home/changwan/GPR_DATA/MOGOD/2021/F1/500MHz/"
 
 
 INPUT_NAME10 = "3DCUBE_GPR_noprocessing.raw"    !10
 
-OUTPUT_NAME20 = "A_SCOPE_GPR.txt"               !20
-OUTPUT_NAME30 = "BSCAN_GPR_noprocessing.txt"    !30
-OUTPUT_NAME31 = "BSCAN_GPR_rmbgr.txt"           !31
-OUTPUT_NAME40 = "3DCUBE_GPR.txt"                !40 
-OUTPUT_NAME50 = "HILBERT_3DCUBE_powerdB.txt"    !50
+OUTPUT_NAME20 = "3D_A_SCOPE_GPR.txt"               !20
+OUTPUT_NAME30 = "3D_BSCAN_GPR_noprocessing.txt"    !30
+OUTPUT_NAME31 = "3D_BSCAN_GPR_rmbgr.txt"           !31
+OUTPUT_NAME40 = "3D_CUBE_GPR.txt"                  !40 
+OUTPUT_NAME50 = "3D_HILBERT_CUBE_powerdB.txt"      !50
 
 
 INPUT_PATH = TRIM(COMMON_PATH1)//INPUT_NAME10
