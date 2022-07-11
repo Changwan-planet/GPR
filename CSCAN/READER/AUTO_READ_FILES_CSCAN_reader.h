@@ -1,7 +1,8 @@
 
 !N = FH1 - 3
 !N = 8
-N = 10
+!N = 10
+N = 15 !MOGOD
 
 DO G=1,TRA
 
@@ -28,7 +29,9 @@ DO G=1,TRA
 
 !=============================PATH===================================
 !COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/SPALAND/"
-COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/CSCAN3/220526_1.PRJ/"
+!COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/CSCAN3/220526_1.PRJ/"
+COMMON_PATH1="/home/changwan/GPR_DATA/MOGOD/2021/F1/500MHz/"
+
 
 
 !OUTPUT_NAME20 = "A_SCOPE_GPR.raw"               !20
@@ -71,18 +74,19 @@ OPEN(UNIT=10, FILE=INPUT_PATH,   ACCESS='STREAM',  STATUS='OLD', ACTION='READ')
 !PRINT *, "            Z                                                            "
 
 
-      READ(10) HEADER, B_SCAN_IMAGE(:,:,G)
+!      READ(10) HEADER, B_SCAN_IMAGE(:,:,G)   !KOREA
+      READ(10) B_SCAN_IMAGE(:,:,G)    !MOGOD
              
       B_SCAN_IMAGE2(:,:,G) = B_SCAN_IMAGE(:,:,G)
 
 !+++++REVERSING THE EVEN_GPR TRACKS+++++++++++++++++++++++
-!!     IF (MOD(G,2)/=0) THEN
-!!         B_SCAN_IMAGE2(:,:,G) = B_SCAN_IMAGE(:,:,G)
-!!     ELSE
-!!      DO P=1,DIS
-!!          B_SCAN_IMAGE2(:,(DIS-P+1),G) = B_SCAN_IMAGE(:,P,G) 
-!!      END DO
-!!     END IF
+     IF (MOD(G,2)/=0) THEN
+         B_SCAN_IMAGE2(:,:,G) = B_SCAN_IMAGE(:,:,G)
+     ELSE
+      DO P=1,DIS
+          B_SCAN_IMAGE2(:,(DIS-P+1),G) = B_SCAN_IMAGE(:,P,G) 
+      END DO
+     END IF
 
       PRINT *, "G=",G    
 
