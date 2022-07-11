@@ -20,9 +20,7 @@ def make_patch_spines_invisible(ax):
 #input_path2 = "/home/changwan/GPR/211028/HILBERT_3D_CUBE_IMAGE_GPR.txt"
 #input_path2 = "/home/changwan/GPR_DATA/KOREA/211028/HILBERT_3D_CUBE_IMAGE_GPR.txt"
 
-#input_path2 = "/home/changwan/GPR_DATA/MOGOD/2021/F1/500MHz/3D_HILBERT_CUBE_powerdB.txt"
-
-input_path2 = "/home/changwan/GPR_DATA/MOGOD/2021/F1/500MHz/3D_HdB_RM_mvmean.txt"
+input_path2 = "/home/changwan/GPR_DATA/MOGOD/2021/F1/500MHz/3D_HILBERT_CUBE_powerdB.txt"
 
 
 #READ DATASET
@@ -57,7 +55,7 @@ print("depth_interval=",depth_int)
 #RESAHPE THE INPUT DATA
 print("input_shape=",data2.shape)    
 #data2_2=data2.reshape(140,1,4096)
-data2_2=data2.reshape(2299,99,512)
+data2_2=data2.reshape(2300,100,512)
 
 #data2_2=data2.reshape(2,3,4)
 
@@ -124,6 +122,36 @@ print(tra)
 #     data2_2[:,east,depth] = data2_2[:,east,depth] \
 #                              - np.mean(data2_2[:,east,depth])
 
+
+fig = plt.figure(figsize = (6, 3.9))
+ax = fig.add_subplot(111, projection= '3d')
+
+ax.
+
+
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"""
 for depth in rows:
 # data2_2[:,:,depth] = data2_2[:,:,depth] - np.mean(data2_2[:,:,depth])
 
@@ -171,6 +199,10 @@ for depth in rows:
  fig.clear()
 
 #plt.show()
+
+"""
+
+
 
 #
 #      +++++++++++++++
