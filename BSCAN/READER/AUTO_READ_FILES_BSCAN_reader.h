@@ -7,6 +7,11 @@ CALL getcwd(CWD)
 !COMMON_PATH1= "/home/changwan/GPR_DATA/KOREA/INBO_ri/220223_5.PRJ/"
 !COMMON_PATH1= "/home/changwan/GPR_DATA/KOREA/GYODONG_ri/20211022/"
 !COMMON_PATH1= "/home/changwan/GPR_DATA/KOREA/GYODONG_ri/211029/"
+!COMMON_PATH1= "/home/changwan/GPR_DATA/MOGOD/2022/Site-1/RTA50/"
+!COMMON_PATH1= "/home/changwan/GPR_DATA/MOGOD/2020/Pr-1/250MHz/"
+!COMMON_PATH1= "/home/changwan/GPR_DATA/MOGOD/2020/Site-1/RTA50/"
+!
+
 
 COMMON_PATH1 = "/home/changwan/GPR_DATA"
 !PRINT *, "COMMON_PATH=",COMMON_PATH1
@@ -29,6 +34,7 @@ PRINT *, ""
 
 !===================FILE_HEAD=================================
 PRINT *, "ENTER THE FILE_HEAD THAT YOU WANT TO READ." 
+PRINT *, "PLEASE CHANGE THE VALUE OF N IF YOU USE A NEW FH1"
 PRINT *, "e.g.) 220526_1__"
 PRINT *, "e.g.) f1-250-profile-"
 
@@ -37,10 +43,11 @@ PRINT *, "FH1=",FH1
 PRINT *, ""
 
 !N = FH1 - 3
-
-N = 15
+!GSSI
 !N = 10
-!N = 8
+
+!MALA
+N = 15
 
 !!DO G=1,TRA
 
@@ -73,9 +80,9 @@ PRINT *,  ""
 
 !============================================================
 
-OUTPUT_NAME20 = "A_SCOPE_GPR.raw"                 !20
-OUTPUT_NAME30 = "BSCAN_GPR_noprocessing.raw"      !30
-!OUTPUT_NAME30 = "BSCAN_GPR_noprocessing.txt"     !30
+OUTPUT_NAME20 = "A_SCOPE_GPR.raw"                !20
+OUTPUT_NAME30 = "BSCAN_GPR_noprocessing.raw"     !30
+OUTPUT_NAME31 = "BSCAN_GPR_noprocessing.txt"     !31
 
 
 !OUTPUT_NAME40 = "3DCUBE_GPR_noprocessing.raw"    !40
@@ -84,10 +91,15 @@ OUTPUT_NAME30 = "BSCAN_GPR_noprocessing.raw"      !30
 INPUT_PATH = TRIM(COMMON_PATH3)//ITEM_NUMBER
 OUTPUT_PATH20 = TRIM(COMMON_PATH3)//OUTPUT_NAME20
 OUTPUT_PATH30 = TRIM(COMMON_PATH3)//OUTPUT_NAME30
+OUTPUT_PATH31 = TRIM(COMMON_PATH3)//OUTPUT_NAME31
+
+
 !OUTPUT_PATH40 = TRIM(COMMON_PATH3)//OUTPUT_NAME40
 !=====================================================================
 
-!PRINT*, INPUT_PATH
+PRINT*, "FH1=",FH1
+PRINT*, "ITEM_NUBMER=", ITEM_NUMBER
+PRINT*, "INPUT_PAHT=",INPUT_PATH
 
 OPEN(UNIT=10, FILE=INPUT_PATH,   ACCESS='STREAM',  STATUS='OLD', ACTION='READ')
 
@@ -117,7 +129,7 @@ OPEN(UNIT=10, FILE=INPUT_PATH,   ACCESS='STREAM',  STATUS='OLD', ACTION='READ')
 !PRINT *, "            Z                                                            "
 
 
-      READ(10)  B_SCAN_IMAGE(:,:,1)
+       READ(10)  B_SCAN_IMAGE(:,:,1)
 
 !      READ(10) HEADER, B_SCAN_IMAGE(:,:,1)
 
