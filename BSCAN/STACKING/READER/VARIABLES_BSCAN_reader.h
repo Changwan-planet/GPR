@@ -1,6 +1,6 @@
 !==================================
-INTEGER, PARAMETER :: DIS=100      !X
-INTEGER, PARAMETER :: TRA=109       !Y
+INTEGER, PARAMETER :: DIS=39     !X
+INTEGER, PARAMETER :: TRA=77       !Y
 INTEGER, PARAMETER :: ROWS=4096    !Z 4096
 !==================================
 
@@ -27,8 +27,8 @@ INTEGER             :: X, Y, Z
 !=====GSSI=====
 !CHARACTER (LEN=11) :: FH1='200430__'
 !CHARACTER (LEN=11) :: FH1='220506__'
-CHARACTER (LEN=13)  :: FH1='220506_3__'
-!CHARACTER (LEN=14)  :: FH1='220525_17__'
+!CHARACTER (LEN=13)  :: FH1='220506_3__'
+CHARACTER (LEN=14)  :: FH1='220525_17__'
 !==============
 
 !CHARACTER (LEN=13) :: FH1='20211022__'
