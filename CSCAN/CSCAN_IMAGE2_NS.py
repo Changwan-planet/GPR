@@ -18,7 +18,7 @@ def make_patch_spines_invisible(ax):
 
 #PATH
 #input_path1="/home/changwan/GPR/C_SCAN_IMAGE_GPR_flip.txt"
-input_path2="/home/changwan/GPR_DATA/KOREA/MIHO_ri/CSCAN3/220526_1.PRJ/HILBERT_3DCUBE_powerdB.txt"
+input_path2="/home/changwan/GPR_DATA/KOREA/MIHO_ri/100MHz/CSCAN3/220526_1.PRJ/HILBERT_3DCUBE_powerdB.txt"
 
 #input_path2 = "/home/changwan/GPR/211027_4/3D_CUBE_IMAGE_GPR.txt"
 #input_path2 = "/home/changwan/GPR/211027_4/HILBERT_3D_CUBE_IMAGE_GPR.txt"

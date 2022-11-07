@@ -5,6 +5,8 @@ import pandas as pd
 from pandas import Series, DataFrame 
 from mpl_toolkits.mplot3d import Axes3D
 from scipy.interpolate import interp1d
+from tifffile import imwrite 
+
 #import ipyvolume as ipv
 #import cv2
 import math
@@ -21,8 +23,16 @@ def make_patch_spines_invisible(ax):
 #input_path2 = "/home/changwan/GPR_DATA/KOREA/211028/HILBERT_3D_CUBE_IMAGE_GPR.txt"
 
 #input_path2 = "/home/changwan/GPR_DATA/MOGOD/2021/F1/500MHz/3D_HILBERT_CUBE_powerdB.txt"
+#input_path2 = "/home/changwan/GPR_DATA/MOGOD/2021/F1/500MHz/3D_HdB_RM_mvmean.txt"
+#input_path2 = "/home/changwan/GPR_DATA/MOGOD/2020/Channel-1/500/3DCUBE_GPR_noprocessing.raw"
+#input_path2 = "/home/changwan/GPR_DATA/MOGOD/2020/Channel-1/500/3D_CUBE/CSCAN_GPR_rmbgr_GC.txt"
+#input_path2 = "/home/changwan/GPR_DATA/MOGOD/2020/Channel-1/500/3D_CUBE/HPF_BSCAN_GC.txt"
+#input_path2 = "/home/changwan/GPR_DATA/MOGOD/2020/Channel-1/500/3D_CUBE/CSCAN_GPR_noprocessing.txt"
+input_path2 = "/home/changwan/GPR_DATA/MOGOD/2020/Channel-1/500/3D_CUBE/3D_HILBERT_CUBE_powerdB.txt"
 
-input_path2 = "/home/changwan/GPR_DATA/MOGOD/2021/F1/500MHz/3D_HdB_RM_mvmean.txt"
+
+
+
 
 
 #READ DATASET
@@ -41,10 +51,13 @@ data2=np.loadtxt(input_path2)
 
 #MOGOD
 c_sl = 3*10**8   # speed of light
-t_window = 213.457859*10**(-9)
+#t_window = 213.457859*10**(-9)
+t_window = 139.303478*10.0**(-9)
+
 permit = 9.0
 depth_range = t_window*(c_sl/np.sqrt(permit))
-sample = 512.0
+#sample = 512.0
+sample = 616.0
 depth_int = depth_range/ sample 
 depth_int = round(depth_int, 2)
 
@@ -57,7 +70,9 @@ print("depth_interval=",depth_int)
 #RESAHPE THE INPUT DATA
 print("input_shape=",data2.shape)    
 #data2_2=data2.reshape(140,1,4096)
-data2_2=data2.reshape(2299,99,512)
+#data2_2=data2.reshape(2299,99,512)
+data2_2=data2.reshape(1498,110,616)
+
 
 #data2_2=data2.reshape(2,3,4)
 
@@ -124,51 +139,74 @@ print(tra)
 #     data2_2[:,east,depth] = data2_2[:,east,depth] \
 #                              - np.mean(data2_2[:,east,depth])
 
+#p_depth = 53
+#imwrite("INSTANT_powerdB_34.tif",data2_2[:,:,34]) 
+imwrite("INSTANT_powerdB_34.tif",np.flipud(data2_2[:,:,34])) 
+
+#reverse colormap
+color_map = plt.cm.get_cmap('magma')
+#reversed_color_map = color_map.reversed()
+
+
 for depth in rows:
 # data2_2[:,:,depth] = data2_2[:,:,depth] - np.mean(data2_2[:,:,depth])
 
 #Transpose the C_scan, and
 #Flip the C_scan when it comes to up and down
 #Becasue I consider the tendency the imhosw plots.
- plt.imshow(np.flipud(data2_2[:,:,depth])
+
+# if(depth==34):
+ if(depth==53):
+  plt.imshow(np.flipud(data2_2[:,:,depth])
            ,extent=(ay1_min,ay1_max,ax1_min,ax1_max)
-           ,cmap='gist_rainbow')
+#           ,cmap='gist_rainbow')
+           ,cmap=color_map)
+
 
 #Almost similar in with and without the interpolation.
 #,interpolation = 'spline16')
 
- plt.colorbar()
- plt.text(35.5, 15, '[dB]', fontweight="bold", fontsize=15)
 
- depth_title = round(((depth-start) * depth_int), 2)
- print(depth_title,"m", "sample=",depth)
+#colorbar
+  plt.colorbar()
+#colorbar range
+  plt.clim(17,-5)
+
+#colorbar titile
+  plt.text(115,90, '[dB]', fontweight="bold", fontsize=15)
+
+  depth_title = round(((depth-start) * depth_int), 2)
+  print(depth_title,"m", "sample=",depth)
 
  #plt.title("Gyodong-ri_100 MHz_EW_Pol.", fontweight="bold", fontsize=30)
- plt.title("MOGOD_500 MHz_EW_Pol.", fontweight="bold", fontsize=30)
+  plt.title("MOGOD_500 MHz_EW_Pol.", fontweight="bold", fontsize=30)
 
 
 #Track interval 
- plt.ylabel("Northing [m] int=0.05 m", fontweight="bold", fontsize=20)
+#  plt.ylabel("Northing [m] interval=0.05 m", fontweight="bold", fontsize=20)
+  plt.ylabel("Y [m] interval=0.05 m", fontweight="bold", fontsize=20)
+
+
 #Distance interval
- plt.xlabel("Easting [m] int=1 m", fontweight="bold", fontsize=20)
+  plt.xlabel("X [m] interval=1 m", fontweight="bold", fontsize=20)
 
 #Tick 
- plt.xticks(fontsize=15, fontweight="bold")
- plt.yticks(fontsize=15, fontweight="bold")
+  plt.xticks(fontsize=15, fontweight="bold")
+  plt.yticks(fontsize=15, fontweight="bold")
 
 #Grid
- plt.grid()
+  plt.grid()
 
 # plt.show(block=False)
- plt.draw()
+  plt.draw()
 
 #Wait for the button press
- plt.waitforbuttonpress()
+  plt.waitforbuttonpress()
  
 #Keep changing the graph with a 0.05 s pause.
 # plt.pause(0.05)
 
- fig.clear()
+  fig.clear()
 
 #plt.show()
 
