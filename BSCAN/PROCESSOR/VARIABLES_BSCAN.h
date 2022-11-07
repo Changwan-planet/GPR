@@ -1,17 +1,34 @@
-!===========MALA===================
-INTEGER, PARAMETER :: DIS = 2300   !X
-INTEGER, PARAMETER :: TRA = 1       !Y
-INTEGER, PARAMETER :: ROWS = 512   !Z 
-INTEGER, PARAMETER :: MV_WIN = 10  !GAIN_CONTROL
-INTEGER, PARAMETER :: ROWS2 =ROWS - (MV_WIN-1) !GAIN_CONTROL
+!===========MALA-MONGOLIA==========
+!INTEGER, PARAMETER :: DIS = 1547    !X
+!INTEGER, PARAMETER :: TRA = 1       !Y
+!INTEGER, PARAMETER :: ROWS = 616   !Z 
+!INTEGER, PARAMETER :: MV_WIN = 10  !GAIN_CONTROL
+!INTEGER, PARAMETER :: ROWS2 =ROWS - (MV_WIN-1) !GAIN_CONTROL
 !==================================
 
-!============GSSI=================
-!INTEGER, PARAMETER :: DIS = 5300   !X
+!===========MALA-HIGH===================
+!INTEGER, PARAMETER :: DIS = 1055    !X
 !INTEGER, PARAMETER :: TRA = 1       !Y
-!INTEGER, PARAMETER :: ROWS = 4096   !Z 
-!INTEGER, PARAMETER :: MV_WIN = 100  !GAIN_CONTROL
+!INTEGER, PARAMETER :: ROWS = 1013   !Z   HDR_HIGH 
+!INTEGER, PARAMETER :: MV_WIN = 10  !GAIN_CONTROL
 !INTEGER, PARAMETER :: ROWS2 =ROWS - (MV_WIN-1) !GAIN_CONTROL
+!==================================
+
+!===========MALA-LOW===================
+!INTEGER, PARAMETER :: DIS = 1055    !X
+!INTEGER, PARAMETER :: TRA = 1       !Y
+!INTEGER, PARAMETER :: ROWS = 999    !Z   HDR_LOW 
+!INTEGER, PARAMETER :: MV_WIN = 10  !GAIN_CONTROL
+!INTEGER, PARAMETER :: ROWS2 =ROWS - (MV_WIN-1) !GAIN_CONTROL
+!==================================
+
+
+!============GSSI=================
+INTEGER, PARAMETER :: DIS = 1901   !X
+INTEGER, PARAMETER :: TRA = 1       !Y
+INTEGER, PARAMETER :: ROWS = 4096   !Z 
+INTEGER, PARAMETER :: MV_WIN = 100  !GAIN_CONTROL
+INTEGER, PARAMETER :: ROWS2 =ROWS - (MV_WIN-1) !GAIN_CONTROL
 !==================================
 
 !===========================================================

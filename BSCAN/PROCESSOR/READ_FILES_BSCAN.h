@@ -4,9 +4,19 @@
 !COMMON_PATH1= "/home/changwan/GPR_DATA/KOREA/INBO_ri/220223_5.PRJ/"
 !COMMON_PATH1= "/home/changwan/GPR_DATA/KOREA/GYODONG_ri/20211022/"
 !COMMON_PATH1= "/home/changwan/GPR_DATA/KOREA/GYODONG_ri/211029/"
+COMMON_PATH1= "/home/changwan/GPR_DATA/KOREA/MIHO_ri/100MHz/CSCAN3/220526_1.PRJ/"
 
 
-COMMON_PATH1= "/home/changwan/GPR_DATA/MOGOD/2021/F1/500MHz/"
+
+!COMMON_PATH1= "/home/changwan/GPR_DATA/MOGOD/2021/F1/500MHz/"
+!COMMON_PATH1= "/home/changwan/GPR_DATA/MOGOD/2022/Site-1/250/"
+!COMMON_PATH1= "/home/changwan/GPR_DATA/MOGOD/2022/Site-1/RTA50/"
+!COMMON_PATH1= "/home/changwan/GPR_DATA/MOGOD/2020/Channel-1/500/"
+
+
+
+!COMMON_PATH1= "/home/changwan/GPR_DATA/KOREA/MIHO_ri/2020_BOMIN/"
+
 
 
 INPUT_NAME10 = "BSCAN_GPR_noprocessing.raw"      !10
@@ -85,7 +95,7 @@ OPEN(UNIT=10, FILE=INPUT_PATH,   ACCESS='STREAM',  STATUS='OLD', ACTION='READ')
 
 
       READ(10) B_SCAN_IMAGE3
-             
+            
 !+++++REVERSING THE EVEN_GPR TRACKS+++++++++++++++++++++++
 !     IF (MOD(G,2)/=0) THEN
 !         B_SCAN_IMAGE2(:,:,G) = B_SCAN_IMAGE(:,:,G)
