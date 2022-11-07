@@ -2,10 +2,10 @@
 !=============================PATH===================================
 !COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/SPALAND/"
 !COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/CSCAN3/220526_1.PRJ/"
-COMMON_PATH1="/home/changwan/GPR_DATA/MOGOD/2021/F1/500MHz/"
+!COMMON_PATH1="/home/changwan/GPR_DATA/MOGOD/2021/F1/500MHz/"
+COMMON_PATH1="/home/changwan/GPR_DATA/MOGOD/2020/Channel-1/500/"
 
-
-INPUT_NAME10 = "3DCUBE_GPR_noprocessing.raw"    !10
+INPUT_NAME10 = "3DCUBE_GPR_noprocessing.raw"       !10
 
 OUTPUT_NAME20 = "3D_A_SCOPE_GPR.txt"               !20
 OUTPUT_NAME30 = "3D_BSCAN_GPR_noprocessing.txt"    !30
@@ -53,17 +53,8 @@ OPEN(UNIT=10, FILE=INPUT_PATH,   ACCESS='STREAM',  STATUS='OLD', ACTION='READ')
 
 
       READ(10) B_SCAN_IMAGE33
+!       READ(10) B_SCAN_IMAGE3
              
-!+++++REVERSING THE EVEN_GPR TRACKS+++++++++++++++++++++++
-!!     IF (MOD(G,2)/=0) THEN
-!!         B_SCAN_IMAGE2(:,:,G) = B_SCAN_IMAGE(:,:,G)
-!!     ELSE
-!!      DO P=1,DIS
-!!          B_SCAN_IMAGE2(:,(DIS-P+1),G) = B_SCAN_IMAGE(:,P,G) 
-!!      END DO
-!!     END IF
-  
-
 DO X = 1, DIS
   DO Y = 1, TRA
     DO Z = 1, ROWS

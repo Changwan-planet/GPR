@@ -3,7 +3,9 @@
 
 DO X = 1, DIS
    DO Y = 1, TRA
-       WRITE(40,*) (B_SCAN_IMAGE4(X, Y, Z), Z = 1,ROWS)
+       WRITE(40,*) (B_SCAN_IMAGE4(X, Y, Z), Z = ROWS/2,1-1)
+!       WRITE(40,*) (B_SCAN_IMAGE4(X, Y, Z), Z = 1,ROWS/2)
+!       WRITE(40) (B_SCAN_IMAGE4(X, Y, Z), Z = 313,1,-1)
    END DO 
 END DO
 
