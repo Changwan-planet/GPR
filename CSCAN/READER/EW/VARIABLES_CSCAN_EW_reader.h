@@ -1,7 +1,7 @@
 !===========MALA-EW================
-INTEGER, PARAMETER :: DIS=1498      !X
-INTEGER, PARAMETER :: TRA=110      !Y
-INTEGER, PARAMETER :: ROWS=616     !Z 
+!INTEGER, PARAMETER :: DIS=1498      !X
+!INTEGER, PARAMETER :: TRA=110      !Y
+!INTEGER, PARAMETER :: ROWS=616     !Z 
 !==================================
 
 !===========GSSI-EW================
