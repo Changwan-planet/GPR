@@ -1,10 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib import cm
+from matplotlib import cm, colors
 import pandas as pd
 from pandas import Series, DataFrame 
 from mpl_toolkits.mplot3d import Axes3D
 from scipy.interpolate import interp1d
+
 #import ipyvolume as ipv
 #import cv2
 import math
@@ -16,17 +17,12 @@ def make_patch_spines_invisible(ax):
         sp.set_visible(False)
 
 #PATH
-#input_path1="/home/changwan/GPR/C_SCAN_IMAGE_GPR_flip.txt"
-#input_path2="/home/changwan/GPR/3D_IMAGE_GPR.txt"
-#input_path2="L:/MOGOD_GPR/2021/3D_CUBE_IMAGE_GPR.txt"
+#input_path2 = "/home/changwan/GPR/211027_4/3D_CUBE_IMAGE_GPR.txt"
+#input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/CSCAN/CSCAN_GPR_stacking.txt"
+#input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/CSCAN2/HILBERT_3DCUBE_stacking_powerdB.txt"
+input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/CSCAN3/EW/HILBERT_3DCUBE_stacking_powerdB.txt"
 
-#input_path2 = "/home/changwan/GPR/211028/3D_CUBE_IMAGE_GPR.txt"
-#input_path2 = "/home/changwan/GPR/211028/HILBERT_3D_CUBE_IMAGE_GPR.txt"
-#input_path2 = "/home/changwan/GPR/211028/HILBERT_3D_CUBE_IMAGE_GPR.txt"
-#input_path2="L:\mnt\l\GPR_DATA/211028.PRJ/HILBERT_3D_CUBE_IMAGE_GPR.txt"
 
-input_path2="L:\GPR_DATA"+"\P211028.PRJ\HILBERT_3D_CUBE_IMAGE_GPR.txt"
-#input_path2="L:\GPR_DATA"+"\P211027_4.PRJ\HILBERT_3D_CUBE_IMAGE_GPR.txt"
 
 
 #READ DATASET
@@ -36,11 +32,11 @@ data2=np.loadtxt(input_path2)
 
 #CALCULATE THE DISTANCE INTERVAL:
 c_sl = 3*10**8   # speed of light
-depth_range = 90 # 90 m 
-permit = 25
+depth_range = 50 #  
+#permit = 
 sample = 4096
-depth_int = depth_range/ sample 
-depth_int = round(depth_int, 2)
+depth_int = (depth_range/ sample) 
+depth_int2 = round(depth_int, 2)
 
 print("\n")
 print("++++++DATA INFO++++++")
@@ -50,84 +46,129 @@ print("depth_interval=",depth_int)
 
 #RESAHPE THE INPUT DATA
 print("input_shape=",data2.shape)    
-data2_2=data2.reshape(140,67,4096)
+data2_2=data2.reshape(17,41,4096)
+data2_3=data2.reshape(17,41,4096)
 print("3D_shape (x,y,z) =",data2_2.shape)
 print("+++++++++++++++++++++")
 print("\n")
 
 fig,host =plt.subplots()
 
+print(data2_2.shape[0])
+print(data2_2.shape[1])
 print(data2_2.shape[2])
 
-ax1_min=0
-ax1_max=data2_2.shape[0]*0.05  #This is Northing.
-ay1_min=0
-ay1_max=data2_2.shape[1]*0.5 #This is Eastilng.
 
+ax1_min=0
+ax1_max=data2_2.shape[0]* 1 #This is Easting.
+ay1_min=data2_2.shape[2]* depth_int #This is Depth.
+ay1_max=0
+
+#subgroup
+#ss = 980     #subgroup start
+#se = 1600     #subgroup end
+#ay1_min = depth_int * se
+#ay1_max = 0
+
+
+
+#ay1_min=0
+#ay1_max=data2_2.shape[1]*1 #This is Easting.
+
+
+
+#cmap=colors.ListedColormap(["white","blue","red"])
 
 #     ++++++++++++++++++++++
 #++++++Before interploation++++++
 #     ++++++++++++++++++++++
-start =  900
-end   = 1050
-rows=list(range(start,end,1))
+start =  0
+end   = 16
+lines=list(range(start,end,1))
+samples=list(range(0,sample,1,))
 
 dis_s = 0
 dis_e = data2_2.shape[0]
 dis=list(range(dis_s,dis_e,1))
 
-tra_s = 0
-tra_e = data2_2.shape[1]
-tra=list(range(tra_s,tra_e,1))
-print(tra)
-
 #PLEASE CHECK THE DIRECTION OF THE GRAPH.
 #Check the direction of the graph
-#data2_2[:,0:20,start] = 1000000*100000 
-#data2_2[100:200,:,start+1] = 1000000*100000 
+#data2_2[10:20,1,start] = 1000000*100000 
+#data2_2[70:80,1,start] = -1000000*100000 
+#data2_2[3,30:40,start] = -1000000*100000 
+#data2_2[1:10,30,start] = -1000000*100000 
+
+
 
 #     ++++++++++++++++++++
 #++++++Remove the average++++++
 #     ++++++++++++++++++++
 
 #remove the noise of the cable
-#for depth in rows:
-#  for east  in tra:
-#     data2_2[:,east,depth] = data2_2[:,east,depth] \
-#                              - np.mean(data2_2[:,east,depth])
+##for depth in rows:
+## data2_2[:,:,depth] = data2_2[:,:,depth] - np.mean(data2_2[:,:,depth])
+##for east in dis:
+## data2_2[east,:,depth] = data2_2[east,:,depth] \
+##                         - np.mean(data2_2[east,:,depth])
 
-for depth in rows:
-# data2_2[:,:,depth] = data2_2[:,:,depth] - np.mean(data2_2[:,:,depth])
+for line in lines:
+ for depth in samples:
+     data2_3[line,:,depth] = data2_2[line,:,depth] - np.mean(data2_2[line,:,depth])
+
+
 
 #Transpose the C_scan, and
 #Flip the C_scan when it comes to up and down
 #Becasue I consider the tendency the imhosw plots.
- plt.imshow(np.flipud(data2_2[:,:,depth])
-           ,extent=(ay1_min,ay1_max,ax1_min,ax1_max)
-           ,cmap='gist_rainbow')
-
+# plt.imshow((data2_2[:,:,depth].T)
+# plt.imshow(np.flipud(data2_2[:,:,depth].T)
+ plt.imshow(data2_3[line,:,:].T
+           ,extent=(ax1_min,ax1_max,ay1_min,ay1_max)
+           #,cmap='gist_rainbow'
+            ,cmap="Greys_r" 
+)
 #Almost similar in with and without the interpolation.
 #,interpolation = 'spline16')
-
+ 
  plt.colorbar()
- plt.text(35.5, 15, '[dB]', fontweight="bold", fontsize=15)
+ plt.text(37,15,'[dB]', fontweight="bold",fontsize=15) 
 
- depth_title = round(((depth-start) * depth_int), 2)
- print(depth_title,"m", "sample=",depth)
+#colorbar
 
- plt.title("Gyodong-ri_100 MHz_EW_Pol.", fontweight="bold", fontsize=30)
+ plt.clim(10,-10)
+
+ #depth_title = round(((depth-start) * depth_int), 2)
+ #d
+ print("line=",line+1,"m")
+
+ plt.title("BSCAN MIHO-ri_40 MHz_EW_Pol.", fontweight="bold", fontsize=20)
 
 #Track interval 
- plt.ylabel("Northing [m] int=0.05 m", fontweight="bold", fontsize=20)
+ plt.ylabel("Depth [m]", fontweight="bold",fontsize=20)
 #Distance interval
- plt.xlabel("Easting [m] int=0.5 m", fontweight="bold", fontsize=20)
+ plt.xlabel("Easting [m]  int_1 m", fontweight="bold",fontsize=20)
 
-#Tick 
+#Ticks
  plt.xticks(fontsize=15, fontweight="bold")
  plt.yticks(fontsize=15, fontweight="bold")
+ 
+ #subgroup
+ ss = 11.5 #subgroup start
+ se = 20.5  #subgroup end
+ plt.xticks(np.arange(0,16,2),np.arange(1,17,2),fontsize=15, fontweight="bold")
+
+ plt.yticks(np.arange(ss,se),np.arange((ss-ss)-1,(se-ss)-1,1),fontsize=15, fontweight="bold")
+
+
+#Ticks limit
+ plt.xlim(0,16)
+ plt.ylim(se,ss)
 
 #Grid
- plt.grid()
+# plt.grid()
+
+#tight_layout
+# plt.tight_layout()
 
 # plt.show(block=False)
  plt.draw()

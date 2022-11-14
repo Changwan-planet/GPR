@@ -20,7 +20,11 @@ def make_patch_spines_invisible(ax):
 #input_path2="/home/changwan/GPR/3D_IMAGE_GPR.txt"
 #input_path2="L:/MOGOD_GPR/2021/3D_CUBE_IMAGE_GPR.txt"
 #input_path2 = "/home/changwan/GPR/211027_4/3D_CUBE_IMAGE_GPR.txt"
-input_path2 = "/home/changwan/GPR/211027_4/HILBERT_3D_CUBE_IMAGE_GPR.txt"
+#input_path2 = "/home/changwan/GPR/211027_4/HILBERT_3D_CUBE_IMAGE_GPR.txt"
+#input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/CSCAN3/EW/HILBERT_3DCUBE_stacking_powerdB.txt"
+input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/CSCAN3/EW/3DCUBE_GPR_stacking.txt"
+
+
 
 #READ DATASET
 #data=np.loadtxt(input_path1)
@@ -29,8 +33,8 @@ data2=np.loadtxt(input_path2)
 
 #CALCULATE THE DISTANCE INTERVAL:
 c_sl = 3*10**8   # speed of light
-depth_range = 90 # 90 m 
-permit = 25
+depth_range = 50 # 90 m 
+permit = 16
 sample = 4096
 depth_int = depth_range/ sample 
 depth_int = round(depth_int, 2)
@@ -43,7 +47,10 @@ print("depth_interval=",depth_int)
 
 #RESAHPE THE INPUT DATA
 print("input_shape=",data2.shape)    
-data2_2=data2.reshape(695,13,4096)
+#data2_2=data2.reshape(695,13,4096)
+data2_2=data2.reshape(17,41,4096)
+
+
 print("3D_shape (x,y,z) =",data2_2.shape)
 print("+++++++++++++++++++++")
 print("\n")
@@ -53,9 +60,9 @@ fig,host =plt.subplots()
 print(data2_2.shape[2])
 
 ax1_min=0
-ax1_max=data2_2.shape[0]*0.05  #This is Northing.
-ay1_min=0
-ay1_max=data2_2.shape[1]*0.5 #This is Easting.
+ax1_max=data2_2.shape[0]*1  #This is Northing.
+ay1_max=0
+ay1_min=data2_2.shape[1]*0.5 #This is Easting.
 
 
 #     ++++++++++++++++++++++
@@ -75,7 +82,7 @@ rows=list(range(start,end,1))
 #     ++++++++++++++++++++
 
 #for depth in rows:
- data2_2[:,:,depth] = data2_2[:,:,depth] - np.mean(data2_2[:,:,depth])
+# data2_2[:,:,depth] = data2_2[:,:,depth] - np.mean(data2_2[:,:,depth])
 
 for depth in rows:
 

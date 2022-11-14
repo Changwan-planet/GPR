@@ -1,6 +1,6 @@
 
 !N = FH2 - 3
-N = 10 
+!N = 10 
 !N = 8 
 
 DO F = 1, LINE
@@ -12,7 +12,7 @@ PRINT *, "F=",F
 
 
 !====AUTOMATIC CHANGE CODE FOR OPENING FOLDER====
-COMMON_PATH1 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/CSCAN3/EW/"
+COMMON_PATH1 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/CSCAN3/NS/"
 
 !PRINT *, LEN(TRIM(COMMON_PATH1)
 
@@ -23,51 +23,85 @@ NN = 7
 
 IF(F<=9.AND.F>=1) THEN
 
-   WRITE(FH1(NN+1:NN+1), FMT='(I1)') F
+   WRITE(FH3(NN+1:NN+1), FMT='(I1)') F
 ELSE IF(F<=99.AND.F>=10) THEN
-
-   WRITE(FH3(NN+1:NN+2), FMT='(I1)') F
+   WRITE(FH3(NN+1:NN+2), FMT='(I2)') F
 END IF
 
-!PRINT *, "FH1=", FH1
-FH2 = TRIM(FH1)//FT
-!PRINT *, "FH2=", FH2
+!PRINT *, "FH3=", FH3
 
+  FH4 = TRIM(FH3)//FT
+
+!PRINT *, "FH4=", FH4
 !PRINT *, "COMMON_PATH1=",COMMON_PATH1
 !PRINT *, LEN(TRIM(COMMON_PATH1))
 
 TAIL_PATH = ".PRJ/"
 
-COMMON_PATH2 = TRIM(COMMON_PATH1)//FH1//TAIL_PATH
-!PRINT *, COMMON_PATH2
+COMMON_PATH2 = TRIM(COMMON_PATH1)//TRIM(FH3)//TAIL_PATH
+   
 
+!PRINT *, "COMMON_PATH2=",COMMON_PATH2
 
 DO G = 1, TRA
 !=====AUTOMATIC CHANCE CODE FOR OPENING FILENAME====
+ IF(F<=9.AND.F>=1) THEN
+    N = 10 
+      IF(G<=9.AND.G>=1) THEN
+         !PRINT*,""
+         !PRINT*, "FH4=",FH4
+         WRITE(FH4(N+1:N+1), FMT='(I1)') 0
+         WRITE(FH4(N+2:N+2), FMT='(I1)') 0
+         WRITE(FH4(N+3:N+3), FMT='(I1)') G
+         !PRINT*, "FH4=",FH4
+         !PRINT*,""
+      ELSE IF(G<=99.AND.G>=10) THEN
+         !PRINT*,""
+         !PRINT*, "FH4=",FH4
+         WRITE(FH4(N+1:N+1), FMT='(I1)') 0
+         WRITE(FH4(N+2:N+3), FMT='(I2)') G
+         !PRINT*, "FH4=",FH4
+         !PRINT*,""
+      ELSE
+         WRITE(FH4(N+1:N+3), FMT='(I3)') G
+      END IF
 
-   IF(G<=9.AND.G>=1) THEN
+    ITEM_NUMBER=TRIM(FH4)//FT2
 
-     WRITE(FH2(N+1:N+1), FMT='(I1)') 0
-     WRITE(FH2(N+2:N+2), FMT='(I1)') 0
-     WRITE(FH2(N+3:N+3), FMT='(I1)') G
-   
-   ELSE IF(G<=99.AND.G>=10) THEN
-    
-     WRITE(FH2(N+1:N+1), FMT='(I1)') 0
-     WRITE(FH2(N+2:N+3), FMT='(I2)') G
-   
-   ELSE
+ELSE IF(F>=10) THEN  
 
-     WRITE(FH2(N+1:N+3), FMT='(I3)') G
-   END IF
+   N = 11 
+      IF(G<=9.AND.G>=1) THEN
+         !PRINT*,""
+         !PRINT*, "FH4=",FH4
+         WRITE(FH4(N+1:N+1), FMT='(I1)') 0
+         WRITE(FH4(N+2:N+2), FMT='(I1)') 0
+         WRITE(FH4(N+3:N+3), FMT='(I1)') G
+         !PRINT*, "FH4=",FH4
+         !PRINT*,""
+      ELSE IF(G<=99.AND.G>=10) THEN
+         !PRINT*,""
+         !PRINT*, "FH4=",FH4
+         WRITE(FH4(N+1:N+1), FMT='(I1)') 0
+         WRITE(FH4(N+2:N+3), FMT='(I2)') G
+         !PRINT*, "FH4=",FH4
+         !PRINT*,""
+      ELSE
+         WRITE(FH4(N+1:N+3), FMT='(I3)') G
+      END IF
 
-   ITEM_NUMBER=TRIM(FH2//FT2)
+    ITEM_NUMBER=TRIM(FH4)//FT2
 
-!   PRINT *, ITEM_NUMBER
+END IF 
+
+!   PRINT *,"ITEM_NUMBER=", ITEM_NUMBER
 !=============================PATH===================================
 OUTPUT_NAME20= "A_SCOPE_GPR.raw"                     !20
 OUTPUT_NAME30= "BSCAN_GPR_stacking.raw"              !30
 OUTPUT_NAME40= "3DCUBE_GPR_stacking.raw"             !40
+OUTPUT_NAME41= "3DCUBE_GPR_stacking.txt"             !41
+
+
 
 INPUT_PATH = TRIM(COMMON_PATH2)//ITEM_NUMBER
 OUTPUT_PATH20 = TRIM(COMMON_PATH1)//OUTPUT_NAME20   !20

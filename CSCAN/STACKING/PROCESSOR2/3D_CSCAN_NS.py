@@ -19,7 +19,10 @@ def make_patch_spines_invisible(ax):
 #PATH
 #input_path2 = "/home/changwan/GPR/211027_4/3D_CUBE_IMAGE_GPR.txt"
 #input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/CSCAN/CSCAN_GPR_stacking.txt"
-input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/CSCAN2/HILBERT_3DCUBE_stacking_powerdB.txt"
+#input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/CSCAN2/HILBERT_3DCUBE_stacking_powerdB.txt"
+input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/CSCAN3/NS/HILBERT_3DCUBE_stacking_powerdB.txt"
+
+
 
 
 #READ DATASET
@@ -43,7 +46,7 @@ print("depth_interval=",depth_int)
 
 #RESAHPE THE INPUT DATA
 print("input_shape=",data2.shape)    
-data2_2=data2.reshape(77,14,4096)
+data2_2=data2.reshape(17,41,4096)
 print("3D_shape (x,y,z) =",data2_2.shape)
 print("+++++++++++++++++++++")
 print("\n")
@@ -56,8 +59,8 @@ print(data2_2.shape[2])
 
 
 ax1_min=0
-ax1_max=data2_2.shape[0]*0.25  #This is Northing.
-ay1_min=data2_2.shape[1]*1 #This is Easting.
+ax1_max=data2_2.shape[0]* 1 #This is Northing.
+ay1_min=data2_2.shape[1]* 0.5 #This is Easting.
 ay1_max=0
 
 
@@ -84,6 +87,10 @@ dis=list(range(dis_s,dis_e,1))
 #Check the direction of the graph
 #data2_2[10:20,1,start] = 1000000*100000 
 #data2_2[70:80,1,start] = -1000000*100000 
+#data2_2[3,30:40,start] = -1000000*100000 
+#data2_2[1:10,30,start] = -1000000*100000 
+
+
 
 #     ++++++++++++++++++++
 #++++++Remove the average++++++
@@ -104,8 +111,8 @@ for depth in rows:
 #Transpose the C_scan, and
 #Flip the C_scan when it comes to up and down
 #Becasue I consider the tendency the imhosw plots.
- plt.imshow((data2_2[:,:,depth].T)
-# plt.imshow(np.flipud(data2_2[:,:,depth].T)
+# plt.imshow((data2_2[:,:,depth].T)
+ plt.imshow(np.flipud(data2_2[:,:,depth].T)
 # plt.imshow(data2_2[:,:,depth])
            ,extent=(ax1_min,ax1_max,ay1_min,ay1_max)
            ,cmap='gist_rainbow'
@@ -120,12 +127,12 @@ for depth in rows:
  depth_title = round(((depth-start) * depth_int), 2)
  print(depth_title,"m", "sample=",depth)
 
- plt.title("MIHO-ri_40 MHz_NS_Pol.", fontweight="bold", fontsize=30)
+ plt.title("CSCAN MIHO-ri_40 MHz_NS_Pol.", fontweight="bold", fontsize=30)
 
 #Track interval 
- plt.ylabel("Northing [m] int=1 m", fontweight="bold",fontsize=20)
+ plt.ylabel("Northing [m] int=0.5 m", fontweight="bold",fontsize=20)
 #Distance interval
- plt.xlabel("Easting [m]  int_0.25 m", fontweight="bold",fontsize=20)
+ plt.xlabel("Easting [m]  int_1 m", fontweight="bold",fontsize=20)
 
 #Ticks
  plt.xticks(fontsize=15, fontweight="bold")

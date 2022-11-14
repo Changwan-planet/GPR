@@ -3,8 +3,7 @@
 
 DO F = 1, LINE
    DO Y = 1, TRA
-       WRITE(40) (STACKED_B_SCAN(F, Y, Z), Z = 1,ROWS)
-       WRITE(41,*) (STACKED_B_SCAN(F, Y, Z), Z = 1,ROWS) 
+       WRITE(40,*) (STACKED_B_SCAN2(F, Y, Z), Z = 1,ROWS)
    END DO 
 END DO
 
