@@ -1,11 +1,3 @@
-
-
-
-
-
-
-
-
 !POWER
 
 DO X = 1, DIS
@@ -27,7 +19,7 @@ DO Z = 1, ROWS
    DO X = 1, DIS
       DO Y = 1, TRA             
 
-      HILBERT_powerdB(X,Y,Z) = 10 * log10( ((HILBERT_power(X,Y,Z))**2)/ ((SLICE_MEAN2)**2) )   
+         HILBERT_powerdB(X,Y,Z) = 10 * log10( ((HILBERT_power(X,Y,Z))**2)/ ((SLICE_MEAN2)**2) )      
 
       END DO
    END DO

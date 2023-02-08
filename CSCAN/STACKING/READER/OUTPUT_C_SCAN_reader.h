@@ -1,6 +1,8 @@
     
 !========CSCAN==========================
 
+STACKED_B_SCAN = 0.0
+
 DO F = 1, LINE
    DO Y = 1, TRA
        WRITE(40) (STACKED_B_SCAN(F, Y, Z), Z = 1,ROWS)

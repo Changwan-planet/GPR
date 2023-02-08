@@ -2,7 +2,7 @@
 !===============NS=================
 !INTEGER, PARAMETER :: DIS = 50       !X !THE NUMBER OF STACK
 
-INTEGER, PARAMETER :: LINE = 17      !F !THE NUMBER OF LINE
+INTEGER, PARAMETER :: LINE = 21      !F !THE NUMBER OF LINE
 INTEGER, PARAMETER :: TRA = 41        !Y !THE NUMBER OF STATIC POINT
 INTEGER, PARAMETER :: ROWS = 4096     !Z 4096
 !==================================

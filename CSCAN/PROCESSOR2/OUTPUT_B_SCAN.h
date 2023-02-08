@@ -4,8 +4,25 @@
 Y = TRA
 
       DO Z = 1, ROWS
-         WRITE(30,*) (HdB2(X,1,Z), X=1,DIS)
+         WRITE(30,*) (B_SCAN_IMAGE3(X,1,Z), X=1,DIS)
       END DO   
+!===================================================
+
+
+!=====BSCAN_rmbgr===================================
+!B_SCAN_IMAGE3(DIS,TRA,ROWS)    
+Y = TRA
+
+      DO Z = 1, ROWS
+         WRITE(31,*) (B_SCAN_IMAGE4(X,1,Z), X=1,DIS)
+      END DO     
+!===================================================
+
+!====BSCAN_afzp=================================   
+Y = TRA
+      DO Z = 1, ROWS2
+         WRITE(32,*) (B_SCAN_IMAGE5(X,1,Z), X=1,DIS)
+      END DO  
 !===================================================
 
 

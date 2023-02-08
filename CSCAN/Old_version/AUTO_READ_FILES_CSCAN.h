@@ -1,8 +1,7 @@
 
 !N = FH1 - 3
 !N = 8
-!N = 10
-N = 15 !MOGOD
+N = 10
 
 DO G=1,TRA
 
@@ -29,32 +28,31 @@ DO G=1,TRA
 
 !=============================PATH===================================
 !COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/SPALAND/"
-!COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/CSCAN3/220526_1.PRJ/"
-!COMMON_PATH1="/home/changwan/GPR_DATA/MOGOD/2021/F1/500MHz/"
-COMMON_PATH1="/home/changwan/GPR_DATA/MOGOD/2020/Channel-1/500/"
+COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/CSCAN3/220526_1.PRJ/"
 
 
-OUTPUT_NAME20 = "A_SCOPE_GPR.raw"                !20
-OUTPUT_NAME30 = "BSCAN_GPR_noprocessing.raw"     !30
-OUTPUT_NAME40 = "3DCUBE_GPR_noprocessing.raw"    !40 
-OUTPUT_NAME41 = "3DCUBE_GPR_noprocessing.txt"    !41 
+OUTPUT_NAME20 = "A_SCOPE_GPR.txt"               !20
+OUTPUT_NAME30 = "BSCAN_GPR_noprocessing.txt"    !30
+OUTPUT_NAME31 = "BSCAN_GPR_rmbgr.txt"           !31
+OUTPUT_NAME40 = "3DCUBE_GPR.txt"                !40 
+OUTPUT_NAME50 = "HILBERT_3DCUBE_powerdB.txt"    !50
 
 
 INPUT_PATH = TRIM(COMMON_PATH1)//ITEM_NUMBER
 OUTPUT_PATH20 = TRIM(COMMON_PATH1)//OUTPUT_NAME20
 OUTPUT_PATH30 = TRIM(COMMON_PATH1)//OUTPUT_NAME30
+OUTPUT_PATH31 = TRIM(COMMON_PATH1)//OUTPUT_NAME31
 OUTPUT_PATH40 = TRIM(COMMON_PATH1)//OUTPUT_NAME40
-OUTPUT_PATH41 = TRIM(COMMON_PATH1)//OUTPUT_NAME41
+OUTPUT_PATH50 = TRIM(COMMON_PATH1)//OUTPUT_NAME50
 !=====================================================================
 
 PRINT*, INPUT_PATH
 
 OPEN(UNIT=10, FILE=INPUT_PATH,   ACCESS='STREAM',  STATUS='OLD', ACTION='READ')
 
-!DO NOT USE THE INITIALIZATION IN THIS LOOP!!
 !======INITIALIZATION=======
-!B_SCAN_IMAGE = 0.0
-!B_SCAN_IMAGE2 = 0.0
+!B_SCAN_IMAGE = 0
+!B_SCAN_IMAGE2 = 0
 !===========================  
 
 !PRINT *, "                                   X                                     "
@@ -78,10 +76,9 @@ OPEN(UNIT=10, FILE=INPUT_PATH,   ACCESS='STREAM',  STATUS='OLD', ACTION='READ')
 !PRINT *, "            Z                                                            "
 
 
-!      READ(10) HEADER, B_SCAN_IMAGE(:,:,G)   !KOREA
-      READ(10) B_SCAN_IMAGE(:,:,G)    !MOGOD
+      READ(10) HEADER, B_SCAN_IMAGE(:,:,G)
              
-!      B_SCAN_IMAGE2(:,:,G) = B_SCAN_IMAGE(:,:,G)
+      B_SCAN_IMAGE2(:,:,G) = B_SCAN_IMAGE(:,:,G)
 
 !+++++REVERSING THE EVEN_GPR TRACKS+++++++++++++++++++++++
      IF (MOD(G,2)/=0) THEN

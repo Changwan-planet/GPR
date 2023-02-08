@@ -26,16 +26,15 @@ DO Z = 1, ROWS
 
 END DO
 
-
-   CALL flip_3d(HILBERT_STACKED_powerdB, LINE, TRA, ROWS, HILBERT_STACKED_powerdB2)
-
+!CALL flip_3d(HILBERT_STACKED_powerdB, LINE, TRA, ROWS, HILBERT_STACKED_powerdB2)
 
 !=====HILBERT_3D_CUBE_IMAGE============================
 !J=ROWS 
       DO F = 1, LINE
         DO Y = 1, TRA
-            WRITE (50,*) (HILBERT_STACKED_powerdB2(F,Y,Z), Z = 1, ROWS)
-!            WRITE (50,*) (HILBERT_STACKED_powerdB(F,Y,Z), Z = 1, ROWS)
+
+ !           WRITE (50,*) (HILBERT_STACKED_powerdB2(F,Y,Z), Z = 1, ROWS)
+            WRITE (50,*) (HILBERT_STACKED_powerdB(F,Y,Z), Z = 1, ROWS)
         END DO 
       END DO
 

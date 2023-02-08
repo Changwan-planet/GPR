@@ -21,14 +21,15 @@ def make_patch_spines_invisible(ax):
 #input_path2 = "/home/changwan/GPR/211028/3D_CUBE_IMAGE_GPR.txt"
 #input_path2 = "/home/changwan/GPR/211028/HILBERT_3D_CUBE_IMAGE_GPR.txt"
 #input_path2 = "/home/changwan/GPR_DATA/KOREA/211028/HILBERT_3D_CUBE_IMAGE_GPR.txt"
+#input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/CSCAN_POL_GPR_powderdB.txt"
 
-#input_path2 = "/home/changwan/GPR_DATA/MOGOD/2021/F1/500MHz/3D_HILBERT_CUBE_powerdB.txt"
+input_path2 = "/home/changwan/GPR_DATA/MOGOD/2021/F1/500MHz/3D_HILBERT_CUBE_powerdB.txt"
 #input_path2 = "/home/changwan/GPR_DATA/MOGOD/2021/F1/500MHz/3D_HdB_RM_mvmean.txt"
 #input_path2 = "/home/changwan/GPR_DATA/MOGOD/2020/Channel-1/500/3DCUBE_GPR_noprocessing.raw"
 #input_path2 = "/home/changwan/GPR_DATA/MOGOD/2020/Channel-1/500/3D_CUBE/CSCAN_GPR_rmbgr_GC.txt"
 #input_path2 = "/home/changwan/GPR_DATA/MOGOD/2020/Channel-1/500/3D_CUBE/HPF_BSCAN_GC.txt"
 #input_path2 = "/home/changwan/GPR_DATA/MOGOD/2020/Channel-1/500/3D_CUBE/CSCAN_GPR_noprocessing.txt"
-input_path2 = "/home/changwan/GPR_DATA/MOGOD/2020/Channel-1/500/3D_CUBE/3D_HILBERT_CUBE_powerdB.txt"
+#input_path2 = "/home/changwan/GPR_DATA/MOGOD/2020/Channel-1/500/Fall_2022_conf/3D_CUBE/3D_HILBERT_CUBE_powerdB.txt"
 
 
 
@@ -156,7 +157,7 @@ for depth in rows:
 #Becasue I consider the tendency the imhosw plots.
 
 # if(depth==34):
- if(depth==53):
+# if(depth==53):
   plt.imshow(np.flipud(data2_2[:,:,depth])
            ,extent=(ay1_min,ay1_max,ax1_min,ax1_max)
 #           ,cmap='gist_rainbow')
