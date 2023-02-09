@@ -57,23 +57,6 @@ PRINT *, "FFT END"
 !!     !CALL hpf(f_real(X,Y,:), f_imag(X,Y,:), ROWS2, BAND, TW, hpf_real(X,Y,:), hpf_imag(X,Y,:))
 !   END DO 
 !END DO
-!PRINT *, "HPF END"
-
-!500MHz BAND PASS FILTER
-!f_l = 30
-!f_h = 115 
-!k = 2 
-!BAND = 30
-!PRINT *, "BAND=",BAND
-
-!DO X = 1, DIS 
-!DO Y = 1, TRA
-!   CALL bpf_butter(f_real(X,Y,:), f_imag(X,Y,:), ROWS, f_l, f_h, k, filter, bpf_real(X,Y,:), bpf_imag(X,Y,:))
-!END DO
-!END DO
-!PRINT *, "BPF END"
-
-
 
 !IFFT
 !DO X = 1, DIS
@@ -82,6 +65,29 @@ PRINT *, "FFT END"
 !   END DO
 !END DO
 
+!PRINT *, "HPF END"
+
+!500MHz BAND PASS FILTER
+f_l = 30
+f_h = 115 
+k = 2 
+!BAND = 30
+!PRINT *, "BAND=",BAND
+
+DO X = 1, DIS 
+DO Y = 1, TRA
+   CALL bpf_butter(f_real(X,Y,:), f_imag(X,Y,:), ROWS2, f_l, f_h, k, filter, bpf_real(X,Y,:), bpf_imag(X,Y,:))
+END DO
+END DO
+
+!IFFT
+DO X = 1, DIS 
+DO Y = 1, TRA
+  CALL ifft(bpf_real(X,Y,:), bpf_imag(X,Y,:), ROWS2, ifft_real(X,Y,:), ifft_imag(X,Y,:))
+END DO
+END DO 
+
+PRINT *, "BPF END"
 
 !HILBERT TRANSFORM
 !HILBERT_A_SCOPE
@@ -124,11 +130,11 @@ PRINT*, "WAITING..."
 
 !INCLUDE "OUTPUT_A_SCAN.h"      !20
 !INCLUDE "OUTPUT_B_SCAN.h"     !30
-INCLUDE "OUTPUT_C_SCAN.h"     !40
+!INCLUDE "OUTPUT_C_SCAN.h"     !40
 !INCLUDE  "OUTPUT_FFT.h"        !50
 !INCLUDE "OUTPUT_HILBERT.h"    !60
 !INCLUDE "OUTPUT_PHASE.h"      !70
-!INCLUDE "OUTPUT_FILTER.h"     !80
+INCLUDE "OUTPUT_FILTER.h"     !80
 
 
 END PROGRAM

@@ -55,6 +55,22 @@ REAL*8, DIMENSION (DIS,TRA,ROWS2) :: hpf_GC_RMV
 REAL*8, DIMENSION (DIS,TRA,ROWS2) :: hpf_GC_RMV2 
 !==============================================
 
+!=====FILTER=====
+!=====BAND-PASS FILTER=====
+INTEGER :: f_l,f_h                           !ORDER, cutoff_frequency
+REAL*8, DIMENSION (DIS,TRA,ROWS2) :: bpf_real
+REAL*8, DIMENSION (DIS,TRA,ROWS2) :: bpf_imag
+REAL*8, DIMENSION (DIS,TRA,ROWS2) :: bpf_power
+REAL*8, DIMENSION (DIS,TRA,ROWS2) :: bpf_powerdB
+REAL*8, DIMENSION (DIS,TRA,ROWS2) :: bpf_real2b
+REAL*8, DIMENSION (DIS,TRA,ROWS2) :: bpf_imag2
+REAL*8, DIMENSION (DIS,TRA,ROWS2) :: bpf_powerdB2
+REAL*8, DIMENSION (DIS,TRA,ROWS3) :: bpf_GC = 0.0 
+REAL*8, DIMENSION (DIS,TRA,ROWS3) :: bpf_GC_RMV = 0.0 
+!==============================================
+
+
+
 !=====POWER SPECTRAL DENSITY=====
 REAL*8, DIMENSION (DIS, TRA, ROWS2) :: psd
 REAL*8, DIMENSION (DIS, TRA, ROWS2) :: psd2
