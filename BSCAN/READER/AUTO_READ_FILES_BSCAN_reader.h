@@ -44,10 +44,10 @@ PRINT *, ""
 
 !N = FH1 - 3
 !GSSI
-!N = 10
+N = 10
 
 !MALA
-N = 15
+!N = 15
 
 !!DO G=1,TRA
 
@@ -129,9 +129,10 @@ OPEN(UNIT=10, FILE=INPUT_PATH,   ACCESS='STREAM',  STATUS='OLD', ACTION='READ')
 !PRINT *, "            Z                                                            "
 
 
-       READ(10)  B_SCAN_IMAGE(:,:,1)
 
-!      READ(10) HEADER, B_SCAN_IMAGE(:,:,1)
+!     READ(10)  B_SCAN_IMAGE(:,:,1)    !MONGOLIA
+ 
+      READ(10) HEADER, B_SCAN_IMAGE(:,:,1)  !KOREA
 
              
       B_SCAN_IMAGE2(:,:,1) = B_SCAN_IMAGE(:,:,1)

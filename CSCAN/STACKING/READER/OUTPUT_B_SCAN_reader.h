@@ -20,10 +20,10 @@
 
 
 !====BSCAN_stacking=================================   
-      DO Z = 1, ROWS
-         WRITE(30) (STACKED_B_SCAN(1,Y,Z), Y=TRA,1,-1)     
-         !WRITE(32,*) (STACKED_B_SCAN(1,Y,Z), Y=1,TRA)     
-      END DO
+      !DO Z = 1, ROWS
+      !   WRITE(30) (STACKED_B_SCAN(Y,1,Z), Y=TRA,1,-1)     
+         !WRITE(32,*) (STACKED_B_SCAN(Y,1,Z), Y=1,TRA)     
+      !END DO
 !===================================================
 
 !====BSCAN_remove_average=================================   

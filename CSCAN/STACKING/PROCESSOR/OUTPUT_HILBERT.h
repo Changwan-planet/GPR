@@ -1,10 +1,10 @@
 !POWER
 
-DO F = 1, LINE
+DO X = 1, DIS
 DO Y = 1, TRA
-DO Z = 1, ROWS
+DO Z = 1, ROWS2
 
-      HILBERT_STACKED_power(F,Y,Z) = SQRT(HILBERT_STACKED_B_SCAN(F,Y,Z)**2 + STACKED_B_SCAN2(F,Y,Z)**2)
+      HILBERT_power(X,Y,Z) = SQRT(HILBERT_B_SCAN(X,Y,Z)**2 + B_SCAN_IMAGE5(X,Y,Z)**2)
 
 END DO 
 END DO 
@@ -12,37 +12,65 @@ END DO
 
 
 !DECIBEL
-DO Z = 1, ROWS
+DO Z = 1, ROWS2
  
-     SLICE_MEAN2 = SUM(HILBERT_STACKED_power(:,:,Z))/SIZE(HILBERT_STACKED_power(:,:,Z)) 
+     SLICE_MEAN2 = SUM(HILBERT_power(:,:,Z))/SIZE(HILBERT_power(:,:,Z)) 
  
-   DO F = 1, LINE
+   DO X = 1, DIS
       DO Y = 1, TRA             
 
-         HILBERT_STACKED_powerdB(F,Y,Z) = 10 * log10( ((HILBERT_STACKED_power(F,Y,Z))**2)/ ((SLICE_MEAN2)**2) )      
+      HILBERT_powerdB(X,Y,Z) = 10 * log10( ((HILBERT_power(X,Y,Z))**2)/ ((SLICE_MEAN2)**2) )   
 
       END DO
    END DO
 
 END DO
 
-!CALL flip_3d(HILBERT_STACKED_powerdB, LINE, TRA, ROWS, HILBERT_STACKED_powerdB2)
-
-!=====HILBERT_3D_CUBE_IMAGE============================
+!=====PRINT FOR PRYTHON.HILBERT_3D_CUBE_IMAGE==
 !J=ROWS 
-      DO F = 1, LINE
+      DO X = 1, DIS
         DO Y = 1, TRA
-
- !           WRITE (50,*) (HILBERT_STACKED_powerdB2(F,Y,Z), Z = 1, ROWS)
-            WRITE (50,*) (HILBERT_STACKED_powerdB(F,Y,Z), Z = 1, ROWS)
-        END DO 
+            WRITE (50,*) (HILBERT_powerdB(X,Y,Z), Z = 1, ROWS2)
+         END DO 
       END DO
+
+!==>  THIS STRUCTURE (F x Y) X Z CAN BE PRINTED. 
+!==>  (F x Y) IS THE C_SCAN.
+!=============================================
+
+
+!=====PRINT FOR GNUPLOT.HILBERT_3D_CUBE_IMAGE==
+!J=ROWS 
+
+!!     DO X = 1, DIS
+!      DO X = 1, 100
+!!        DO Y = 1, TRA
+!        DO Y = 1, 4
+!!            WRITE (50,*) (HILBERT_powerdB(X,Y,Z), Z = 1, ROWS2)
+!            WRITE (50,*) (HILBERT_powerdB(X,Y,Z), Z = 100, 101)
+!!         END DO 
+!!      END DO
+
+!==>  THIS STRUCTURE (F x Y) X Z CAN BE PRINTED. 
+!==>  (F x Y) IS THE C_SCAN.
+!=============================================
+
+!=====PRINT FOR GNUPLOT.HILBERT_3D_CUBE_IMAGE=====
+!=====CONSIDERED INTEGRATION FROM MOVING AVERAGE=====
+!J=ROWS 
+
+!!     DO X = 1, MV_DIS
+!!        DO Y = 1, MV_TRA
+!!            WRITE (51,*) (HILBERT_powerdB(X,Y,Z), Z = 1, ROWS2)
+!!         END DO 
+!!      END DO
 
 !==>  THIS STRUCTURE (F x Y) X Z CAN BE PRINTED. 
 !==>  (F x Y) IS THE C_SCAN.
      PRINT *, "COMPLETE HILBERT_3D_CUBE_IMAGE OUTPUT"
 !=============================================
 
-PRINT *, char(7)
+
+!PRINT *, char(7)
 
 

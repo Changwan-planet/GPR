@@ -16,33 +16,13 @@ REAL*8, DIMENSION(DIS,TRA,ROWS) :: B_SCAN_IMAGE4
 
 !===========================================================
 REAL*8, DIMENSION(  1,  1, ROWS) :: STACKED_A_SCOPE 
-REAL*8, DIMENSION(  LINE, TRA, ROWS) :: STACKED_B_SCAN 
-REAL*8, DIMENSION(  LINE, TRA, ROWS) :: STACKED_B_SCAN2
+REAL*8, DIMENSION(  TRA, LINE, ROWS) :: STACKED_B_SCAN 
+REAL*8, DIMENSION(  TRA, LINE, ROWS) :: STACKED_B_SCAN2
 !===========================================================
 
 !===========================================================
 REAL*8, DIMENSION(  1,  1, ROWS) :: MEAN_A_SCOPE 
 !===========================================================
-
-!===========================================================
-REAL*8, DIMENSION(DIS,TRA,ROWS) :: HILBERT_B_SCAN 
-REAL*8, DIMENSION(LINE,TRA,ROWS) :: HILBERT_STACKED_B_SCAN 
-REAL*8, DIMENSION(LINE,TRA,ROWS) :: HILBERT_STACKED_B_SCAN_imag 
-
-REAL*8, DIMENSION(LINE,TRA,ROWS) :: HILBERT_STACKED_power 
-REAL*8, DIMENSION(LINE,TRA,ROWS) :: HILBERT_STACKED_powerdB 
-
-REAL*8, DIMENSION(1,1,ROWS) :: HILBERT_STACKED_SIGNAL 
-REAL*8, DIMENSION(1,1,ROWS) :: HILBERT_STACKED_SIGNAL_imag
-
-!============================================================      
-
-
-!============================================================
-REAL*8, DIMENSION(1,1,1:ROWS) :: HILBERT_SIGNAL 
-
-REAL*8, DIMENSION(1:ROWS,1) :: f_real
-REAL*8, DIMENSION(1:ROWS,1) :: f_imag
 
 
 INTEGER             :: I,J,K,G,N,P,R, SAMPLE
@@ -53,6 +33,8 @@ REAL*8              :: MEAN
 REAL*8              :: SLICE_MEAN, SLICE_MEAN2
 
 !=============================================================
+
+
 !=====MALA=====
 !CHARACTER (LEN=11)  :: FH1='201223__0'
 !CHARACTER (LEN=11)  :: FH1='210201__0'

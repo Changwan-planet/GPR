@@ -9,9 +9,9 @@ END DO
 !=====dB=====
 DO X = 1, DIS
 DO Z = 1, ROWS
-!   hpf_powerdB(X,1,Z) = 10 *log10(hpf_power(X,1,Z)**2)
+   hpf_powerdB(X,1,Z) = 10 *log10(hpf_power(X,1,Z)**2)  !ABSOLUTE VALUES
 !   hpf_powerdB(X,1,Z) = 10 *log10(hpf_power(X,1,Z)**2/(MAXVAL(hpf_power(X,1,:))**2))
-   hpf_powerdB(X,1,Z) = 10 *log10(hpf_power(X,1,Z)/MAXVAL(hpf_power(X,1,:)))
+!   hpf_powerdB(X,1,Z) = 10 *log10(hpf_power(X,1,Z)/MAXVAL(hpf_power(X,1,:)))
 
 
 END DO 
@@ -70,19 +70,22 @@ END DO
 !FLIP THE BSCAN IMAGE
 !CALL flip_2d(hpf_GC,DIS,ROWS,hpf_GC2)
 
-CALL flip_2d(hpf_GC_RMV,DIS,ROWS2,hpf_GC_RMV2)
+!CALL flip_2d(hpf_GC_RMV,DIS,ROWS2,hpf_GC_RMV2)
 
 
-DIS2 = 1498
+!DIS2 = 1498
 
 !=====HIGH-PASS FILTER=====
 DO Z = 1, ROWS2
 
 !    WRITE(71,*) (hpf_GC_RMV(X,1,Z), X = 1, DIS)
 !    WRITE(71,*) (ifft_real(X,1,Z), X = 1, DIS)
+   WRITE(71,*) (hpf_GC(X,1,Z), X = 1, DIS)
+
+
 
 !    WRITE(71,*) (hpf_GC_RMV(X,1,Z), X = 1, DIS2)
-    WRITE(71,*) (hpf_GC_RMV2(X,1,Z), X = 1, DIS2)
+!    WRITE(71,*) (hpf_GC_RMV2(X,1,Z), X = 1, DIS2)
 
 
 

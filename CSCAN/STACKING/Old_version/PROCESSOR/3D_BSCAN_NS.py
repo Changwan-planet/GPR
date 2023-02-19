@@ -20,7 +20,9 @@ def make_patch_spines_invisible(ax):
 #input_path2 = "/home/changwan/GPR/211027_4/3D_CUBE_IMAGE_GPR.txt"
 #input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/CSCAN/CSCAN_GPR_stacking.txt"
 #input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/CSCAN2/HILBERT_3DCUBE_stacking_powerdB.txt"
-input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/CSCAN3/EW/HILBERT_3DCUBE_stacking_powerdB.txt"
+input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/NS/HILBERT_3DCUBE_stacking_powerdB.txt"
+#input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/NS/3DCUBE_GPR_stacking.txt"
+
 
 
 
@@ -46,8 +48,8 @@ print("depth_interval=",depth_int)
 
 #RESAHPE THE INPUT DATA
 print("input_shape=",data2.shape)    
-data2_2=data2.reshape(17,41,4096)
-data2_3=data2.reshape(17,41,4096)
+data2_2=data2.reshape(21,41,4096)
+data2_3=data2.reshape(21,41,4096)
 print("3D_shape (x,y,z) =",data2_2.shape)
 print("+++++++++++++++++++++")
 print("\n")
@@ -83,9 +85,9 @@ ay1_max=0
 #++++++Before interploation++++++
 #     ++++++++++++++++++++++
 start =  0
-end   = 16
+end   = 21
 lines=list(range(start,end,1))
-samples=list(range(0,sample,1,))
+samples = list(range(0,sample,1))
 
 dis_s = 0
 dis_e = data2_2.shape[0]
@@ -97,6 +99,8 @@ dis=list(range(dis_s,dis_e,1))
 #data2_2[70:80,1,start] = -1000000*100000 
 #data2_2[3,30:40,start] = -1000000*100000 
 #data2_2[1:10,30,start] = -1000000*100000 
+#data2_2[:,30:50,500:600] = -1000000*100000 
+
 
 
 
@@ -113,7 +117,7 @@ dis=list(range(dis_s,dis_e,1))
 
 for line in lines:
  for depth in samples:
-     data2_3[line,:,depth] = data2_2[line,:,depth] - np.mean(data2_2[line,:,depth])
+      data2_3[line,:,depth] = data2_2[line,:,depth] - np.mean(data2_2[line,:,depth])
 
 
 
@@ -141,7 +145,7 @@ for line in lines:
  #d
  print("line=",line+1,"m")
 
- plt.title("BSCAN MIHO-ri_40 MHz_EW_Pol.", fontweight="bold", fontsize=20)
+ plt.title("BSCAN MIHO-ri_40 MHz_NS_Pol.", fontweight="bold", fontsize=20)
 
 #Track interval 
  plt.ylabel("Depth [m]", fontweight="bold",fontsize=20)
@@ -149,10 +153,9 @@ for line in lines:
  plt.xlabel("Easting [m]  int_1 m", fontweight="bold",fontsize=20)
 
 #Ticks
- plt.xticks(fontsize=15, fontweight="bold")
- plt.yticks(fontsize=15, fontweight="bold")
- 
- #subgroup
+ #plt.xticks(fontsize=15, fontweight="bold")
+ #plt.yticks(fontsize=15, fontweight="bold")
+
  ss = 11.5 #subgroup start
  se = 20.5  #subgroup end
  plt.xticks(np.arange(0,16,2),np.arange(1,17,2),fontsize=15, fontweight="bold")
@@ -161,9 +164,8 @@ for line in lines:
 
 
 #Ticks limit
- plt.xlim(0,16)
+ plt.xlim(0,20)
  plt.ylim(se,ss)
-
 #Grid
 # plt.grid()
 

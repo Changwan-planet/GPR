@@ -23,6 +23,7 @@ REAL*8, DIMENSION(DIS,TRA,ROWS) ::  B_SCAN_IMAGE4
 REAL*8, DIMENSION(DIS,TRA,ROWS2) ::  B_SCAN_IMAGE5
 REAL*8, DIMENSION(DIS,TRA,ROWS3)::  B_SCAN_IMAGE6
 REAL*8, DIMENSION(DIS,TRA,ROWS2)::  B_SCAN_IMAGE7
+REAL*8, DIMENSION(DIS,TRA,ROWS2)::  B_SCAN_IMAGE9
 !============================================================
 
 REAL*8, DIMENSION(1,1,ROWS) :: imag
@@ -83,9 +84,18 @@ REAL*8, DIMENSION (DIS, 1, ROWS2) :: INST_PHASE2
 REAL*8, DIMENSION (DIS, 1, ROWS2) :: INST_FREQUENCY
 !====================================================
 
+!=====INTERPETATION=====
+INTEGER :: S1, S2
+INTEGER, DIMENSION(DIS) :: H_1          !HORIZON
+!====================================================
+
+
 
 INTEGER             :: I,J,G,N,P,R, SAMPLE
 INTEGER             :: X, Y, Z
+
+
+REAL*8, DIMENSION(ROWS2)   :: TEMP
 REAL*8              :: BGR
 REAL*8              :: MEAN
 REAL*8              :: SLICE_MEAN, SLICE_MEAN2

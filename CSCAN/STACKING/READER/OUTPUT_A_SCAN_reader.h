@@ -24,7 +24,8 @@
 Y = 1
 !! DO Y = 1, TRA    
     DO Z = 1,ROWS
-       WRITE(20) STACKED_A_SCOPE(1,Y,Z) 
+       WRITE(20) STACKED_A_SCOPE(Y,1,Z) 
+       WRITE(21,*) STACKED_A_SCOPE(Y,1,Z) 
     END DO
 !! END DO   
 !=====================================================  

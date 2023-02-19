@@ -99,6 +99,7 @@ END IF
 !   PRINT *,"ITEM_NUMBER=", ITEM_NUMBER
 !=============================PATH===================================
 OUTPUT_NAME20= "A_SCOPE_GPR.raw"                     !20
+OUTPUT_NAME21= "A_SCOPE_GPR.txt"                     !21
 OUTPUT_NAME30= "BSCAN_GPR_stacking.raw"              !30
 OUTPUT_NAME40= "3DCUBE_GPR_stacking.raw"             !40
 OUTPUT_NAME41= "3DCUBE_GPR_stacking.txt"             !41
@@ -107,6 +108,9 @@ OUTPUT_NAME41= "3DCUBE_GPR_stacking.txt"             !41
 
 INPUT_PATH = TRIM(COMMON_PATH2)//ITEM_NUMBER
 OUTPUT_PATH20 = TRIM(COMMON_PATH1)//OUTPUT_NAME20   !20
+OUTPUT_PATH21 = TRIM(COMMON_PATH1)//OUTPUT_NAME21   !21
+
+
 OUTPUT_PATH30 = TRIM(COMMON_PATH1)//OUTPUT_NAME30   !30
 OUTPUT_PATH40 = TRIM(COMMON_PATH1)//OUTPUT_NAME40   !40
 OUTPUT_PATH41 = TRIM(COMMON_PATH1)//OUTPUT_NAME41   !41
@@ -114,7 +118,7 @@ OUTPUT_PATH41 = TRIM(COMMON_PATH1)//OUTPUT_NAME41   !41
 
 !=====================================================================
 
-!PRINT*, INPUT_PATH
+PRINT*, INPUT_PATH
 
 OPEN(UNIT=10, FILE=INPUT_PATH,   ACCESS='STREAM',  STATUS='OLD', ACTION='READ')
 
@@ -146,7 +150,7 @@ OPEN(UNIT=10, FILE=INPUT_PATH,   ACCESS='STREAM',  STATUS='OLD', ACTION='READ')
 
       READ(10) HEADER, B_SCAN_IMAGE(:,:,G)
              
-      B_SCAN_IMAGE2(:,:,G) = B_SCAN_IMAGE(:,:,G)
+!      B_SCAN_IMAGE2(:,:,G) = B_SCAN_IMAGE(:,:,G)
 
 !+++++REVERSING THE EVEN_GPR TRACKS+++++++++++++++++++++++
 !!     IF (MOD(G,2)/=0) THEN
@@ -172,5 +176,4 @@ END DO
 CLOSE(10)
 
 END DO
-
 

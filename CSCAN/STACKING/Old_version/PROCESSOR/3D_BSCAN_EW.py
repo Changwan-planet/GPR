@@ -10,20 +10,11 @@ from scipy.interpolate import interp1d
 #import cv2
 import math
 
-def make_patch_spines_invisible(ax):
-    ax.set_frame_on(True)
-    ax.patch.set_visible(False)
-    for sp in ax.spines.values():
-        sp.set_visible(False)
-
 #PATH
 #input_path2 = "/home/changwan/GPR/211027_4/3D_CUBE_IMAGE_GPR.txt"
 #input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/CSCAN/CSCAN_GPR_stacking.txt"
 #input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/CSCAN2/HILBERT_3DCUBE_stacking_powerdB.txt"
-input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/CSCAN3/NS/HILBERT_3DCUBE_stacking_powerdB.txt"
-
-
-
+input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/EW/HILBERT_3DCUBE_stacking_powerdB.txt"
 
 #READ DATASET
 #data=np.loadtxt(input_path1)
@@ -32,11 +23,11 @@ data2=np.loadtxt(input_path2)
 
 #CALCULATE THE DISTANCE INTERVAL:
 c_sl = 3*10**8   # speed of light
-depth_range = 100 # 90 m 
+depth_range = 50 #  
 #permit = 
 sample = 4096
-depth_int = (depth_range/ sample) *(3/4) 
-depth_int = round(depth_int, 2)
+depth_int = (depth_range/ sample) 
+depth_int2 = round(depth_int, 2)
 
 print("\n")
 print("++++++DATA INFO++++++")
@@ -46,7 +37,8 @@ print("depth_interval=",depth_int)
 
 #RESAHPE THE INPUT DATA
 print("input_shape=",data2.shape)    
-data2_2=data2.reshape(17,41,4096)
+data2_2=data2.reshape(21,41,4096)
+data2_3=data2.reshape(21,41,4096)
 print("3D_shape (x,y,z) =",data2_2.shape)
 print("+++++++++++++++++++++")
 print("\n")
@@ -59,9 +51,16 @@ print(data2_2.shape[2])
 
 
 ax1_min=0
-ax1_max=data2_2.shape[0]* 1 #This is Northing.
-ay1_min=data2_2.shape[1]* 0.5 #This is Easting.
+ax1_max=data2_2.shape[0]* 1 #This is Easting.
+ay1_min=data2_2.shape[2]* depth_int #This is Depth.
 ay1_max=0
+
+#subgroup
+#ss = 980     #subgroup start
+#se = 1600     #subgroup end
+#ay1_min = depth_int * se
+#ay1_max = 0
+
 
 
 #ay1_min=0
@@ -74,10 +73,10 @@ ay1_max=0
 #     ++++++++++++++++++++++
 #++++++Before interploation++++++
 #     ++++++++++++++++++++++
-start =  850
-end   = 1200
-rows=list(range(start,end,1))
-
+start =  0
+end   = 21
+lines=list(range(start,end,1))
+samples=list(range(0,sample,1,))
 
 dis_s = 0
 dis_e = data2_2.shape[0]
@@ -103,8 +102,9 @@ dis=list(range(dis_s,dis_e,1))
 ## data2_2[east,:,depth] = data2_2[east,:,depth] \
 ##                         - np.mean(data2_2[east,:,depth])
 
-for depth in rows:
-# data2_2[:,:,depth] = data2_2[:,:,depth] - np.mean(data2_2[:,:,depth])
+for line in lines:
+ for depth in samples:
+     data2_3[line,:,depth] = data2_2[line,:,depth] - np.mean(data2_2[line,:,depth])
 
 
 
@@ -112,34 +112,54 @@ for depth in rows:
 #Flip the C_scan when it comes to up and down
 #Becasue I consider the tendency the imhosw plots.
 # plt.imshow((data2_2[:,:,depth].T)
- plt.imshow(np.flipud(data2_2[:,:,depth].T)
-# plt.imshow(data2_2[:,:,depth])
+# plt.imshow(np.flipud(data2_2[:,:,depth].T)
+ plt.imshow(data2_3[line,:,:].T
            ,extent=(ax1_min,ax1_max,ay1_min,ay1_max)
-#           ,cmap='gist_rainbow'
-           ,cmap="Greys_r"
+           #,cmap='gist_rainbow'
+            ,cmap="Greys_r" 
+)
 #Almost similar in with and without the interpolation.
-,interpolation = 'spline16')
+#,interpolation = 'spline16')
  
  plt.colorbar()
  plt.text(37,15,'[dB]', fontweight="bold",fontsize=15) 
 
+#colorbar
 
- depth_title = round(((depth-start) * depth_int), 2)
- print(depth_title,"m", "sample=",depth)
+ plt.clim(10,-10)
 
- plt.title("CSCAN MIHO-ri_40 MHz_NS_Pol.", fontweight="bold", fontsize=30)
+ #depth_title = round(((depth-start) * depth_int), 2)
+ #d
+ print("line=",line+1,"m")
+
+ plt.title("BSCAN MIHO-ri_40 MHz_EW_Pol.", fontweight="bold", fontsize=20)
 
 #Track interval 
- plt.ylabel("Northing [m] int=0.5 m", fontweight="bold",fontsize=20)
+ plt.ylabel("Depth [m]", fontweight="bold",fontsize=20)
 #Distance interval
  plt.xlabel("Easting [m]  int_1 m", fontweight="bold",fontsize=20)
 
 #Ticks
  plt.xticks(fontsize=15, fontweight="bold")
  plt.yticks(fontsize=15, fontweight="bold")
+ 
+ #subgroup
+ ss = 11.5 #subgroup start
+ se = 20.5  #subgroup end
+ plt.xticks(np.arange(0,16,2),np.arange(1,17,2),fontsize=15, fontweight="bold")
+
+ plt.yticks(np.arange(ss,se),np.arange((ss-ss)-1,(se-ss)-1,1),fontsize=15, fontweight="bold")
+
+
+#Ticks limit
+ plt.xlim(0,20)
+ plt.ylim(se,ss)
 
 #Grid
- plt.grid()
+# plt.grid()
+
+#tight_layout
+# plt.tight_layout()
 
 # plt.show(block=False)
  plt.draw()

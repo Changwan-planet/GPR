@@ -5,6 +5,8 @@
 !COMMON_PATH1= "/home/changwan/GPR_DATA/KOREA/GYODONG_ri/20211022/"
 !COMMON_PATH1= "/home/changwan/GPR_DATA/KOREA/GYODONG_ri/211029/"
 !COMMON_PATH1= "/home/changwan/GPR_DATA/KOREA/MIHO_ri/100MHz/CSCAN3/220526_1.PRJ/"
+COMMON_PATH1= "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/100MHz/"
+
 
 
 !COMMON_PATH1= "/home/changwan/GPR_DATA/MOGOD/2021/F1/500MHz/"
@@ -12,7 +14,7 @@
 !COMMON_PATH1= "/home/changwan/GPR_DATA/MOGOD/2022/Site-1/RTA50/"
 !COMMON_PATH1= "/home/changwan/GPR_DATA/MOGOD/2020/Pr-1/250MHz/"
 !COMMON_PATH1= "/home/changwan/GPR_DATA/MOGOD/2020/Channel-1/500/Pr-1/"
-COMMON_PATH1= "/home/changwan/GPR_DATA/MOGOD/2020/Channel-1/500/"
+!COMMON_PATH1= "/home/changwan/GPR_DATA/MOGOD/2020/Channel-1/500/"
 
 
 INPUT_NAME10 = "BSCAN_GPR_noprocessing.raw"      !10

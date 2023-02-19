@@ -7,7 +7,7 @@
 !==================================
 
 !============GSSI=================
-INTEGER, PARAMETER :: DIS = 1901   !X
+INTEGER, PARAMETER :: DIS = 400   !X
 INTEGER, PARAMETER :: TRA = 1       !Y
 INTEGER, PARAMETER :: ROWS = 4096   !Z 
 INTEGER, PARAMETER :: MV_WIN = 100  !GAIN_CONTROL
@@ -42,23 +42,11 @@ REAL*8, DIMENSION (DIS, 1, ROWS) :: ifft_imag
 !==============================================
 
 !=====FILTER=====
-!=====HIGH-PASS FILTER=====
+!=====BAND-PASS FILTER=====
+INTEGER :: f_l,f_h                           !ORDER, cutoff_frequency
 INTEGER :: k, f_c                               !ORDER, cutoff_frequency
 REAL*8, DIMENSION (ROWS)         :: TW          !TIME WINDOW
 REAL*8, DIMENSION (ROWS)         :: filter      !FILTER
-REAL*8, DIMENSION (DIS,TRA,ROWS) :: hpf_real
-REAL*8, DIMENSION (DIS,TRA,ROWS) :: hpf_imag
-REAL*8, DIMENSION (DIS,TRA,ROWS) :: hpf_power
-REAL*8, DIMENSION (DIS,TRA,ROWS) :: hpf_powerdB
-REAL*8, DIMENSION (DIS,TRA,ROWS) :: hpf_real2
-REAL*8, DIMENSION (DIS,TRA,ROWS) :: hpf_imag2
-REAL*8, DIMENSION (DIS,TRA,ROWS) :: hpf_powerdB2
-REAL*8, DIMENSION (DIS,TRA,ROWS) :: hpf_GC = 0.0
-REAL*8, DIMENSION (DIS,TRA,ROWS) :: hpf_GC_RMV = 0.0
-!==============================================
-
-!=====BAND-PASS FILTER=====
-INTEGER :: f_l,f_h                           !ORDER, cutoff_frequency
 REAL*8, DIMENSION (DIS,TRA,ROWS) :: bpf_real
 REAL*8, DIMENSION (DIS,TRA,ROWS) :: bpf_imag
 REAL*8, DIMENSION (DIS,TRA,ROWS) :: bpf_power
