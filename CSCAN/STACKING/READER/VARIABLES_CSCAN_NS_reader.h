@@ -1,6 +1,6 @@
 
 !===============NS=================
-INTEGER, PARAMETER :: LINE = 21          !THE NUMBER OF LINE
+INTEGER, PARAMETER :: LINE = 4          !THE NUMBER OF LINE
 INTEGER, PARAMETER :: DIS = 50         !X !THE NUMBER OF STACK
 INTEGER, PARAMETER :: TRA = 41        !Y !THE NUMBER OF STATIC POINT
 INTEGER, PARAMETER :: ROWS = 4096     !Z 4096
@@ -17,6 +17,7 @@ REAL*8, DIMENSION(DIS,TRA,ROWS) :: B_SCAN_IMAGE4
 !===========================================================
 REAL*8, DIMENSION(  1,  1, ROWS) :: STACKED_A_SCOPE 
 REAL*8, DIMENSION(  LINE, TRA, ROWS) :: STACKED_B_SCAN 
+REAL*8, DIMENSION(  LINE, TRA, ROWS) :: STACKED_B_SCAN_flip 
 REAL*8, DIMENSION(  LINE, TRA, ROWS) :: STACKED_B_SCAN2
 !===========================================================
 
@@ -65,7 +66,11 @@ REAL*8              :: SLICE_MEAN, SLICE_MEAN2
 !=====GSSI=====
 !CHARACTER (LEN=8)  :: FH1='221109_'
 !CHARACTER (LEN=13) :: FH2
-CHARACTER (LEN=9)   :: FH3='221109_'
+
+!CHARACTER (LEN=9)   :: FH3='221109_'
+CHARACTER (LEN=9)   :: FH3='221116_'
+
+
 CHARACTER (LEN=14)  :: FH4
 
 

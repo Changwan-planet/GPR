@@ -8,11 +8,14 @@ CALL getcwd(CWD)
 !COMMON_PATH1= "/home/changwan/GPR_DATA/KOREA/GYODONG_ri/20211022/"
 !COMMON_PATH1= "/home/changwan/GPR_DATA/KOREA/GYODONG_ri/211029/"
 !COMMON_PATH1= "/home/changwan/GPR_DATA/MOGOD/2022/Site-3/250/"
-COMMON_PATH1= "/home/changwan/GPR_DATA/KOREA/MIHO_ri/2020_BOMIN/"
+!COMMON_PATH1= "/home/changwan/GPR_DATA/KOREA/MIHO_ri/2020_BOMIN/"
+COMMON_PATH1= "/home/changwan/GPR_DATA/KOREA/MIHO_ri/2022_BOMIN/Analysis/"
 !============================================================
 
 !INPUT_NAME = "DAT_1233_1.rd3"
-INPUT_NAME = "DAT_1233_2.rd3"
+!INPUT_NAME = "DAT_1233_2.rd3"
+INPUT_NAME = "f1-450-profile-001.rd7"
+
 
 OUTPUT_NAME20 = "A_SCOPE_GPR.txt"                 !20
 OUTPUT_NAME30 = "BSCAN_GPR_noprocessing.raw"      !30

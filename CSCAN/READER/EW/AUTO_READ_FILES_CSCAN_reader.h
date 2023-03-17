@@ -1,8 +1,8 @@
 
 !N = FH1 - 3
 !N = 8
-!N = 10
-N = 15 !MOGOD
+N = 10
+!N = 15 !MALA
 
 DO G=1,TRA
 
@@ -30,8 +30,13 @@ DO G=1,TRA
 !=============================PATH===================================
 !COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/SPALAND/"
 !COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/CSCAN3/220526_1.PRJ/"
+COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/100MHz/Analysis/"
+
+
 !COMMON_PATH1="/home/changwan/GPR_DATA/MOGOD/2021/F1/500MHz/"
-COMMON_PATH1="/home/changwan/GPR_DATA/MOGOD/2020/Channel-1/500/"
+!COMMON_PATH1="/home/changwan/GPR_DATA/MOGOD/2020/Channel-1/500/"
+!COMMON_PATH1="/home/changwan/GPR_DATA/MOGOD/2020/Channel-1/500/"
+!COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/2022_BOMIN/Analysis/"
 
 
 OUTPUT_NAME20 = "A_SCOPE_GPR.raw"                !20
@@ -78,10 +83,10 @@ OPEN(UNIT=10, FILE=INPUT_PATH,   ACCESS='STREAM',  STATUS='OLD', ACTION='READ')
 !PRINT *, "            Z                                                            "
 
 
-!      READ(10) HEADER, B_SCAN_IMAGE(:,:,G)   !KOREA
-      READ(10) B_SCAN_IMAGE(:,:,G)    !MOGOD
+      READ(10) HEADER, B_SCAN_IMAGE(:,:,G)   !KOREA
+!      READ(10) B_SCAN_IMAGE(:,:,G)    !MOGOD-MALA
              
-!      B_SCAN_IMAGE2(:,:,G) = B_SCAN_IMAGE(:,:,G)
+      B_SCAN_IMAGE2(:,:,G) = B_SCAN_IMAGE(:,:,G)
 
 !+++++REVERSING THE EVEN_GPR TRACKS+++++++++++++++++++++++
      IF (MOD(G,2)/=0) THEN
@@ -90,6 +95,7 @@ OPEN(UNIT=10, FILE=INPUT_PATH,   ACCESS='STREAM',  STATUS='OLD', ACTION='READ')
       DO P=1,DIS
           B_SCAN_IMAGE2(:,(DIS-P+1),G) = B_SCAN_IMAGE(:,P,G) 
       END DO
+      PRINT *, "THE EVEN-NUMBER TRACK HAVE BEEN FILPPED."
      END IF
 
       PRINT *, "G=",G    

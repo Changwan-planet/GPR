@@ -1,0 +1,18 @@
+!=======A-SCOPE============================
+!BEFORE REMOVING BACKGROUND
+    DO Z=1,ROWS
+        WRITE(20,*) B_SCAN_IMAGE3(1,1,Z) 
+    END DO
+
+!AFTER REMOVING BACKGROUND
+    DO Z=1,ROWS
+        WRITE(21,*) B_SCAN_IMAGE4(1,1,Z) 
+    END DO
+
+!TOTAL SUM OF ASCOPE
+!    DO Z =1, ROWS2
+!       WRITE(22,*) T_SUM_ASCOPE(1,1,Z)
+!    END DO
+
+PRINT *, "COMPELETE TO PRINT A_SCAN"
+
