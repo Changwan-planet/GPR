@@ -16,11 +16,11 @@ import math
 #input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/BSCAN/NS/3DCUBE_GPR_stacking.txt"
 #input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/BSCAN/NS/3D_CUBE_GPR.txt"
 #input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/BSCAN/NS/attribute/3D_HILBERT_powerdB.txt"
-#input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/NS/3D_CUBE_GPR.txt"
+input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/NS/3D_CUBE_GPR.txt"
 #input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/NS/3DCUBE_GPR_stacking.txt"
 
 #MUNAM_ri
-input_path2 = "/home/changwan/GPR_DATA/KOREA/MUNAM_ri/3D_CUBE_GPR.txt"
+#input_path2 = "/home/changwan/GPR_DATA/KOREA/MUNAM_ri/3D_CUBE_GPR.txt"
 
 
 
@@ -31,8 +31,8 @@ data2=np.loadtxt(input_path2)
 
 #CALCULATE THE DISTANCE INTERVAL:
 c_sl = 3*10**8   # speed of light
-#depth_range = 50 #  
-depth_range = 100 #  
+depth_range = 50 #  
+#depth_range = 100 #  
 
 
 #permit = 16
@@ -51,8 +51,8 @@ print("depth_interval=",depth_int)
 #RESAHPE THE INPUT DATA
 print("input_shape=",data2.shape)    
 #40MHz
-point = 73
-l = 1
+point = 41
+l = 21
 
 #data2_2=data2.reshape(21,41,4096)
 #data2_3=data2.reshape(21,41,4096)
@@ -80,8 +80,8 @@ print(data2_2.shape[2])
 
 ax1_min=0
 #BASIC PROGRAM
-#ax1_max=data2_2.shape[0]* 0.5     #This is Easting.
-ax1_max=data2_2.shape[0]* 0.25     #This is Easting.
+ax1_max=data2_2.shape[0]* 0.5     #This is Easting.
+#ax1_max=data2_2.shape[0]* 0.25     #This is Easting.
 
 
 #READER TEST
@@ -183,9 +183,9 @@ for line in lines:
  print("line=",line+1,"m")
 
  
- #plt.title("BSCAN MIHO-ri_40 MHz_NS_Pol.", fontweight="bold", fontsize=20)
+ plt.title("BSCAN MIHO-ri_40 MHz_NS_Pol.", fontweight="bold", fontsize=20)
  #plt.title("BSCAN MIHO-ri_100 MHz_EW_Pol.", fontweight="bold", fontsize=20)
- plt.title("BSCAN MUNAM_ri_40 MHz_XX_Pol.", fontweight="bold", fontsize=20)
+ #plt.title("BSCAN MUNAM_ri_40 MHz_XX_Pol.", fontweight="bold", fontsize=20)
  
 #Track interval 
  plt.ylabel("Depth [m]", fontweight="bold",fontsize=20)
@@ -205,12 +205,12 @@ for line in lines:
  #se = 26.5  #subgroup end
 
  #enlarged view_3-Northern Miho
- #ss = 11.5 #subgroup start
- #se = 25.5  #subgroup end
+ ss = 11.5 #subgroup start
+ se = 25.5  #subgroup end
 
  #enlarged view_3-Munam
- ss = 20.0 #subgroup start
- se = 30.0  #subgroup end
+ #ss = 20.0 #subgroup start
+ #se = 30.0  #subgroup end
 
 
  #full view
@@ -229,7 +229,7 @@ for line in lines:
  plt.xlim(0,20)
 
  #full view
- plt.ylim(se,ss)
+ #plt.ylim(se,ss)
 
  #enlarged view-Southern Miho
  #es = 11.5
@@ -240,12 +240,12 @@ for line in lines:
  #plt.ylim(es+5,es)
 
  #enlarged view_3-Southern Miho
- #es = ss
- #plt.ylim(es+10,es)
-
- #enlarged view_3-Munam
  es = ss
  plt.ylim(es+10,es)
+
+ #enlarged view_3-Munam
+ #es = ss
+ #plt.ylim(es+10,es)
 
 
 #Grid
