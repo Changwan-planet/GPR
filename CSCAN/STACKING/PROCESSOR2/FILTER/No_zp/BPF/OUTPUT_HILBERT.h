@@ -1,11 +1,8 @@
 !POWER
-
 DO X = 1, TRA
 DO Y = 1, LINE
 DO Z = 1, ROWS
-
       HILBERT_power(X,Y,Z) = SQRT(HILBERT_B_SCAN(X,Y,Z)**2 + B_SCAN_IMAGE8(X,Y,Z)**2)
-
 END DO 
 END DO 
 END DO 
@@ -31,30 +28,31 @@ DO X = 1, TRA
 DO Y = 1, LINE
 DO Z = 1,  ROWS
   
-   HILBERT_powerdB(X,Y,Z) = 10 * log( (HILBERT_power(X,Y,Z))/MAXVAL(HILBERT_power(X,Y,:)) )
+   HILBERT_powerdB(X,Y,Z) = 10 * log( (HILBERT_power(X,Y,Z)**2)/(MAXVAL(HILBERT_power(X,Y,:))**2) )
 
 END DO     
 END DO 
 END DO 
 
 !just log
-DO X = 1, TRA
-DO Y = 1, LINE
-DO Z = 1,  ROWS
+!DO X = 1, TRA
+!DO Y = 1, LINE
+!DO Z = 1,  ROWS
   
-   HILBERT_powerlog(X,Y,Z) = 10 * log( HILBERT_power(X,Y,Z) )
+!   HILBERT_powerlog(X,Y,Z) = 10 * log( HILBERT_power(X,Y,Z) )
 
-END DO     
-END DO 
-END DO 
+!END DO     
+!END DO 
+!END DO 
 
 
 !=====PRINT FOR PRYTHON.HILBERT_3D_CUBE_IMAGE==
 !J=ROWS 
       DO X = 1, TRA
         DO Y = 1, LINE
-!            WRITE (60,*) (HILBERT_powerdB(X,Y,Z), Z = 1, ROWS)
-            WRITE (60,*) (HILBERT_powerlog(X,Y,Z), Z = 1, ROWS)
+!            WRITE (60,*) (HILBERT_power(X,Y,Z), Z = 1, ROWS)
+            WRITE (60,*) (HILBERT_powerdB(X,Y,Z), Z = 1, ROWS)
+!            WRITE (60,*) (HILBERT_powerlog(X,Y,Z), Z = 1, ROWS)
 !            WRITE (60,*) (HILBERT_B_SCAN(X,Y,Z), Z = 1, ROWS)
 
          END DO 

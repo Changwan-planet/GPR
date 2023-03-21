@@ -11,29 +11,16 @@ from scipy.interpolate import interp1d
 import math
 
 #PATH
-#input_path2 = "/home/changwan/GPR/211027_4/3D_CUBE_IMAGE_GPR.txt"
-#input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/CSCAN/CSCAN_GPR_stacking.txt"
-#input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/CSCAN2/HILBERT_3DCUBE_stacking_powerdB.txt"
-#input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/EW/HILBERT_3DCUBE_stacking_powerdB.txt"
-#input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/100MHz/Analysis/3DCUBE_GPR_rmbgr.txt"
-#input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/100MHz/Analysis/3D_CUBE_GPR_afzp.txt"
-#input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/100MHz/Analysis/3D_CUBE_GPR_rmavg.txt"
-#input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/100MHz/Analysis/filter/3D_BPF_rmavg.txt"
-
-#input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/EW/3DCUBE_GPR_stacking.txt/"
-#input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/EW/3DCUBE_GPR_stacking.txt"
-#input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/EW/3D_CUBE_GPR_rmavrg.txt"
-#input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/EW/3D_CUBE_GPR.txt"
-
 #EW
 #input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/BSCAN/EW/3DCUBE_GPR_stacking.txt"
 #input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/BSCAN/EW/3D_CUBE_GPR.txt"
-input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/BSCAN/EW/attribute/3D_HILBERT_powerdB.txt"
-
+#input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/BSCAN/EW/attribute/3D_HILBERT_powerdB.txt"
 
 #input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/BSCAN/EW/3D_CUBE_GPR_rmavrg.txt"
 
 #input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/BSCAN/BSCAN_POL_powerdB.txt"
+#input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/EW/3DCUBE_GPR_stacking.txt"
+input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/EW/3D_CUBE_GPR.txt"
 
 
 #READ DATASET
@@ -59,11 +46,16 @@ print("depth_interval=",depth_int)
 print("input_shape=",data2.shape)    
 #40MHz
 point = 41
-l = 4
+l = 21
 
 #data2_2=data2.reshape(21,41,4096)
 #data2_3=data2.reshape(21,41,4096)
 
+#READER PROGRAM TEST
+#data2_2=data2.reshape(l,point,sample)
+#data2_3=data2.reshape(l,point,sample)
+
+#BASIC-PROCESS
 data2_2=data2.reshape(point,l,sample)
 data2_3=data2.reshape(point,l,sample)
 
@@ -80,6 +72,9 @@ print(data2_2.shape[2])
 
 
 ax1_min=0
+#READER PROGRAM
+#ax1_max=data2_2.shape[1]* 0.5      #This is Easting.
+#BASIC PROGRAM
 ax1_max=data2_2.shape[0]* 0.5      #This is Easting.
 ay1_min=data2_2.shape[2]* depth_int #This is Depth.
 ay1_max=0
@@ -139,6 +134,7 @@ for line in lines:
 # d_m = 600    # display_moderator
 
  plt.imshow(data2_3[:,line,:].T
+# plt.imshow(data2_3[line,:,:].T
            ,extent=(ax1_min,ax1_max,ay1_min,ay1_max)
            #,cmap='gist_rainbow'
             ,cmap="Greys_r" 
@@ -157,8 +153,10 @@ for line in lines:
 #colorbar
 
  #plt.clim(10,-10)
- plt.clim(150,130) 
- #plt.clim(-10**(6),10**(6))
+ #plt.clim(150,130) 
+ plt.clim(-10**(6),10**(6))
+ #plt.clim(-10**(5),10**(5))
+
 
 
  #depth_title = round(((depth-start) * depth_int), 2)
@@ -178,8 +176,15 @@ for line in lines:
  plt.yticks(fontsize=15, fontweight="bold")
  
  #subgroup
+
+ #enlarged view-northern miho
+ #ss = 11.5 #subgroup start
+ #se = 20.5  #subgroup end
+ 
+ #enlarged view2-southern miho
  ss = 11.5 #subgroup start
- se = 20.5  #subgroup end
+ se = 25.5  #subgroup end
+
  #FULL VIEW
  #ss = 0      #subgroup start
  #se = ay1_min  #subgroup end
@@ -190,12 +195,18 @@ for line in lines:
 
 #Ticks limit
  plt.xlim(0,20)
- #plt.ylim(se,ss)
- #plt.ylim(20,10)
  
- #ENLARGED VIEW
- es = 11.5
- plt.ylim(es+5,es)
+ #full view
+ #plt.ylim(se,ss)
+
+ #enlarged view-northern miho
+ #es = ss
+ #plt.ylim(es+5,es)
+ 
+ #enlarged view2-southern miho
+ es = ss
+ plt.ylim(es+10,es)
+
 
 #Grid
 # plt.grid()

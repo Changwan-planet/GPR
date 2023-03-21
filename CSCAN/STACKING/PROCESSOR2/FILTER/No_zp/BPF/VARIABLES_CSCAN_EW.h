@@ -8,7 +8,7 @@
 
 
 !===============GSSI=================
-INTEGER, PARAMETER :: LINE = 4       !X FOR STACKING
+INTEGER, PARAMETER :: LINE = 21       !X FOR STACKING
 !INTEGER, PARAMETER :: DIS =          !X
 INTEGER, PARAMETER :: TRA = 41        !Y
 INTEGER, PARAMETER :: ROWS = 4096     !Z 4096
