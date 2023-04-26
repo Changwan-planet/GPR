@@ -10,7 +10,7 @@ gfortran -g -mcmodel=medium CSCAN_GPR_NS.f90\
                            $path/MD_FILTER.f90\
                            $path/MD_INTERPRE.f90\
                            $path/MD_MEAN_ASCAN.f90\
-                           $path/MD_MVMEAN.f90 -o test
+                           $path/MD_MVMEAN.f90 -o test_NS
 
 
 

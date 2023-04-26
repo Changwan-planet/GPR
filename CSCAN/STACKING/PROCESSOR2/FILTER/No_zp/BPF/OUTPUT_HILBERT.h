@@ -10,11 +10,10 @@ END DO
 
 !DECIBEL TO MEAN OF SLICE
 !DO Z = 1, ROWS
-
 !     SLICE_MEAN2 = SUM(HILBERT_power(:,:,Z))/SIZE(HILBERT_power(:,:,Z)) 
- 
-!   DO X = 1, LINE
-!      DO Y = 1, TRA             
+
+!   DO X = 1, TRA
+!      DO Y = 1, LINE             
 
 !      HILBERT_powerdB(X,Y,Z) = 10 * log10( ((HILBERT_power(X,Y,Z))**2)/ ((SLICE_MEAN2)**2) )   
 
@@ -28,7 +27,7 @@ DO X = 1, TRA
 DO Y = 1, LINE
 DO Z = 1,  ROWS
   
-   HILBERT_powerdB(X,Y,Z) = 10 * log( (HILBERT_power(X,Y,Z)**2)/(MAXVAL(HILBERT_power(X,Y,:))**2) )
+   HILBERT_powerdB(X,Y,Z) = 10 * log10( (HILBERT_power(X,Y,Z)**2)/(MAXVAL(HILBERT_power(X,Y,:))**2) )
 
 END DO     
 END DO 
@@ -39,7 +38,7 @@ END DO
 !DO Y = 1, LINE
 !DO Z = 1,  ROWS
   
-!   HILBERT_powerlog(X,Y,Z) = 10 * log( HILBERT_power(X,Y,Z) )
+!   HILBERT_powerlog(X,Y,Z) = 10 * log10( HILBERT_power(X,Y,Z) )
 
 !END DO     
 !END DO 

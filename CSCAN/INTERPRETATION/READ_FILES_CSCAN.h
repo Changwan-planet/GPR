@@ -3,10 +3,14 @@
 !COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/SPALAND/"
 !COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/CSCAN3/220526_1.PRJ/"
 !COMMON_PATH1="/home/changwan/GPR_DATA/MOGOD/2021/F1/500MHz/"
-COMMON_PATH1="/home/changwan/GPR_DATA/MOGOD/2020/Channel-1/500/"
+!COMMON_PATH1="/home/changwan/GPR_DATA/MOGOD/2020/Channel-1/500/"
+COMMON_PATH1="/home/changwan/GPR_DATA/MIHO_ri/3D_trench/40MHz/CSCAN3/NS/attrtibute/"
+
 
 !INPUT_NAME10 = "3DCUBE_GPR_noprocessing.raw"      !10
-INPUT_NAME10 = "3DCUBE_GPR_rmbgr_zpd.raw"          !10
+!INPUT_NAME10 = "3DCUBE_GPR_rmbgr_zpd.raw"         !10
+INPUT_NAME10 = "3D_HIBERT_powerdB.txt"             !10
+
 INPUT_NAME11 = "3D_A_SCOPE_GPR_afzp.txt"          !20
 INPUT_NAME12 = "3D_BSCAN_GPR_afzp.txt"            !30
 INPUT_NAME13 = "3D_BSCAN_GPR_GC.txt"              !31

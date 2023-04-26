@@ -1,0 +1,16 @@
+
+
+
+!YY = 21	
+
+DO X= 1, DIS  
+
+  DO Z = INT(HORIZON_AS(2,X)-25),  INT(HORIZON_AS(2,X)+25)
+     IF (  B_SCAN_IMAGE6F(X, YY, Z-1) < B_SCAN_IMAGE6F(X, YY, Z) .AND. &
+         & B_SCAN_IMAGE6F(X, YY, Z+1) < B_SCAN_IMAGE6F(X, YY, Z)  ) THEN 
+        WRITE(92,*) X, Z
+     END IF
+
+END DO
+END DO
+

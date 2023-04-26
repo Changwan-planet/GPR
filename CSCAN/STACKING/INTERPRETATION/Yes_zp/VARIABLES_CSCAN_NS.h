@@ -1,14 +1,14 @@
 
 !===============NS=================
-!INTEGER, PARAMETER :: DIS=1900      !X
-!INTEGER, PARAMETER :: TRA=17        !Y
-!INTEGER, PARAMETER :: ROWS=4096     !Z 4096
+INTEGER, PARAMETER :: DIS=41      !X
+INTEGER, PARAMETER :: TRA=21        !Y
+INTEGER, PARAMETER :: ROWS=4096     !Z 4096
 !==================================
 
 !===============MOGOD=================
-INTEGER, PARAMETER :: DIS=2300      !X
-INTEGER, PARAMETER :: TRA=100        !Y
-INTEGER, PARAMETER :: ROWS=512       !Z 512
+!INTEGER, PARAMETER :: DIS=2300      !X
+!INTEGER, PARAMETER :: TRA=100        !Y
+!INTEGER, PARAMETER :: ROWS=512       !Z 512
 !==================================
 
 

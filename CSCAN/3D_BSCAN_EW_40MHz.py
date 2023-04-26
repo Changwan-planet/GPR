@@ -20,7 +20,12 @@ import math
 
 #input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/BSCAN/BSCAN_POL_powerdB.txt"
 #input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/EW/3DCUBE_GPR_stacking.txt"
-input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/EW/3D_CUBE_GPR.txt"
+#input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/EW/attribute/3D_HILBERT_powerdB.txt"
+
+
+#input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/EW/3D_CUBE_GPR.txt"
+input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/2023/EW/3D_CUBE_GPR.txt"
+
 
 
 #READ DATASET
@@ -46,7 +51,9 @@ print("depth_interval=",depth_int)
 print("input_shape=",data2.shape)    
 #40MHz
 point = 41
-l = 21
+l = 18
+#l = 8
+
 
 #data2_2=data2.reshape(21,41,4096)
 #data2_3=data2.reshape(21,41,4096)
@@ -109,7 +116,11 @@ dis=list(range(dis_s,dis_e,1))
 #data2_2[3,30:40,start] = -1000000*100000 
 #data2_2[1:10,30,start] = -1000000*100000 
 
-
+#manual edit of the position of the signal
+#edit = 255
+#for i in np.arange(0,(sample-edit),1):
+#    print("i=",i)
+#    data2_3_e[(point-30),0,i] = data2_3[(point-30),0,edit+i]
 
 #     ++++++++++++++++++++
 #++++++Remove the average++++++
@@ -133,14 +144,16 @@ for line in lines:
 # plt.imshow(np.flipud(data2_2[:,:,depth].T)
 # d_m = 600    # display_moderator
 
- plt.imshow(data2_3[:,line,:].T
-# plt.imshow(data2_3[line,:,:].T
-           ,extent=(ax1_min,ax1_max,ay1_min,ay1_max)
-           #,cmap='gist_rainbow'
-            ,cmap="Greys_r" 
-)
+ plt.imshow(np.fliplr(data2_3[:,line,:].T)
+ #plt.imshow(data2_3[:,line,:].T
+ #plt.imshow(data2_3[line,:,:].T
+           ,extent=(ax1_min,ax1_max,ay1_min,ay1_max)           
+           #,cmap='gnuplot'
+           ,cmap="Greys_r" 
+           )
 #Almost similar in with and without the interpolation.
-#,interpolation = 'spline16')
+            #,interpolation = 'none')
+            #,interpolation = 'spline16')
  
  s = "line="+ str(line+1)
  plt.colorbar()
@@ -151,9 +164,11 @@ for line in lines:
 
 
 #colorbar
-
+ #plt.clim(0,-100)
  #plt.clim(10,-10)
  #plt.clim(150,130) 
+ 
+ #amp
  plt.clim(-10**(6),10**(6))
  #plt.clim(-10**(5),10**(5))
 
@@ -176,36 +191,39 @@ for line in lines:
  plt.yticks(fontsize=15, fontweight="bold")
  
  #subgroup
-
+ thick = 10
  #enlarged view-northern miho
- #ss = 11.5 #subgroup start
- #se = 20.5  #subgroup end
+ ss = 11.5 #subgroup start
+ se = ss + thick  #subgroup end
  
  #enlarged view2-southern miho
- ss = 11.5 #subgroup start
- se = 25.5  #subgroup end
+ #ss = 11.5 #subgroup start
+ #se = 25.5  #subgroup end
 
  #FULL VIEW
  #ss = 0      #subgroup start
  #se = ay1_min  #subgroup end
 
  plt.xticks(np.arange(0,20,2),np.arange(0,20,2),fontsize=15, fontweight="bold")
+#full view
+# plt.yticks(np.arange(ss,se,10),np.arange((ss-ss)-1,(se-ss)-1,10),fontsize=15, fontweight="bold")
+#enlarged view
  plt.yticks(np.arange(ss,se,1),np.arange((ss-ss)-1,(se-ss)-1,1),fontsize=15, fontweight="bold")
 
 
 #Ticks limit
  plt.xlim(0,20)
  
- #full view
- #plt.ylim(se,ss)
-
  #enlarged view-northern miho
  #es = ss
  #plt.ylim(es+5,es)
  
  #enlarged view2-southern miho
  es = ss
- plt.ylim(es+10,es)
+ plt.ylim(es+thick,es)
+
+ #full view
+ #plt.ylim(se,ss)
 
 
 #Grid

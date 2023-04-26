@@ -6,15 +6,11 @@
 !COMMON_PATH1="/home/changwan/GPR_DATA/MOGOD/2020/Channel-1/500/"
 
 !EW
-!COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/BSCAN/EW/"
-!COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/EW/"
-
-
-!NS
 !MIHO_ri
-COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/NS/"
-!COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/BSCAN/NS/"
-!COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/CSCAN2/"
+!COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/BSCAN/EW/"
+COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/EW/"
+!COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/2023/EW/"
+
 
 !MUNAM_ri
 !COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MUNAM_ri/"
@@ -155,7 +151,7 @@ DO X = 1, TRA
   DO Y = 1, LINE
     DO Z = 1, ROWS
 
-      B_SCAN_IMAGE8(X,Y,Z) = B_SCAN_IMAGE7(Y,X,Z)
+      B_SCAN_IMAGE7_E(X,Y,Z) = B_SCAN_IMAGE7(Y,X,Z)
 
 !      PRINT *, X,Y,Z,"<----",Y,X,Z
         
