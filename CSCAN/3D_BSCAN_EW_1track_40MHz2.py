@@ -87,7 +87,7 @@ rows = list(range(start,end,1))
 
 #samples=list(range(0,sample,1,))
 
-dis_s = 0
+dis_s = 20
 dis_e = data_1.shape[0]
 dis=list(range(dis_s,dis_e,1))
 #dis = dis_e *dis_int
@@ -103,14 +103,14 @@ dis=list(range(dis_s,dis_e,1))
 #++++++Remove the average++++++
 #     ++++++++++++++++++++
 
-line = 1
+line = 20
 
 #Transpose the C_scan, and
 #Flip the C_scan when it comes to up and down
 #Becasue I consider the tendency the imhosw plots.
 # plt.imshow((data2_2[:,:,depth].T)
 # plt.imshow(np.flipud(data2_2[:,:,depth].T)
-plt.imshow(data_1[:,0,:].T
+plt.imshow(data_1[:,line,:].T
            ,extent=(ax1_min,ax1_max,ay2_min,ay2_max)
            #,cmap='gist_rainbow'
             ,cmap="Greys_r" 
@@ -145,7 +145,15 @@ plt.xlabel("Easting [m] dis_int=0.5 m", fontweight="bold",fontsize=20)
 #Ticks
 plt.xticks(fontsize=15, fontweight="bold")
 plt.yticks(fontsize=15, fontweight="bold")
- 
+
+
+
+
+
+plt.show()
+
+"""
+
 #subgroup
 thick = 10
 #enlarged view_2-Northern Miho-100 m depth range
@@ -200,4 +208,4 @@ plt.ylim(es+thick,es)
 #fig.clear()
 
 plt.show()
-
+"""

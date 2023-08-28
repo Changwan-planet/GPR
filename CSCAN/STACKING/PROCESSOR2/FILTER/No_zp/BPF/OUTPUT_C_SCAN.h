@@ -16,11 +16,20 @@
  
 !===================================================
 
-DO X = 1, TRA
-   DO Y = 1, LINE
-       WRITE(40,*) (B_SCAN_IMAGE8(X, Y, Z), Z = 1, ROWS)
-   END DO 
+!================================================================
+DO Z = 1, ROWS
+DO Y = 1, TRA
+DO X = 1, DIS
+      !WRITE(40,*) X, Y, Z, B_SCAN_IMAGE2(X, Y, Z)
+      WRITE(40,*) B_SCAN_IMAGE2(X, Y, Z), X, Y, Z
+!      WRITE(40,*) B_SCAN_IMAGE2(X, Y, Z)
+
+
+
+END DO 
+END DO 
 END DO
+
 
 !==> THIS STRUCTURE (F X Y) X Z CAN BE PRINTED.
 !==> (F X Y) IS THE C_SCAN.
@@ -28,17 +37,23 @@ END DO
 !===================================================
 
 !===================================================
+!!DO X = 1, DIS
+!!DO Y = 1, TRA
+!!       WRITE(40,*) (B_SCAN_IMAGE2(X, Y, Z), Z = 1, ROWS)
 
-!DO X = 1, LINE
-!   DO Y = 1, TRA
-!       WRITE(41,*) (B_SCAN_IMAGE7_rmavrg(X, Y, Z), Z = 1,ROWS)
-!   END DO 
-!END DO
+!!END DO 
+!!END DO 
+
+
 
 !==> THIS STRUCTURE (F X Y) X Z CAN BE PRINTED.
 !==> (F X Y) IS THE C_SCAN.
-PRINT *, "COMPLETE 3D_CUBE IMAGE OUTPUT"
+!PRINT *, "COMPLETE 3D_CUBE IMAGE OUTPUT"
 !===================================================
 
 
+
+
+!===================================================
+!       WRITE(41,*) (B_SCAN_IMAGE7_rmavrg(X, Y, Z), Z = 1,ROWS)
 

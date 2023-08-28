@@ -13,8 +13,8 @@ PRINT *, "F=",F
 
 !====AUTOMATIC CHANGE CODE FOR OPENING FOLDER====
 !MIHO_ri
-COMMON_PATH1 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/2023/NS/"
-!COMMON_PATH1 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/NS/"
+!COMMON_PATH1 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/2023/NS/"
+COMMON_PATH1 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/NS/"
 !COMMON_PATH1 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/BSCAN/NS/"
 !COMMON_PATH1 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/CSCAN2/"
 !COMMON_PATH1 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/220506_3.PRJ/"
@@ -23,6 +23,8 @@ COMMON_PATH1 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/2023/NS/"
 
 !MUNAM_ri
 !COMMON_PATH1 = "/home/changwan/GPR_DATA/KOREA/MUNAM_ri/"
+!COMMON_PATH1 = "/home/changwan/GPR_DATA/KOREA/MUNAM_ri/2023/"
+
 
 
 

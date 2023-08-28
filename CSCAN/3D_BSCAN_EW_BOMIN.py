@@ -1,8 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import cm, colors
-#import matplotlib.ticker as MaxNLocator
-from matplotlib.ticker import MaxNLocator as mnloc
 import pandas as pd
 from pandas import Series, DataFrame 
 from mpl_toolkits.mplot3d import Axes3D
@@ -13,36 +11,30 @@ from scipy.interpolate import interp1d
 import math
 
 #PATH
-#EW
+#input_path2 = "/home/changwan/GPR/211027_4/3D_CUBE_IMAGE_GPR.txt"
+#input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/CSCAN/CSCAN_GPR_stacking.txt"
+#input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/CSCAN2/HILBERT_3DCUBE_stacking_powerdB.txt"
 
-#input_path = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/EW/3D_CUBE_GPR.txt"
-input_path = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/NS/3D_CUBE_GPR.txt"
+#input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/EW/HILBERT_3DCUBE_stacking_powerdB.txt"
+#input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/100MHz/Analysis/3DCUBE_GPR_rmbgr.txt"
+input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/2022_BOMIN/Analysis/3DCUBE_GPR_rmbgr_zpd.txt"
+#input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/2022_BOMIN/Analysis/filter/3D_BPF_rmavg.txt"
+
+
 
 
 #READ DATASET
-inputdata = np.loadtxt(input_path)
-
-#extract the values and their coordinates
-values = inputdata[:, 0]
-coords = inputdata[:, 1:].astype(int) - 1 #subtract 1 due to indices starting at 0
-
-#create your matrix
-#(dis, tra, rows)
-dis = 41
-tra = 21
-rows = 4096
-
-data_1 = np.zeros( shape = (dis, tra, rows) )
-
-#fill in your matrix at the appropriate coordinates
-data_1.flat[np.ravel_multi_index(coords.T, data_1.shape)] = values
+#data=np.loadtxt(input_path1)
+data2=np.loadtxt(input_path2)
 
 
 #CALCULATE THE DISTANCE INTERVAL:
 c_sl = 3*10**8   # speed of light
-depth_range = 50 #  
+t_window = 10**(-7)
+depth_range = t_window * c_sl * 0.5
 #permit = 
-sample = 4096
+sample = 512
+
 depth_int = (depth_range/ sample) 
 depth_int2 = round(depth_int, 2)
 
@@ -53,32 +45,39 @@ print("depth_interval=",depth_int)
 #C_SCAN_IMAGE
 
 #RESAHPE THE INPUT DATA
-print("input_shape=",data_1.shape)    
+print("input_shape=",data2.shape)    
 #40MHz
-point = 41
-l = 21
-#l = 8
+data2_2=data2.reshape(808,1,512)
+data2_3=data2.reshape(808,1,512)
 
 
-
-print("3D_shape (x,y,z) =",data_1.shape)
+print("3D_shape (x,y,z) =",data2_2.shape)
 print("+++++++++++++++++++++")
 print("\n")
 
 fig,host =plt.subplots()
 
-print(data_1.shape[0])
-print(data_1.shape[1])
-print(data_1.shape[2])
+print(data2_2.shape[0])
+print(data2_2.shape[1])
+print(data2_2.shape[2])
 
 
 ax1_min=0
-#READER PROGRAM
-#ax1_max=data_1.shape[1]* 0.5      #This is Easting.
-#BASIC PROGRAM
-ax1_max=data_1.shape[0]* 0.5      #This is Easting.
-ay1_min=data_1.shape[2]* depth_int #This is Depth.
+ax1_max=data2_2.shape[0]* 0.5 #This is Easting.
+ay1_min=data2_2.shape[2]* depth_int #This is Depth.
 ay1_max=0
+
+#subgroup
+#ss = 980     #subgroup start
+#se = 1600     #subgroup end
+#ay1_min = depth_int * se
+#ay1_max = 0
+
+
+
+#ay1_min=0
+#ay1_max=data2_2.shape[1]*1 #This is Easting.
+
 
 
 #cmap=colors.ListedColormap(["white","blue","red"])
@@ -87,12 +86,12 @@ ay1_max=0
 #++++++Before interploation++++++
 #     ++++++++++++++++++++++
 start =  0
-end   =  l
+end   = 21
 lines=list(range(start,end,1))
 samples=list(range(0,sample,1,))
 
 dis_s = 0
-dis_e = data_1.shape[0]
+dis_e = data2_2.shape[0]
 dis=list(range(dis_s,dis_e,1))
 
 #PLEASE CHECK THE DIRECTION OF THE GRAPH.
@@ -102,129 +101,85 @@ dis=list(range(dis_s,dis_e,1))
 #data2_2[3,30:40,start] = -1000000*100000 
 #data2_2[1:10,30,start] = -1000000*100000 
 
+
+
 #     ++++++++++++++++++++
 #++++++Remove the average++++++
 #     ++++++++++++++++++++
-#plt.rcParams['figure.figsize'] = [29, 10]
 
+#remove the noise of the cable
+##for depth in rows:
+## data2_2[:,:,depth] = data2_2[:,:,depth] - np.mean(data2_2[:,:,depth])
+##for east in dis:
+## data2_2[east,:,depth] = data2_2[east,:,depth] \
+##                         - np.mean(data2_2[east,:,depth])
 
 for line in lines:
 # for depth in samples:
-#     data2_3[:,line,depth] = data2_2[:,line,depth] - np.mean(data2_2[:,line,depth])
+#     data2_3[line,:,depth] = data2_2[line,:,depth] - np.mean(data2_2[line,:,depth])
 
-#Don't move the position
- plt.figure(layout='constrained',figsize=(6.5,7))  #Please use this When you save the figure with confirmed size
-# plt.tight_layout()
 
-                 
- 
- plt.imshow(np.fliplr(data_1[:,line,:].T)
- #plt.imshow(data_1[:,line,:].T
 
- #plt.imshow(data2_3[:,line,:].T
- #plt.imshow(data2_3[line,:,:].T
-           ,extent=(ax1_min,ax1_max,ay1_min,ay1_max)           
-           #,cmap='gnuplot'
-           ,cmap="Greys_r"
-           ,aspect = 3   
-          )
+#Transpose the C_scan, and
+#Flip the C_scan when it comes to up and down
+#Becasue I consider the tendency the imhosw plots.
+# plt.imshow((data2_2[:,:,depth].T)
+# plt.imshow(np.flipud(data2_2[:,:,depth].T)
+ plt.imshow(data2_3[:,line,:].T
+           ,extent=(ax1_min,ax1_max,ay1_min,ay1_max)
+           #,cmap='gist_rainbow'
+            ,cmap="Greys_r" 
+)
 #Almost similar in with and without the interpolation.
-            #,interpolation = 'none')
-            #,interpolation = 'spline16')
+#,interpolation = 'spline16')
  
-
-
- s = "line="+ str(line+1)
- #plt.colorbar()
- #full view
- #plt.text(10,-1, s, fontweight="bold",fontsize=15) 
- #enlarged view
- plt.text(9,11, s, fontweight="bold",fontsize=20) 
-
+ plt.colorbar()
+ plt.text(37,15,'[dB]', fontweight="bold",fontsize=15) 
 
 #colorbar
- #plt.clim(0,-100)
- #plt.clim(0,-50)
- #plt.clim(10,-10)
- #plt.clim(150,130) 
- 
- #amp
- #plt.colorbar(orientation='horizontal', ticks=None, values=None)
- 
- plt.clim(-10**(6),10**(6))
-#plt.clim(-10**(5),10**(5))
+
+ plt.clim(10**(7),-10**(7))
 
  #depth_title = round(((depth-start) * depth_int), 2)
  #d
  print("line=",line+1,"m")
 
- plt.title("40 MHz GPR Y Pol.", fontweight="bold", fontsize=20)
- #plt.title("40 MHz GPR X Pol.", fontweight="bold", fontsize=20)
- #plt.title("BSCAN MIHO-ri_100 MHz_EW_Pol.", fontweight="bold", fontsize=20)
+ plt.title("BSCAN MIHO-ri_450 MHz_EW_Pol.", fontweight="bold", fontsize=20)
 
 #Track interval 
  plt.ylabel("Depth [m]", fontweight="bold",fontsize=20)
 #Distance interval
- plt.xlabel("Distance [m]  int_0.5 m", fontweight="bold",fontsize=20)
+ plt.xlabel("Easting [m]  int_0.5 m", fontweight="bold",fontsize=20)
 
 #Ticks
  plt.xticks(fontsize=15, fontweight="bold")
  plt.yticks(fontsize=15, fontweight="bold")
  
  #subgroup
- thick = 7
- #enlarged view-northern miho
- ss = 11.5 #subgroup start
- #ss = 11.2 #subgroup start
- se = ss + thick  #subgroup end
- 
- #enlarged view2-southern miho
- #ss = 11.5 #subgroup start
- #se = 25.5  #subgroup end
-
- #FULL VIEW
- #ss = 0      #subgroup start
- #se = ay1_min  #subgroup end
-
+ ss = 1.5 #subgroup start
+ se = 10.5  #subgroup end
  plt.xticks(np.arange(0,20,2),np.arange(0,20,2),fontsize=15, fontweight="bold")
-#full view
-# plt.yticks(np.arange(ss,se,10),np.arange((ss-ss)-1,(se-ss)-1,10),fontsize=15, fontweight="bold")
-#enlarged view
- plt.yticks(np.arange(ss,se,1),np.arange((ss-ss)-1,(se-ss)-1,1),fontsize=15, fontweight="bold")
+ plt.yticks(np.arange(ss,se),np.arange((ss-ss)-1,(se-ss)-1,1),fontsize=15, fontweight="bold")
+
 
 #Ticks limit
  plt.xlim(0,20)
- 
- #enlarged view-northern miho
- #es = ss
- #plt.ylim(es+5,es)
- 
- #enlarged view2-southern miho
- es = ss
- plt.ylim(es+thick,es)
- #plt.gca().yaxis.set_major_locator(mticker.MultipleLocator(1))
- #plt.gca().yaxis.set_major_locator(mticker.MultipleLocator(1))
- #plt.gca().yaxis.set_major_locator(MaxNLocator(integer=True))
- #plt.gca().yaxis.set_major_locator(mnloc(integer=True,steps=[1,2,5,10]))
-
-
- #full view
- #plt.ylim(se,ss)
-
+ plt.ylim(se,ss)
 
 #Grid
- #plt.grid()
+# plt.grid()
 
 #tight_layout
- #plt.tight_layout()
+# plt.tight_layout()
 
- #plt.show(block=False)
+# plt.show(block=False)
  plt.draw()
+
 #Wait for the button press
  plt.waitforbuttonpress()
  
 #Keep changing the graph with a 0.05 s pause.
- #plt.pause(0.05)
+# plt.pause(0.05)
 
  fig.clear()
 

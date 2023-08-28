@@ -1,11 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib import cm
+from matplotlib import cm, colors
 import pandas as pd
 from pandas import Series, DataFrame 
 from mpl_toolkits.mplot3d import Axes3D
 from scipy.interpolate import interp1d
-from tifffile import imwrite 
 
 #import ipyvolume as ipv
 #import cv2
@@ -18,23 +17,17 @@ def make_patch_spines_invisible(ax):
         sp.set_visible(False)
 
 #PATH
-#input_path2 = "/home/changwan/GPR/211028/3D_CUBE_IMAGE_GPR.txt"
-#input_path2 = "/home/changwan/GPR/211028/HILBERT_3D_CUBE_IMAGE_GPR.txt"
-#input_path2 = "/home/changwan/GPR_DATA/KOREA/211028/HILBERT_3D_CUBE_IMAGE_GPR.txt"
-#input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/CSCAN_POL_GPR_powderdB.txt"
-
-input_path2 = "/home/changwan/GPR_DATA/MOGOD/2021/F1/500MHz/3D_HILBERT_CUBE_powerdB.txt"
-#input_path2 = "/home/changwan/GPR_DATA/MOGOD/2021/F1/500MHz/3D_HdB_RM_mvmean.txt"
-#input_path2 = "/home/changwan/GPR_DATA/MOGOD/2020/Channel-1/500/3DCUBE_GPR_noprocessing.raw"
-#input_path2 = "/home/changwan/GPR_DATA/MOGOD/2020/Channel-1/500/3D_CUBE/CSCAN_GPR_rmbgr_GC.txt"
-#input_path2 = "/home/changwan/GPR_DATA/MOGOD/2020/Channel-1/500/3D_CUBE/HPF_BSCAN_GC.txt"
-#input_path2 = "/home/changwan/GPR_DATA/MOGOD/2020/Channel-1/500/3D_CUBE/CSCAN_GPR_noprocessing.txt"
-#input_path2 = "/home/changwan/GPR_DATA/MOGOD/2020/Channel-1/500/Fall_2022_conf/3D_CUBE/3D_HILBERT_CUBE_powerdB.txt"
+#Miho
+#input_path1="/home/changwan/GPR/C_SCAN_IMAGE_GPR_flip.txt"
+#input_path2="/home/changwan/GPR_DATA/KOREA/MIHO_ri/100MHz/CSCAN3/220526_1.PRJ/HILBERT_3DCUBE_powerdB.txt"
+#input_path2="/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/2023/NS/HILBERT_3DCUBE_powerdB.txt"
+#input_path2="/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/2023/NS/attribute/3D_HILBERT_powerdB.txt"
+input_path2="/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/2023/POL/CSCAN_POL_diff_powerdB.txt"
 
 
 
-
-
+#input_path2 = "/home/changwan/GPR/211027_4/3D_CUBE_IMAGE_GPR.txt"
+#input_path2 = "/home/changwan/GPR/211027_4/HILBERT_3D_CUBE_IMAGE_GPR.txt"
 
 #READ DATASET
 #data=np.loadtxt(input_path1)
@@ -42,23 +35,10 @@ data2=np.loadtxt(input_path2)
 
 
 #CALCULATE THE DISTANCE INTERVAL:
-#KOREA
-#c_sl = 3*10**8   # speed of light
-#depth_range = 90 # 90 m 
-#permit = 25
-#sample = 4096
-#depth_int = depth_range/ sample 
-#depth_int = round(depth_int, 2)
-
-#MOGOD
 c_sl = 3*10**8   # speed of light
-#t_window = 213.457859*10**(-9)
-t_window = 139.303478*10.0**(-9)
-
-permit = 9.0
-depth_range = t_window*(c_sl/np.sqrt(permit))
-#sample = 512.0
-sample = 616.0
+depth_range = 50 # 90 m 
+permit = 16
+sample = 4096
 depth_int = depth_range/ sample 
 depth_int = round(depth_int, 2)
 
@@ -70,12 +50,12 @@ print("depth_interval=",depth_int)
 
 #RESAHPE THE INPUT DATA
 print("input_shape=",data2.shape)    
-#data2_2=data2.reshape(140,1,4096)
-#data2_2=data2.reshape(2299,99,512)
-data2_2=data2.reshape(1498,110,616)
 
+#data2_2=data2.reshape(1900,17,4096)
 
-#data2_2=data2.reshape(2,3,4)
+#Miho-ri
+#202303
+data2_2=data2.reshape(41,18,4096)
 
 
 print("3D_shape (x,y,z) =",data2_2.shape)
@@ -86,32 +66,33 @@ fig,host =plt.subplots()
 
 print(data2_2.shape[2])
 
-#KOREA
-#ax1_min=0
-#ax1_max=data2_2.shape[0]*0.05  #This is Northing.
-#ay1_min=0
-#ay1_max=data2_2.shape[1]*0.5 #This is Eastilng.
-
-#MOGOD
 ax1_min=0
-ax1_max=data2_2.shape[0]*0.05  #This is Northing.
+#ax1_max=data2_2.shape[0]*0.01  #This is Northing.
+ax1_max=data2_2.shape[0]*0.5  #This is Northing.
+
+
+
 ay1_min=0
-ay1_max=data2_2.shape[1]*1   #This is Eastilng.
+ay1_max=data2_2.shape[1]*0.5 #This is Easting.
+#make a upper-left figure zero.
+#ay1_max=0
+#ay1_min=data2_2.shape[1]*0.5 #This is Easting.
+
+
+#cmap=colors.ListedColormap(["white","blue","red"])
+
 
 
 #     ++++++++++++++++++++++
 #++++++Before interploation++++++
 #     ++++++++++++++++++++++
-#start =  0
-#end   =  4
-#rows=list(range(start,end,1))
+#start = 1000
+#end   = 2000
 
+#40MHz
+start = 1037
+end   = 2000
 
-#start =  900
-#end   = 1050
-
-start = 1
-end   = 200
 
 rows=list(range(start,end,1))
 
@@ -120,94 +101,77 @@ dis_s = 0
 dis_e = data2_2.shape[0]
 dis=list(range(dis_s,dis_e,1))
 
-tra_s = 0
-tra_e = data2_2.shape[1]
-tra=list(range(tra_s,tra_e,1))
-print(tra)
-
 #PLEASE CHECK THE DIRECTION OF THE GRAPH.
 #Check the direction of the graph
-#data2_2[:,0:20,start] = 1000000*100000 
+#data2_2[100:300,3,start] = 1000000*100000 
 #data2_2[100:200,:,start+1] = 1000000*100000 
 
 #     ++++++++++++++++++++
 #++++++Remove the average++++++
 #     ++++++++++++++++++++
 
-#remove the noise of the cable
-#for depth in rows:
-#  for east  in tra:
-#     data2_2[:,east,depth] = data2_2[:,east,depth] \
-#                              - np.mean(data2_2[:,east,depth])
 
-#p_depth = 53
-#imwrite("INSTANT_powerdB_34.tif",data2_2[:,:,34]) 
-imwrite("INSTANT_powerdB_34.tif",np.flipud(data2_2[:,:,34])) 
+data2_2[10,2,1050] = 1000000
 
-#reverse colormap
-color_map = plt.cm.get_cmap('magma')
-#reversed_color_map = color_map.reversed()
 
+#remote the noise of the cable
+##for depth in rows:
+#data2_2[:,:,depth] = data2_2[:,:,depth] - np.mean(data2_2[:,:,depth])
+##for east in dis:
+## data2_2[east,:,depth] = data2_2[east,:,depth] \
+##                         - np.mean(data2_2[east,:,depth])
+plt.rcParams['font.size'] = 15
 
 for depth in rows:
 # data2_2[:,:,depth] = data2_2[:,:,depth] - np.mean(data2_2[:,:,depth])
 
+
 #Transpose the C_scan, and
 #Flip the C_scan when it comes to up and down
 #Becasue I consider the tendency the imhosw plots.
-
-# if(depth==34):
-# if(depth==53):
-  plt.imshow(np.flipud(data2_2[:,:,depth])
-           ,extent=(ay1_min,ay1_max,ax1_min,ax1_max)
-#           ,cmap='gist_rainbow')
-           ,cmap=color_map)
+#plt.imshow(np.flip(data2_2[:,:,depth].T)
+#plt.imshow(np.fliplr(np.flip(data2_2[:,:,depth].T))
+ plt.imshow(np.flipud(data2_2[:,:,depth].T)
+           ,extent=(ax1_min,ax1_max,ay1_min,ay1_max)
+#           ,cmap='gist_rainbow'
+           ,cmap= "Greys_r"
+#           ,cmap='RdGy' 
 
 
 #Almost similar in with and without the interpolation.
-#,interpolation = 'spline16')
+,interpolation = 'spline16')
+ 
+ plt.colorbar()
+ plt.text(37,15,'[dB]', fontweight="bold",fontsize=15) 
 
 
-#colorbar
-  plt.colorbar()
-#colorbar range
-  plt.clim(17,-5)
+ depth_title = round(((depth-start) * depth_int), 2)
+ print(depth_title,"m", "sample=",depth)
 
-#colorbar titile
-  plt.text(115,90, '[dB]', fontweight="bold", fontsize=15)
-
-  depth_title = round(((depth-start) * depth_int), 2)
-  print(depth_title,"m", "sample=",depth)
-
- #plt.title("Gyodong-ri_100 MHz_EW_Pol.", fontweight="bold", fontsize=30)
-  plt.title("MOGOD_500 MHz_EW_Pol.", fontweight="bold", fontsize=30)
-
+ plt.title("MIHO_ri 40 MHz_NS_Pol.", fontweight="bold", fontsize=30)
 
 #Track interval 
-#  plt.ylabel("Northing [m] interval=0.05 m", fontweight="bold", fontsize=20)
-  plt.ylabel("Y [m] interval=0.05 m", fontweight="bold", fontsize=20)
-
-
+ plt.ylabel("Y [m] int=0.5 m", fontweight="bold",fontsize=20)
 #Distance interval
-  plt.xlabel("X [m] interval=1 m", fontweight="bold", fontsize=20)
+ plt.xlabel("X [m] int=0.5 m", fontweight="bold",fontsize=20)
 
-#Tick 
-  plt.xticks(fontsize=15, fontweight="bold")
-  plt.yticks(fontsize=15, fontweight="bold")
+#Ticks
+ plt.xticks(fontsize=15, fontweight="bold")
+ plt.yticks(fontsize=15, fontweight="bold")
 
 #Grid
-  plt.grid()
+ plt.grid()
 
 # plt.show(block=False)
-  plt.draw()
+ plt.draw()
 
 #Wait for the button press
-  plt.waitforbuttonpress()
+ plt.waitforbuttonpress()
  
 #Keep changing the graph with a 0.05 s pause.
 # plt.pause(0.05)
 
-  fig.clear()
+ fig.clear()
 
 #plt.show()
 

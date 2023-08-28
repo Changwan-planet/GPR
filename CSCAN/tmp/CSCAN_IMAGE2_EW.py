@@ -17,8 +17,15 @@ def make_patch_spines_invisible(ax):
         sp.set_visible(False)
 
 #PATH
+#Miho
 #input_path1="/home/changwan/GPR/C_SCAN_IMAGE_GPR_flip.txt"
-input_path2="/home/changwan/GPR_DATA/KOREA/MIHO_ri/100MHz/CSCAN3/220526_1.PRJ/HILBERT_3DCUBE_powerdB.txt"
+#input_path2="/home/changwan/GPR_DATA/KOREA/MIHO_ri/100MHz/CSCAN3/220526_1.PRJ/HILBERT_3DCUBE_powerdB.txt"
+#input_path2="/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/2023/NS/HILBERT_3DCUBE_powerdB.txt"
+
+#input_path2="/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/2023/EW/attribute/3D_HILBERT_powerdB.txt"
+input_path2="/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/2023/POL/CSCAN_POL_diff_powerdB.txt"
+
+
 
 #input_path2 = "/home/changwan/GPR/211027_4/3D_CUBE_IMAGE_GPR.txt"
 #input_path2 = "/home/changwan/GPR/211027_4/HILBERT_3D_CUBE_IMAGE_GPR.txt"
@@ -44,7 +51,14 @@ print("depth_interval=",depth_int)
 
 #RESAHPE THE INPUT DATA
 print("input_shape=",data2.shape)    
-data2_2=data2.reshape(1900,17,4096)
+
+#data2_2=data2.reshape(1900,17,4096)
+
+#Miho-ri
+#202303
+data2_2=data2.reshape(41,18,4096)
+
+
 print("3D_shape (x,y,z) =",data2_2.shape)
 print("+++++++++++++++++++++")
 print("\n")
@@ -54,9 +68,16 @@ fig,host =plt.subplots()
 print(data2_2.shape[2])
 
 ax1_min=0
-ax1_max=data2_2.shape[0]*0.01  #This is Northing.
-ay1_max=0
-ay1_min=data2_2.shape[1]*0.5 #This is Easting.
+#ax1_max=data2_2.shape[0]*0.01  #This is Northing.
+ax1_max=data2_2.shape[0]*0.5  #This is Northing.
+
+
+ay1_min=0
+ay1_max=data2_2.shape[1]*0.5 #This is Easting.
+#make a uppder-left figure zero.
+#ay1_max=0
+#ay1_min=data2_2.shape[1]*0.5 #This is Easting.
+
 
 
 #cmap=colors.ListedColormap(["white","blue","red"])
@@ -66,8 +87,14 @@ ay1_min=data2_2.shape[1]*0.5 #This is Easting.
 #     ++++++++++++++++++++++
 #++++++Before interploation++++++
 #     ++++++++++++++++++++++
-start = 1000
+#start = 1000
+#end   = 2000
+
+#40MHz
+start = 1037
 end   = 2000
+
+
 rows=list(range(start,end,1))
 
 
@@ -90,7 +117,13 @@ dis=list(range(dis_s,dis_e,1))
 ##for east in dis:
 ## data2_2[east,:,depth] = data2_2[east,:,depth] \
 ##                         - np.mean(data2_2[east,:,depth])
+plt.rcParams['font.size'] = 15
 
+#direction check
+#data2_2[:,2,1100] = 1000000
+#data2_2[10,2,1100] = 1000000
+#data2_2[10,2,1050] = 1000000
+ 
 for depth in rows:
 # data2_2[:,:,depth] = data2_2[:,:,depth] - np.mean(data2_2[:,:,depth])
 
@@ -98,12 +131,18 @@ for depth in rows:
 #Transpose the C_scan, and
 #Flip the C_scan when it comes to up and down
 #Becasue I consider the tendency the imhosw plots.
- plt.imshow(data2_2[:,:,depth].T
+ #plt.imshow(np.flipud(data2_2[:,:,depth].T)
+ plt.imshow(np.flipud(data2_2[:,:,depth].T)
+
+
            ,extent=(ax1_min,ax1_max,ay1_min,ay1_max)
-           ,cmap='gist_rainbow')
+#           ,cmap='gist_rainbow'
+           ,cmap= "Greys_r"
+#           ,cmap='RdGy' 
+
 
 #Almost similar in with and without the interpolation.
-#,interpolation = 'spline16')
+,interpolation = 'spline16')
  
  plt.colorbar()
  plt.text(37,15,'[dB]', fontweight="bold",fontsize=15) 
@@ -112,12 +151,12 @@ for depth in rows:
  depth_title = round(((depth-start) * depth_int), 2)
  print(depth_title,"m", "sample=",depth)
 
- plt.title("MIHO-ri_100 MHz_NS_Pol.", fontweight="bold", fontsize=30)
+ plt.title("MIHO_ri 40 MHz_XX_Pol.", fontweight="bold", fontsize=30)
 
 #Track interval 
- plt.ylabel("Northing [m] int=_0.5 m", fontweight="bold",fontsize=20)
+ plt.ylabel("Y [m] int=0.5 m", fontweight="bold",fontsize=20)
 #Distance interval
- plt.xlabel("Easting [m]  int_0.01 m", fontweight="bold",fontsize=20)
+ plt.xlabel("X [m] int=0.5 m", fontweight="bold",fontsize=20)
 
 #Ticks
  plt.xticks(fontsize=15, fontweight="bold")

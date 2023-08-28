@@ -5,18 +5,24 @@
 !COMMON_PATH1="/home/changwan/GPR_DATA/MOGOD/2021/F1/500MHz/"
 !COMMON_PATH1="/home/changwan/GPR_DATA/MOGOD/2020/Channel-1/500/"
 
-!EW
+
+!NS
 !MIHO_ri
-!COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/2023/EW/"
+COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/2023/NS/"
 
-!COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/BSCAN/EW/"
 !COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/NS/"
+!COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/BSCAN/NS/"
+!COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/CSCAN2/"
+!COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/2023/NS/"
+!COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/220506_3.PRJ/"
+!COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/220303/"
 
-!COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/2023/EW/"
 
 
 !MUNAM_ri
-!COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MUNAM_ri/"
+!COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MUNAM_ri/2023/230531/"
+
+
 
 
 !DIRECTORY TEST AND MAKER
@@ -52,9 +58,7 @@ IF (file_exists .eqv.l1) CALL system(CMD5)
 
 !INPUT_NAME10 = "3DCUBE_GPR_noprocessing.raw"      !10
 !INPUT_NAME10 = "3DCUBE_GPR_rmbgr_zpd.raw"          !10
-!INPUT_NAME10 = "3DCUBE_GPR_stacking.raw"          !10
-INPUT_NAME10 = "3DCUBE_GPR_stacking.txt"          !10
-
+INPUT_NAME10 = "3DCUBE_GPR_stacking.raw"          !10
 
 
 OUTPUT_NAME20 = "3D_A_SCOPE_GPR.txt"          !20
@@ -67,15 +71,16 @@ OUTPUT_NAME40 = "3D_CUBE_GPR.txt"                  !40
 OUTPUT_NAME41 = "3D_CUBE_GPR_rmavrg.txt"               !41 
 
 OUTPUT_NAME50 = "3D_FFT.txt"                       !50
-OUTPUT_NAME51 = "FF_D_DIAGRAM.txt"                  !51
 
 OUTPUT_NAME60 = "3D_HILBERT_powerdB.txt"           !60
 
 OUTPUT_NAME70 = "3D_GPR_phase.txt"                 !70
+OUTPUT_NAME71 = "3D_GPR_frequency.txt"                 !70
+
 
 OUTPUT_NAME80 = "3D_TW_BPF.txt"                    !80
 !OUTPUT_NAME81 = "3D_BPF_GC.txt"                    !81
-!OUTPUT_NAME81 = "3D_BPF.txt"                    !81
+OUTPUT_NAME81 = "3D_BPF.txt"                    !81
 
 
 !OUTPUT_NAME90 = "HORIZON_PICK.txt"                 !90
@@ -94,14 +99,13 @@ OUTPUT_PATH40 = TRIM(COMMON_PATH1)//OUTPUT_NAME40
 OUTPUT_PATH41 = TRIM(COMMON_PATH1)//OUTPUT_NAME41
 
 OUTPUT_PATH50 = TRIM(COMMON_PATH2)//OUTPUT_NAME50
-OUTPUT_PATH51 = TRIM(COMMON_PATH2)//OUTPUT_NAME51
-
 
 OUTPUT_PATH60 = TRIM(COMMON_PATH4)//OUTPUT_NAME60
 OUTPUT_PATH70 = TRIM(COMMON_PATH4)//OUTPUT_NAME70
+OUTPUT_PATH71 = TRIM(COMMON_PATH4)//OUTPUT_NAME71
 
 OUTPUT_PATH80 = TRIM(COMMON_PATH2)//OUTPUT_NAME80
-!OUTPUT_PATH81 = TRIM(COMMON_PATH2)//OUTPUT_NAME81
+OUTPUT_PATH81 = TRIM(COMMON_PATH2)//OUTPUT_NAME81
 
 !OUTPUT_PATH90 = TRIM(COMMON_PATH5)//OUTPUT_NAME90
 
@@ -110,9 +114,7 @@ OUTPUT_PATH80 = TRIM(COMMON_PATH2)//OUTPUT_NAME80
 
 PRINT*, INPUT_PATH
 
-OPEN(UNIT=10, FILE=INPUT_PATH, FORM="FORMATTED", STATUS='OLD', ACTION='READ')
-!OPEN(UNIT=10, FILE=INPUT_PATH,   ACCESS='STREAM',  STATUS='OLD', ACTION='READ')
-
+OPEN(UNIT=10, FILE=INPUT_PATH,   ACCESS='STREAM',  STATUS='OLD', ACTION='READ')
 
 !======INITIALIZATION=======
 !B_SCAN_IMAGE = 0
@@ -139,15 +141,34 @@ OPEN(UNIT=10, FILE=INPUT_PATH, FORM="FORMATTED", STATUS='OLD', ACTION='READ')
 !PRINT *, "            .                                                            " 
 !PRINT *, "            Z                                                            "
 
-DO R = 1, DIS * TRA * ROWS
-!DO Y = 1, TRA
-!DO X = 1, DIS
-!DO Z = 1, ROWS
-!       READ(10,*) B_SCAN_IMAGE(X,Y,Z), XX, YY, ZZ
-        READ(10,*) XX, YY, ZZ, B_SCAN_IMAGE(XX,YY,ZZ)
-!END DO 
-!END DO 
-!END DO 
-END DO             
+
+       READ(10) B_SCAN_IMAGE6 
+
+            
+DO X = 1, LINE
+  DO Y = 1, TRA
+    DO Z = 1, ROWS
+
+      B_SCAN_IMAGE7(X,Y,Z) = B_SCAN_IMAGE6(Z,Y,X)
+
+!      PRINT *, X,Y,Z,"<----",Z,X,Y
+        
+    END DO
+  END DO
+END DO
+
+DO X = 1, TRA
+  DO Y = 1, LINE
+    DO Z = 1, ROWS
+
+      B_SCAN_IMAGE7_E(X,Y,Z) = B_SCAN_IMAGE7(Y,X,Z)
+
+!      PRINT *, X,Y,Z,"<----",Y,X,Z
+        
+    END DO
+  END DO
+END DO
+
 PRINT *, "COMPLETED TO READ"    
+!PRINT *, "GPR TRACK REVERSED IN THE READER PROGRAM"
 

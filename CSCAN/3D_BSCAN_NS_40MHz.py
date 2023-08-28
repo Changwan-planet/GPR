@@ -14,20 +14,20 @@ import math
 #MIHO_ri
 #NS
 #BSCAN
+input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/2023/NS/3D_CUBE_GPR.txt"
+
 #input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/BSCAN/NS/3DCUBE_GPR_stacking.txt"
 #input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/BSCAN/NS/3D_CUBE_GPR.txt"
 #input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/BSCAN/NS/attribute/3D_HILBERT_powerdB.txt"
 
 #CSCAN
-input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/NS/3D_CUBE_GPR.txt"
+#input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/NS/3D_CUBE_GPR.txt"
 #input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/EW/3D_CUBE_GPR.txt"
 
 
 #input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/NS/3DCUBE_GPR_stacking.txt"
 #input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/NS/attribute/3D_GPR_frequency.txt"
 #input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/NS/attribute/3D_HILBERT_powerdB.txt"
-
-
 
 
 #input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/2023/NS/3D_CUBE_GPR.txt"
@@ -37,7 +37,18 @@ input_path2 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/NS/3
 
 
 #MUNAM_ri
+#input_path2 = "/home/changwan/GPR_DATA/KOREA/MUNAM_ri/2023/230601/3DCUBE_GPR_stacking.txt"
+
+#input_path2 = "/home/changwan/GPR_DATA/KOREA/MUNAM_ri/2023/230601/attribute/3D_HILBERT_powerdB.txt"
+#input_path2 = "/home/changwan/GPR_DATA/KOREA/MUNAM_ri/2023/230531/attribute/3D_HILBERT_powerdB.txt"
+
+
+
+#input_path2 = "/home/changwan/GPR_DATA/KOREA/MUNAM_ri/2023/230531/3DCUBE_GPR_stacking.txt"
+
+
 #input_path2 = "/home/changwan/GPR_DATA/KOREA/MUNAM_ri/3D_CUBE_GPR.txt"
+
 
 #input_path3 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/NS/horizon/HORIZON_PICK_line21.txt"
 
@@ -64,6 +75,8 @@ depth_range = 50 #
 
 sample = 4096
 depth_int = (depth_range/ sample) 
+#depth_int = (depth_range/ sample)*math.sqrt(16.0) / math.sqrt(9.0) 
+
 depth_int2 = round(depth_int, 2)
 
 print("\n")
@@ -107,6 +120,9 @@ ax1_min=0
 
 #ax1_max=data2_2.shape[0] * 1     #This is Easting.
 ax1_max=data2_2.shape[0] * 0.5     #This is Easting.
+#ax1_max=data2_2.shape[0] * 0.2     #This is Easting.
+
+
 #ax1_max=data2_2.shape[0]* 0.25     #This is Easting.
 #READER TEST
 #ax1_max=data2_2.shape[1]* 0.5      #Test for reader program.
@@ -169,6 +185,8 @@ dis=list(range(dis_s,dis_e,1))
 ## data2_2[east,:,depth] = data2_2[east,:,depth] \
 ##                         - np.mean(data2_2[east,:,depth])
 plt.rcParams['font.size'] = 15
+#plt.rcParams['figure.figsize'] = (8,13)
+
 
 for line in lines:
 # for depth in samples:
@@ -181,15 +199,20 @@ for line in lines:
 # plt.imshow(np.flipud(data2_2[:,:,depth].T)
 # d_m = 600    # display_moderator
 
-
- plt.imshow(np.fliplr(data2_3[:,line,:].T)
+ #plt.imshow(np.fliplr(data2_3[:,line,:].T)
+ plt.imshow(data2_3[:,line,:].T
  #plt.imshow(data2_3[line,:,:].T         
  #plt.imshow(data2_3[:,line,:].T
             ,extent=(ax1_min,ax1_max,ay1_min,ay1_max)
            #,cmap='gist_rainbow'
-           # ,cmap="gnuplot" 
+#            ,cmap="gnuplot" 
+#            ,cmap="inferno" 
+#             ,cmap="RdGy"
+
             ,cmap="Greys_r" 
-            ,aspect=3
+
+#            ,aspect=3
+#            ,aspect=1
 )
 #Almost similar in with and without the interpolation.
 #,interpolation = 'spline16')
@@ -202,7 +225,7 @@ for line in lines:
  #full view
  #plt.text(10,-1, s, fontweight="bold",fontsize=15) 
  #enlarged view
- plt.text(10,11.125, s, fontweight="bold",fontsize=15) 
+ #plt.text(10,11.125, s, fontweight="bold",fontsize=15) 
  
  #enlarged view2-Northern Miho
  #plt.text(10,20.125, s, fontweight="bold",fontsize=15) 
@@ -210,27 +233,30 @@ for line in lines:
  #enlarged view3-Southern Miho
  #plt.text(10,11.125, s, fontweight="bold",fontsize=15) 
  
-#colorbar
+ #colorbar
  #plt.clim(10,-10)
  #plt.clim(10,-30)
  #plt.clim(0,-100)
  
  #plt.clim(150,130)
+ #plt.clim(0,-60)
  
- plt.clim(-1* 10**(6),1*10**(6))
- #plt.clim(-3* 10**(6),3*10**(6))
- #plt.clim(-1* 10**(5),1*10**(5))
+
+ #plt.clim(-1* 10**(6),1*10**(6))
+ #plt.clim(-2* 10**(6),2*10**(6))
+ #plt.clim(-4* 10**(5),4*10**(5))
+ plt.clim(-1* 10**(5),1*10**(5))
 
 
 
  #depth_title = round(((depth-start) * depth_int), 2)
- #d
  print("line=",line+1,"m")
 
+ #plt.figure(figsize=(8,11))
  
  #plt.title("BSCAN MIHO-ri_40 MHz_XX_Pol.", fontweight="bold", fontsize=20, position=(0.5,-3))
- plt.title("40 MHz Y direction", fontweight="bold", fontsize=20, position=(0.5,-3))
- #plt.title("40 MHz X direction", fontweight="bold", fontsize=20, position=(0.5,-3))
+ #plt.title("40 MHz Y direction", fontweight="bold", fontsize=20, position=(0.5,-3))
+ plt.title("40 MHz GPR YY pol.", fontweight="bold", fontsize=20, position=(0.5,-3))
  
 #plt.title("BSCAN MIHO-ri_100 MHz_EW_Pol.", fontweight="bold", fontsize=20)
  #plt.title("BSCAN MUNAM_ri_40 MHz_XX_Pol.", fontweight="bold", fontsize=20)
@@ -240,7 +266,9 @@ for line in lines:
 #Track interval 
  plt.ylabel("Depth [m]", fontweight="bold",fontsize=25)
 #Distance interval
- plt.xlabel("Northing [m]  int_0.5 m", fontweight="bold",fontsize=25)
+ #plt.xlabel("Northing [m]  int_0.5 m", fontweight="bold",fontsize=25)
+ #plt.xlabel("Distance [m]  int_0.5 m", fontweight="bold",fontsize=25)
+ plt.xlabel("Distance [m]  int = 0.5 m", fontweight="bold",fontsize=25)
 
 #Ticks
  plt.xticks(fontsize=25, fontweight="bold")
@@ -249,6 +277,10 @@ for line in lines:
  #enlarged view
  thick = 10
  ss = 11.5    #subgroup start
+ #ss = 11.625    #subgroup start
+
+
+ #ss = 15.5    #subgroup start
  se = ss+ thick  #subgroup end
 
  #enlarged view_2-Northern Miho-depth_range:100 m 
@@ -268,16 +300,18 @@ for line in lines:
  #ss = 0      #subgroup start
  #se = ay1_min  #subgroup end
 
- plt.xticks(np.arange(0,21,2),np.arange(0,21,2),fontsize=15, fontweight="bold")
+ plt.xticks(np.arange(0,20,2),np.arange(0,20,2),fontsize=15, fontweight="bold")
+ #plt.xticks(np.arange(0,31,2),np.arange(0,31,2),fontsize=15, fontweight="bold")
+
+
  #full view
  #plt.yticks(np.arange(ss,se,10),np.arange((ss-ss)-1,(se-ss)-1,10),fontsize=15, fontweight="bold")
  #enlarged view
  plt.yticks(np.arange(ss,se,1),np.arange((ss-ss)-1,(se-ss)-1,1),fontsize=15, fontweight="bold")
 
 
-
 #Ticks limit
- #plt.xlim(0,20)
+ plt.xlim(0,20)
 
  #enlarged view-Southern Miho
  es = ss
@@ -306,6 +340,7 @@ for line in lines:
 # plt.tight_layout()
 
 # plt.show(block=False)
+ 
  plt.draw()
 
 #Wait for the button press
@@ -313,7 +348,8 @@ for line in lines:
  
 #Keep changing the graph with a 0.05 s pause.
 # plt.pause(0.05)
-
+ #plt.figure(figsize=(8,10))
+ 
  fig.clear()
 
 #plt.show()
