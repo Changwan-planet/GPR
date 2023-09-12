@@ -5,6 +5,10 @@
        WRITE(20,*) B_SCAN_IMAGE3(1,1,Z) 
     END DO
 
+!    DO Z=1,ROWS
+!        WRITE(20,*) B_SCAN_IMAGE2(Z,1,1) 
+!    END DO
+
 
 
 

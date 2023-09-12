@@ -1,11 +1,10 @@
-
 !N = FH1 - 3
 !N = 8
 !N = 10
-N = 15 !MALA
+!N = 15 !MALA
+N = 8 !MALA2
 
 DO G=1,TRA
-
 
 !=====AUTOMATIC CHANCE CODE FOR OPENING FILE===================
 
@@ -34,16 +33,25 @@ DO G=1,TRA
 !COMMON_PATH1="/home/changwan/GPR_DATA/MOGOD/2020/Channel-1/500/"
 !COMMON_PATH1="/home/changwan/GPR_DATA/MOGOD/2020/Channel-1/500/"
 !COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/2022_BOMIN/Analysis/"
-COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/2020_BOMIN/1234_2/"
+!COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/2020_BOMIN/1234_2/"
+COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/2022_BOMIN/Raw/Miho11H/"
 
 
-OUTPUT_NAME20 = "A_SCOPE_GPR.raw"                !20
+ITEM_NUMBER2 = "start_end_info_only_values.txt"
+
+!OUTPUT_NAME20 = "A_SCOPE_GPR.raw"                !20
+OUTPUT_NAME20 = "A_SCOPE_GPR.txt"                !20
+
+
 OUTPUT_NAME30 = "BSCAN_GPR_noprocessing.raw"     !30
 OUTPUT_NAME40 = "3DCUBE_GPR_noprocessing.raw"    !40 
 OUTPUT_NAME41 = "3DCUBE_GPR_noprocessing.txt"    !41 
 
 
 INPUT_PATH = TRIM(COMMON_PATH1)//ITEM_NUMBER
+INPUT_PATH2 = TRIM(COMMON_PATH1)//ITEM_NUMBER2
+
+
 OUTPUT_PATH20 = TRIM(COMMON_PATH1)//OUTPUT_NAME20
 OUTPUT_PATH30 = TRIM(COMMON_PATH1)//OUTPUT_NAME30
 OUTPUT_PATH40 = TRIM(COMMON_PATH1)//OUTPUT_NAME40
@@ -51,12 +59,16 @@ OUTPUT_PATH41 = TRIM(COMMON_PATH1)//OUTPUT_NAME41
 !=====================================================================
 
 PRINT*, INPUT_PATH
+!======INITIALIZATION=======
+!B_SCAN_IMAGE = 0.0
+!===========================
 
 OPEN(UNIT=10, FILE=INPUT_PATH,   ACCESS='STREAM',  STATUS='OLD', ACTION='READ')
+OPEN(UNIT=11, FILE=INPUT_PATH2, FORM='FORMATTED', STATUS='OLD', ACTION='READ')
+
 
 !DO NOT USE THE INITIALIZATION IN THIS LOOP!!
 !======INITIALIZATION=======
-!B_SCAN_IMAGE = 0.0
 !B_SCAN_IMAGE2 = 0.0
 !===========================  
 
@@ -82,18 +94,26 @@ OPEN(UNIT=10, FILE=INPUT_PATH,   ACCESS='STREAM',  STATUS='OLD', ACTION='READ')
 
 
 !      READ(10) HEADER, B_SCAN_IMAGE(:,:,G)   !GSSI-KOREA
-      READ(10) B_SCAN_IMAGE(:,:,G)    !MOGOD-MALA, MALA
+      
+      READ(11,*) START_END_XY(G,:)
+      PRINT *, START_END_XY(G,:)
+
+
+      READ(10, END = 200) B_SCAN_IMAGE(:,:,G)    !MOGOD-MALA, MALA
+      200 CLOSE(10)
+
              
       B_SCAN_IMAGE2(:,:,G) = B_SCAN_IMAGE(:,:,G)
 
+
 !+++++REVERSING THE EVEN_GPR TRACKS+++++++++++++++++++++++
-!!     IF (MOD(G,2)/=0) THEN
-!!         B_SCAN_IMAGE2(:,:,G) = B_SCAN_IMAGE(:,:,G)
-!!     ELSE
-!!      DO P=1,DIS
-!!          B_SCAN_IMAGE2(:,(DIS-P+1),G) = B_SCAN_IMAGE(:,P,G) 
-!!      END DO
-!!     END IF
+     IF (MOD(G,2)/=0) THEN
+         B_SCAN_IMAGE2(:,:,G) = B_SCAN_IMAGE(:,:,G)
+     ELSE
+      DO P=1,DIS
+          B_SCAN_IMAGE2(:,(DIS-P+1),G) = B_SCAN_IMAGE(:,P,G) 
+      END DO
+     END IF
 
       PRINT *, "G=",G    
 
@@ -108,8 +128,8 @@ DO X = 1, DIS
     END DO
   END DO
 END DO
- 
-CLOSE(10)
+
+
 
 END DO
 
