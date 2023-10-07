@@ -1,8 +1,8 @@
 #!/bin/bash
 
 date=`date`
-#username="Changwan-planet"
-username="tjsckddhks@gmail.com"
+username="Changwan-planet"
+#username="tjsckddhks@gmail.com"
 github_Token="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"
 github_Address="https://github.com/Changwan-planet/GPR.git"
 logFile="/home/changwan/GPR/push.log"
