@@ -3,9 +3,7 @@
 date=`date`
 #username="Changwan-planet"
 username="tjsckddhks@gmail.com"
-
-
-github_Token="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"
+github_Token="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"
 github_Address="https://github.com/Changwan-planet/GPR.git"
 logFile="/home/changwan/GPR/push.log"
 SourceDir="/home/changwan/GPR"
