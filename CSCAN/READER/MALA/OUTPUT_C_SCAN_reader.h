@@ -3,7 +3,7 @@
 
 DO Y = 1, TRA
 !DO Y = 3, 18
-      WRITE(51,*) (B_SCAN_IMAGE4(X, Y, 50), X = 1, DIS)     
+      WRITE(51,*) (B_SCAN_IMAGE5(X, Y, 50), X = 1, DIS)     
 END DO 
 
 !DO Y = 1, TRA
