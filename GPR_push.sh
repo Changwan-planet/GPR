@@ -1,7 +1,7 @@
 #!/bin/bash
 
 date=`date`
-github_id="tjsckddhks@gmail.com"
+username="Changwan-planet"
 github_Token="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"
 github_Address="https://github.com/Changwan-planet/GPR.git"
 logFile="/home/changwan/GPR/push.log"
@@ -22,7 +22,7 @@ echo "`git commit -m "$date commit"`" >> $logFile 2>&1
 echo "" && echo "" >> $logFile 2>&1 && echo "==" >> $logFile 2>&1
 
 echo "git push!" && echo "git push!" >> $logFile 2>&1
-git push origin GPR_2023 https://$github_id:$github_Token@$github_Address >> $logFile 2>&1
+git push https://$username:$github_Token@$github_Address >> $logFile 2>&1
 
 sleep 2
 
