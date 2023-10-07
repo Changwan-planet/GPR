@@ -22,7 +22,7 @@ echo "`git commit -m "$date commit"`" >> $logFile 2>&1
 echo "" && echo "" >> $logFile 2>&1 && echo "==" >> $logFile 2>&1
 
 echo "git push!" && echo "git push!" >> $logFile 2>&1
-git push https://$username:$github_Token@$github_Address >> $logFile 2>&1
+git push $username:$github_Token@$github_Address >> $logFile 2>&1
 
 sleep 2
 
