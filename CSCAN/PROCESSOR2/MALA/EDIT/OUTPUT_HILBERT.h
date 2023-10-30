@@ -12,8 +12,8 @@ END DO
 !DO Z = 1, ROWS
 !     SLICE_MEAN2 = SUM(HILBERT_power(:,:,Z))/SIZE(HILBERT_power(:,:,Z)) 
 
-!   DO X = 1, DIS
-!      DO Y = 1, TRA             
+!   DO X = 1, TRA
+!      DO Y = 1, LINE             
 
 !      HILBERT_powerdB(X,Y,Z) = 10 * log10( ((HILBERT_power(X,Y,Z))**2)/ ((SLICE_MEAN2)**2) )   
 
@@ -23,26 +23,26 @@ END DO
 !END DO
 
 !dB to Max
-DO X = 1, DIS
-DO Y = 1, TRA
-DO Z = 1, ROWS
-  
-   HILBERT_powerdB(X,Y,Z) = 10 * log10( (HILBERT_power(X,Y,Z)**2)/(MAXVAL(HILBERT_power(X,Y,:))**2) )
-
-END DO     
-END DO 
-END DO 
-
-!just log
 !DO X = 1, DIS
 !DO Y = 1, TRA
 !DO Z = 1, ROWS
   
-!   HILBERT_powerlog(X,Y,Z) = 10 * log10( HILBERT_power(X,Y,Z) )
+!   HILBERT_powerdB(X,Y,Z) = 10 * log10( (HILBERT_power(X,Y,Z)**2)/(MAXVAL(HILBERT_power(X,Y,:))**2) )
 
 !END DO     
 !END DO 
 !END DO 
+
+!just log
+DO X = 1, DIS
+DO Y = 1, TRA
+DO Z = 1, ROWS
+  
+   HILBERT_powerlog(X,Y,Z) = 10 * log10( HILBERT_power(X,Y,Z) )
+
+END DO     
+END DO 
+END DO 
 
 
 !HILBERT_powerdB(10,3,:) = -1000000
@@ -50,20 +50,20 @@ END DO
 !=====PRINT FOR PRYTHON.HILBERT_3D_CUBE_IMAGE==
 !J=ROWS 
 
-!DO Z = 1, ROWS
-!DO Y = 1, TRA
-!DO X = 1, DIS
+DO Z = 1, ROWS
+DO Y = 1, TRA
+DO X = 1, DIS
 !           WRITE (60,*) HILBERT_powerdB(X,Y,Z), X, Y, Z
-           WRITE (60,*) X, Y, Z, HILBERT_powerdB(X,Y,Z)
+!           WRITE (60,*) X, Y, Z, HILBERT_powerdB(X,Y,Z)
 !           WRITE (60,*) X, Y, Z, HILBERT_powerlog(X,Y,Z)
-!           WRITE (60,*) HILBERT_powerlog(X,Y,Z), X, Y, Z
+           WRITE (60,*) HILBERT_powerlog(X,Y,Z), X, Y, Z
 
 
 
 
-!END DO 
-!END DO
-!END DO 
+END DO 
+END DO
+END DO 
 
 !==>  THIS STRUCTURE (F x Y) X Z CAN BE PRINTED. 
 !==>  (F x Y) IS THE C_SCAN.

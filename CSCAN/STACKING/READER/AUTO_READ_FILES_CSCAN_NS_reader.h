@@ -14,9 +14,12 @@ PRINT *, "F=",F
 !====AUTOMATIC CHANGE CODE FOR OPENING FOLDER====
 !MIHO_ri
 !COMMON_PATH1 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/2023/NS/"
-COMMON_PATH1 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/NS/"
+!COMMON_PATH1 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/NS/"
 !COMMON_PATH1 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/BSCAN/NS/"
+COMMON_PATH1 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/CSCAN/"
 !COMMON_PATH1 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/CSCAN2/"
+
+
 !COMMON_PATH1 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/220506_3.PRJ/"
 !COMMON_PATH1 = "/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/220303/"
 
@@ -163,19 +166,19 @@ OPEN(UNIT=10, FILE=INPUT_PATH,   ACCESS='STREAM',  STATUS='OLD', ACTION='READ')
       B_SCAN_IMAGE2(:,:,G) = B_SCAN_IMAGE(:,:,G)
 
 !+++++REVERSING THE EVEN_GPR TRACKS+++++++++++++++++++++++
-!!     IF (MOD(G,2)/=0) THEN
-!!         B_SCAN_IMAGE2(:,:,G) = B_SCAN_IMAGE(:,:,G)
-!!     ELSE
-!!      DO P=1,DIS
-!!          B_SCAN_IMAGE2(:,(DIS-P+1),G) = B_SCAN_IMAGE(:,P,G) 
-!!      END DO
-!!     END IF
+     IF (MOD(G,2)/=0) THEN
+         B_SCAN_IMAGE2(:,:,G) = B_SCAN_IMAGE(:,:,G)
+     ELSE
+      DO P=1,DIS
+          B_SCAN_IMAGE2(:,(DIS-P+1),G) = B_SCAN_IMAGE(:,P,G) 
+      END DO
+     END IF
 
 DO X = 1, DIS
   DO Y = 1, TRA
     DO Z = 1, ROWS
 
-      B_SCAN_IMAGE3(X,Y,Z) = -1 * B_SCAN_IMAGE2(Z,X,Y)
+      B_SCAN_IMAGE3(X,Y,Z) = 1 * B_SCAN_IMAGE2(Z,X,Y)
 
 !THE REASON THAT MULTIPLE -1.
 !WE MEASURE THE 40 MHz GPR FOR OUR CONVENIENCE.

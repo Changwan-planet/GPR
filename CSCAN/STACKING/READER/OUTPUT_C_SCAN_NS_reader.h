@@ -8,10 +8,9 @@ END DO
 END DO
 END DO
 
- 
+DO Z = 1, ROWS
 DO F = 1, LINE
 DO Y = 1, TRA
-DO Z = 1, ROWS
 
       !WRITE(40) (STACKED_B_SCAN(F, Y, Z), Z = 1,ROWS)
 !      WRITE(41,*) (STACKED_B_SCAN(F, Y, Z), Y, F, Z, Z = 1,ROWS)
