@@ -10,7 +10,7 @@
 !COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/2023/EW/"
 
 !COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/BSCAN/EW/"
-!COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/NS/"
+COMMON_PATH1="/home/csun/GPR_DATA/KOREA/MIHO_ri/3D_trench/40MHz/CSCAN3/EW/"
 
 !COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/40MHz/2023/EW/"
 
@@ -67,7 +67,7 @@ OUTPUT_NAME40 = "3D_CUBE_GPR.txt"                  !40
 OUTPUT_NAME41 = "3D_CUBE_GPR_rmavrg.txt"               !41 
 
 OUTPUT_NAME50 = "3D_FFT.txt"                       !50
-OUTPUT_NAME51 = "FF_D_DIAGRAM.txt"                  !51
+OUTPUT_NAME51 = "FT_D_DIAGRAM.txt"                  !51
 
 OUTPUT_NAME60 = "3D_HILBERT_powerdB.txt"           !60
 

@@ -1,17 +1,27 @@
 
 !===============NS=================
-INTEGER, PARAMETER :: LINE = 7          !THE NUMBER OF LINE
+!INTEGER, PARAMETER :: LINE = 7          !THE NUMBER OF LINE
+!INTEGER, PARAMETER :: DIS = 50         !X !THE NUMBER OF STACK
+INTEGER, PARAMETER :: LINE = 21          !THE NUMBER OF LINE
 INTEGER, PARAMETER :: DIS = 50         !X !THE NUMBER OF STACK
-INTEGER, PARAMETER :: TRA = 81        !Y !THE NUMBER OF STATIC POINT
+
+
+
+INTEGER, PARAMETER :: TRA = 41        !Y !THE NUMBER OF STATIC POINT
 INTEGER, PARAMETER :: ROWS = 4096     !Z 4096
 !==================================
 
 !===========================================================
 INTEGER, DIMENSION(32768) :: HEADER !32768 * 4 BYTES!
 INTEGER, DIMENSION(ROWS,DIS,TRA) :: B_SCAN_IMAGE 
+
+
 REAL*8, DIMENSION(ROWS,DIS,TRA) :: B_SCAN_IMAGE2 
 REAL*8, DIMENSION(DIS,TRA,ROWS) :: B_SCAN_IMAGE3 
 REAL*8, DIMENSION(DIS,TRA,ROWS) :: B_SCAN_IMAGE4 
+REAL*8, DIMENSION(DIS,TRA,ROWS) :: B_SCAN_IMAGE5 
+
+
 !===========================================================
 
 !===========================================================
@@ -79,10 +89,10 @@ REAL*8              :: SLICE_MEAN, SLICE_MEAN2
 
 !MIHO
 !CHARACTER (LEN=9)   :: FH3='230322_'
-!CHARACTER (LEN=9)   :: FH3='221109_'
+CHARACTER (LEN=9)   :: FH3='221109_'
 !CHARACTER (LEN=9)   :: FH3='221116_'
 
-CHARACTER (LEN=9)   :: FH3='220519_'
+!CHARACTER (LEN=9)   :: FH3='220519_'
 !CHARACTER (LEN=9)   :: FH3='220525_'
 
 !CHARACTER (LEN=9)   :: FH3='220506_'

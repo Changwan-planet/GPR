@@ -1,14 +1,21 @@
-!=======A-SCOPE============================
-!AFTER ZERO_PADDING
-    DO Z=1, ROWS3
-       WRITE(20,*) B_SCAN_IMAGE6(1,1,Z) 
+!=====A-SCOPE=====
+X = 31
+
+!BEFORE ZERO_PADDING
+    DO Z=1, ROWS
+       WRITE(20,*) Z, B_SCAN_IMAGE(X,Y,Z) 
+    END DO
+!=================
+
+!AFTER GAIN-CONTROL
+    DO Z=1, ROWS2
+       WRITE(21,*) Z, B_SCAN_IMAGE_GC(X,Y,Z) 
     END DO
 
-!=======INSTANTNEOUS_AMPLITUDE===============================
-    DO Z=1,ROWS4
-       WRITE(21,*) HILBERT_power2(1,1,Z)  
-   END DO  
-!=====================================================  
+!AFTER HILBERT TRANSFORMING, POWER DECIBEL TO MAXIMUM
+    DO Z=1, ROWS
+       WRITE(22,*) Z, HILBERT_powerdB(X,Y,Z) 
+    END DO
 
 
 PRINT *, "COMPELETE TO PRINT A_SCAN"

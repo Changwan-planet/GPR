@@ -1,0 +1,10 @@
+DO X = 0, DIS-1
+DO Y = 0, TRA-1
+   CALL zero_padding( B_SCAN_IMAGE4(X,Y,:), ROWS, ROWS2, B_SCAN_IMAGE4_zp(X,Y,:) )
+!   CALL zero_padding( B_SCAN_IMAGE4_CO(X,Y,:), ROWS, ROWS2, B_SCAN_IMAGE5_zp(X,Y,:) )
+
+
+END DO
+END DO
+PRINT *, "COMPLETE TO DO ZERO_PADDING"
+

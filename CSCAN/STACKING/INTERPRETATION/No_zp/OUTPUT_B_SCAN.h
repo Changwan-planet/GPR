@@ -1,19 +1,41 @@
-!YY = 21
     
-!====BSCAN-power================================   
+!====AMP=================================   
 !Y = TRA
-      DO Z = 1, ROWS
-         WRITE(60,*) (B_SCAN_IMAGE6F(X,YY,Z), X=1,DIS)
-      END DO  
-!===================================================
+!Y = 1
 
-!====BSCAN-Amp================================   
+!      DO Z = 1, ROWS2    
+!      DO X = 1, DIS     
+!         WRITE(30,*) X, Y, Z, B_SCAN_IMAGE_GC(X,Y,Z)
+!         WRITE(30,*) X, Y, Z, B_SCAN_IMAGE(X,Y,Z)
+!      END DO  
+!      END DO 
+
+      DO Z = 1, ROWS     
+         WRITE(30,*) ( B_SCAN_IMAGE(X,Y,Z), X = 1, DIS)
+      END DO  
+
+
+!===================================================
+ 
+!====HILBERT=================================   
 !Y = TRA
-      DO Z = 1, ROWS
-         WRITE(61,*) (B_SCAN_IMAGE7F(X,YY,Z), X=1,DIS)
-      END DO  
-!===================================================
+!Y = 21
 
+!      DO Z = 1, ROWS    
+!      DO X = 1, DIS     
+
+!       WRITE(31,*) X, Y, Z, HILBERT_powerdB(X,Y,Z)
+!        WRITE(31,*) X, Y, Z, B_SCAN_IMAGE(X,Y,Z)
+
+!      END DO  
+!      END DO 
+
+      DO Z = 1, ROWS     
+         WRITE(31,*) (HILBERT_powerdB(X,Y,Z), X = 1, DIS)
+      END DO  
+
+
+!===================================================
 
 
 !=====BSCAN_GC======================================

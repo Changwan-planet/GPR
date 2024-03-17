@@ -19,6 +19,11 @@ INTEGER, PARAMETER :: ROWS2 = ROWS - (MV_WIN-1) !GAIN_CONTROL
 !===========================================================
 REAL*8, DIMENSION(DIS,TRA,ROWS) ::  B_SCAN_IMAGE
 REAL*8, DIMENSION(DIS,TRA,ROWS) ::  B_SCAN_IMAGE2
+REAL*8, DIMENSION(DIS,TRA,ROWS) ::  B_SCAN_IMAGE2_rmavrg
+
+
+REAL*8, DIMENSION(DIS,TRA,ROWS2) ::  B_SCAN_IMAGE2_GC
+
 
 
 
@@ -77,7 +82,7 @@ REAL*8, DIMENSION (DIS,TRA,ROWS) :: bpf_GC_RMV = 0.0
 
 
 !=====POWER SPECTRAL DENSITY=====
-REAL*8, DIMENSION (DIS,TRA,ROWS) :: psd
+REAL*8, DIMENSION (DIS,TRA,ROWS) :: psd_val
 REAL*8, DIMENSION (DIS,TRA,ROWS) :: psd2
 REAL*8, DIMENSION (DIS,TRA,ROWS) :: psd3
 !==========================================

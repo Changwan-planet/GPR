@@ -2,7 +2,11 @@
 !=============================PATH===================================
 !MIHO_ri
 !COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/2022_BOMIN/Edit_data/Miho11/STACK_CUBE/"
-COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/2022_BOMIN/Edit_data/Miho21/P_CUBE/"
+!COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/2022_BOMIN/Edit_data/Miho21/P_CUBE/"
+!COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/2022_BOMIN/Edit_data/Miho11/H/GPR/"
+COMMON_PATH1="/home/changwan/GPR_DATA/KOREA/MIHO_ri/2022_BOMIN/Edit_data/Miho21/H/GPR/"
+
+
 
 
 !DIRECTORY TEST AND MAKER
@@ -36,7 +40,7 @@ IF (file_exists .eqv.l1) CALL system(CMD5)
 
 
 !INPUT_NAME10 = "3D_CUBE_GPR_EDIT_zpt.txt"             !10
-INPUT_NAME10 = "3D_CUBE_GPR_H_zpt.txt"             !10
+INPUT_NAME10 = "3D_CUBE_GPR_H_zp.txt"             !10
 
 
 !INPUT_NAME10 = "3D_CUBE_GPR_noflip.txt"             !10

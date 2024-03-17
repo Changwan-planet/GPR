@@ -1,6 +1,6 @@
 #!/bin/bash
 
-path=/home/changwan/MODULE
+path=/home/csun/MODULE
 
 gfortran -g -mcmodel=medium CSCAN_GPR.f90\
                            $path/MD_BASIC.f90\
