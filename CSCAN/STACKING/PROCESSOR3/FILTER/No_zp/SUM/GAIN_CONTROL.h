@@ -1,0 +1,16 @@
+!GAIN CONTROL BASED ON INSTANTENOUS POWER
+!DO X = 1, DIS
+!DO Y = 1, TRA
+!DO Z = 1, ROWS3
+!!   HILBERT_power(X,Y,Z) = SQRT(HILBERT_B_SCAN(X,Y,Z)**2 + B_SCAN_IMAGE6(X,Y,Z)**2)
+!    HILBERT_power(X,Y,Z) = SQRT(HILBERT_B_SCAN(X,Y,Z)**2 + ifft_real(X,Y,Z)**2)
+!END DO
+!END DO
+!END DO 
+
+!DO Y = 1, TRA
+!   CALL mv_meanz( HILBERT_power(:,Y,:), MV_WIN, DIS, ROWS3, ROWS4, HILBERT_power2(:,Y,:))
+! PRINT *, "MV_WIN=",MV_WIN
+!END DO
+!PRINT*, "GAIN CONTROL END"
+
